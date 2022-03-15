@@ -19,19 +19,20 @@ public class CharacterManager : MonoBehaviour, IHit
     }
 
     [SerializeField] int heal;
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        gameObject.GetComponent<Animator>().SetBool("IsAttack", true);
+        if (other.gameObject.CompareTag("Character"))
+        {
+                gameObject.GetComponent<Animator>().SetBool("IsAttack", true);
 
-        transform.LookAt(new Vector3(other.gameObject.transform.position.x, 0.866f, other.gameObject.transform.position.z));
+                transform.LookAt(new Vector3(other.gameObject.transform.position.x, 0.866f, other.gameObject.transform.position.z));
 
-        transform.LookAt(new Vector3(gameObject.transform.position.x, 0.866f, gameObject.transform.position.z));
+                transform.LookAt(new Vector3(gameObject.transform.position.x, 0.866f, gameObject.transform.position.z));
 
-        StartCoroutine(ResetAnim());
+                StartCoroutine(ResetAnim());
+        }
     }
-
-    
 
     IEnumerator ResetAnim()
     {
@@ -43,4 +44,6 @@ public class CharacterManager : MonoBehaviour, IHit
     {
         heal -= damage;
     }
+
+    
 }
