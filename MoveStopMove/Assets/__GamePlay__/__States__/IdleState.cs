@@ -2,40 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : State
+public class IdleState : StateMachineBehaviour
 {
-    private static IdleState instance;
-    public static IdleState Instance
+    float timer;
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = GameObject.FindObjectOfType<IdleState>();
-            }
-
-            return instance;
-        }
+        timer = 0f;
     }
 
-    public AttackState attackState;
-
-    public GameObject Character;
-
-    public bool isInAttackRange;
-
-    public Animator anim;
-    public override State RunCurrentState()
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Character.GetComponent<Animator>().SetBool("IsIdle", true);
+        timer += Time.deltaTime;
 
-        if (isInAttackRange)
+        if(timer > 3f)
         {
-            return attackState;
-        }
-        else
-        {
-            return this;
+            animator.SetBool("IsIdle", false);
         }
     }
 }

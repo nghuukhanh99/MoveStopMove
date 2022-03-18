@@ -1,117 +1,74 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class PatrolState : State
+public class PatrolState : StateMachineBehaviour
 {
-    private static PatrolState instance;
-    public static PatrolState Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = GameObject.FindObjectOfType<PatrolState>();
-            }
+    float timer;
 
-            return instance;
+    int currentWaypointIndex;
+
+    [SerializeField] List<Transform> WayPoints = new List<Transform>();
+
+    NavMeshAgent agent;
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        timer = 0f;
+
+        currentWaypointIndex = Random.Range(Random.Range(0,10), WayPoints.Count);
+
+        Transform wayPointsObject = GameObject.FindGameObjectWithTag("WayPoints").transform;
+
+        foreach (Transform t in wayPointsObject)
+        {
+            WayPoints.Add(t);
         }
+
+        agent = animator.GetComponent<NavMeshAgent>();
+
+        agent.SetDestination(WayPoints[currentWaypointIndex].position);
+
+        agent.transform.LookAt(WayPoints[currentWaypointIndex].position);
     }
 
-    public IdleState idleState;
-
-    public bool canSeeTheCharacter;
-
-    public Animator anim;
-
-    [SerializeField] private float moveSpeed;
-
-    public Transform[] waypoints;
-
-    private int currentWaypointIndex;
-
-    private float waitTime;
-
-    private float waitCounter = 0f;
-
-    private bool waiting = false;
-
-    public GameObject Character;
-
-    private void Start()
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        waitTime = Random.Range(1.5f, 3f);
+        Transform wp = WayPoints[currentWaypointIndex];
 
-        currentWaypointIndex = Random.Range(0, waypoints.Length);
-    }
-
-    public override State RunCurrentState()
-    {
-        Patrol();
-
-        ExitState();
-
-        if (canSeeTheCharacter)
+        if(Vector3.Distance(agent.transform.position, wp.position) < 0.01f)
         {
-            return idleState;
+            animator.SetBool("IsIdle", true);
+
+            agent.transform.position = wp.position;
+
+            currentWaypointIndex = Random.Range(0, WayPoints.Count);
         }
         else
         {
-            return this;
+            animator.SetBool("IsIdle", false);
+
+            agent.SetDestination(wp.position);
+
+            agent.transform.LookAt(wp.position);
+        }
+
+        timer += Time.deltaTime;
+
+        if (timer > Random.Range(2.5f, 4f))
+        {
+            animator.SetBool("IsIdle", true);
         }
     }
 
-    public void ExitState()
+    //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (AttackState.Instance.Attacked == true && IdleState.Instance.isInAttackRange == true && canSeeTheCharacter == true)
-        {
-            AttackState.Instance.Attacked = false;
+        animator.SetBool("IsIdle", true);
 
-            IdleState.Instance.isInAttackRange = false;
-
-            Character.GetComponent<Animator>().SetBool("IsIdle", false);
-
-            Character.GetComponent<Animator>().SetBool("IsAttack", false);
-
-            canSeeTheCharacter = false;
-        }
+        agent.SetDestination(agent.transform.position);
     }
 
-    void Patrol()
-    {
-        if (waiting)
-        {
-            waitCounter += Time.deltaTime;
-
-            if (waitCounter < waitTime)
-            {
-                return;
-            }
-
-            waiting = false;
-        }
-
-        Transform wp = waypoints[currentWaypointIndex];
-
-        if (Vector3.Distance(Character.transform.position, wp.position) < 0.01f)
-        {
-            Character.GetComponent<Animator>().SetBool("IsIdle", true);
-
-            Character.transform.position = wp.position;
-
-            waitCounter = 0f;
-
-            waiting = true;
-
-            currentWaypointIndex = Random.Range(0, waypoints.Length);
-        }
-        else
-        {
-            Character.GetComponent<Animator>().SetBool("IsIdle", false);
-
-            Character.transform.position = Vector3.MoveTowards(Character.transform.position, wp.position, moveSpeed * Time.deltaTime);
-
-            Character.transform.LookAt(wp.position);
-        }
-    }
 }
