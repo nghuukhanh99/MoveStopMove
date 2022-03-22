@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hammer : Weapon
+public class Candy : Weapon
 {
+    [SerializeField] WeaponData weaponData;
+
     private void Update()
     {
         Attack();
@@ -11,6 +13,7 @@ public class Hammer : Weapon
 
     public override void Attack()
     {
-        
+        Debug.Log("Candy Attack");
+        base.Attack();
     }
 }
