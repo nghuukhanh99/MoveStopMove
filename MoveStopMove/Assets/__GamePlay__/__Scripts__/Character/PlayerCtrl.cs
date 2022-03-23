@@ -32,8 +32,6 @@ public class PlayerCtrl : CharacterManager
 
         if(movementDirection != Vector3.zero)
         {
-           
-
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);

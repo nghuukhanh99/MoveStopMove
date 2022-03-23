@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68b60ed53fef27418aaddac2066a727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WayPoints: []
 --- !u!1101 &-1091983328920632873
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -733,6 +734,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &2229369259047128168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2674ac399e30454696d757b3e5120ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1101 &3987912786224721547
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

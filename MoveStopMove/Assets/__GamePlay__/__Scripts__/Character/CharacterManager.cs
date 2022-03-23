@@ -20,53 +20,24 @@ public class CharacterManager : MonoBehaviour, IHit
 
     [SerializeField] int heal;
 
-    [SerializeField] float range;
+    public List<GameObject> CharacterList = new List<GameObject>();
 
-    [SerializeField] List<GameObject> CharacterList = new List<GameObject>();
-
-    Transform character;
-    private void Start()
-    {
-
-    }
-
-    //private void OnTriggerEnter(Collider other)
+    //private void OnTriggerStay(Collider other)
     //{
-    //    if (other.gameObject.CompareTag("Character"))
-    //    {
-    //            gameObject.GetComponent<Animator>().SetBool("IsAttack", true);
+    //    gameObject.GetComponent<Animator>().SetBool("IsAttack", true);
 
-    //            transform.LookAt(new Vector3(other.gameObject.transform.position.x, 0.866f, other.gameObject.transform.position.z));
+    //    transform.LookAt(new Vector3(other.gameObject.transform.position.x, 0.866f, other.gameObject.transform.position.z));
 
-    //            transform.LookAt(new Vector3(gameObject.transform.position.x, 0.866f, gameObject.transform.position.z));
+    //    transform.LookAt(new Vector3(gameObject.transform.position.x, 0.866f, gameObject.transform.position.z));
 
-    //            StartCoroutine(ResetAnim());
-    //    }
+    //    StartCoroutine(ResetAnim());
+
     //}
-
-
 
     //IEnumerator ResetAnim()
     //{
     //    yield return new WaitForSeconds(0.6f);
     //    gameObject.GetComponent<Animator>().SetBool("IsAttack", false);
-    //}
-
-    public void Update()
-    {
-        //Attack();
-        
-    }
-    //public void Attack()
-    //{
-    //    dist = Vector3.Distance()
-    //    foreach(GameObject character in CharacterList)
-    //    {
-    //        if(Vector3.Distance(transform.position, character.transform.position) < range)
-    //        {
-    //            Debug.Log("Character in range");
-    //        }
-    //    }
     //}
 
     public void OnHit(int damage)
