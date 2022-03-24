@@ -6,4 +6,6 @@ using UnityEngine.AI;
 public class Enemy : CharacterManager
 {
     [SerializeField] private string enemyName;
+    
+    
 }

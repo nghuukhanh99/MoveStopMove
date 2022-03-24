@@ -2711,7 +2711,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   enemyName: John
 --- !u!54 &205767435
 Rigidbody:
@@ -2742,7 +2745,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d1600bacc7ce67b44924efa10d104cf7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -5937,7 +5940,7 @@ GameObject:
   - component: {fileID: 454538267}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5968,7 +5971,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &461494114
 GameObject:
@@ -6297,7 +6300,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   joystick: {fileID: 784850935}
   moveSpeed: 0.2
   rotationSpeed: 500
@@ -6345,7 +6351,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: af2cf7787f062f4428a4e2c6abf049b2, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -9412,7 +9418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   enemyName: John
 --- !u!54 &776951175
 Rigidbody:
@@ -9443,7 +9452,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d1600bacc7ce67b44924efa10d104cf7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -11904,7 +11913,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   enemyName: John
 --- !u!54 &976666767
 Rigidbody:
@@ -11935,7 +11947,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d1600bacc7ce67b44924efa10d104cf7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -12449,9 +12461,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1034300360}
   - component: {fileID: 1034300361}
+  - component: {fileID: 1034300362}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12481,8 +12494,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1034300362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034300359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da13bdbe7386d0d479d3dfa975b9b446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1036349633
 GameObject:
   m_ObjectHideFlags: 0
@@ -12899,9 +12924,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1083013402}
   - component: {fileID: 1083013403}
+  - component: {fileID: 1083013404}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12931,8 +12957,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1083013404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083013401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da13bdbe7386d0d479d3dfa975b9b446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1094466286
 GameObject:
   m_ObjectHideFlags: 0
@@ -15294,7 +15332,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   enemyName: John
 --- !u!54 &1246158398
 Rigidbody:
@@ -15325,7 +15366,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d1600bacc7ce67b44924efa10d104cf7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -15355,9 +15396,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1251698093}
   - component: {fileID: 1251698094}
+  - component: {fileID: 1251698095}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15387,8 +15429,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1251698095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251698092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da13bdbe7386d0d479d3dfa975b9b446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1252019311
 GameObject:
   m_ObjectHideFlags: 0
@@ -17040,7 +17094,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList:
+  Characters:
+  - {fileID: 502985501}
   - {fileID: 5857012898592429030}
   - {fileID: 976666763}
   - {fileID: 776951171}
@@ -17049,7 +17104,9 @@ MonoBehaviour:
   - {fileID: 1801869868}
   - {fileID: 1431272875}
   - {fileID: 205767431}
-  - {fileID: 502985501}
+  target: {fileID: 0}
+  range: 0.01
+  playerIsMoving: 0
 --- !u!1 &1374774501
 GameObject:
   m_ObjectHideFlags: 0
@@ -17751,7 +17808,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   enemyName: John
 --- !u!54 &1431272879
 Rigidbody:
@@ -17782,7 +17842,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d1600bacc7ce67b44924efa10d104cf7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -19328,9 +19388,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1601518268}
   - component: {fileID: 1601518269}
+  - component: {fileID: 1601518270}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19360,8 +19421,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1601518270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601518267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da13bdbe7386d0d479d3dfa975b9b446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1601849508
 GameObject:
   m_ObjectHideFlags: 0
@@ -19761,9 +19834,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1659904792}
   - component: {fileID: 1659904793}
+  - component: {fileID: 1659904794}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19793,8 +19867,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1659904794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659904791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da13bdbe7386d0d479d3dfa975b9b446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1667245036
 GameObject:
   m_ObjectHideFlags: 0
@@ -21695,9 +21781,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1795971676}
   - component: {fileID: 1795971677}
+  - component: {fileID: 1795971678}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21727,8 +21814,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1795971678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795971675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da13bdbe7386d0d479d3dfa975b9b446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1800598044
 GameObject:
   m_ObjectHideFlags: 0
@@ -21831,7 +21930,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   enemyName: John
 --- !u!54 &1801869872
 Rigidbody:
@@ -21862,7 +21964,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d1600bacc7ce67b44924efa10d104cf7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -21892,9 +21994,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1802018900}
   - component: {fileID: 1802018901}
+  - component: {fileID: 1802018902}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21924,8 +22027,20 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1802018902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802018899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da13bdbe7386d0d479d3dfa975b9b446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1802567748
 GameObject:
   m_ObjectHideFlags: 0
@@ -24553,7 +24668,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   enemyName: John
 --- !u!54 &2020957099
 Rigidbody:
@@ -24584,7 +24702,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d1600bacc7ce67b44924efa10d104cf7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -29674,13 +29792,26 @@ GameObject:
   m_Component:
   - component: {fileID: 5857012898589078684}
   - component: {fileID: 5857012898589078687}
+  - component: {fileID: 5857012898589078686}
   m_Layer: 0
   m_Name: Attack Range
-  m_TagString: Character
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5857012898589078686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857012898589078685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da13bdbe7386d0d479d3dfa975b9b446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &5857012898589078687
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -29692,7 +29823,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.23
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &5857012898592429024
 CapsuleCollider:
@@ -29737,7 +29868,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d1600bacc7ce67b44924efa10d104cf7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -29815,7 +29946,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 10
-  CharacterList: []
+  Characters: []
+  target: {fileID: 0}
+  range: 0.23
+  playerIsMoving: 0
   enemyName: John
 --- !u!1 &5857012899046326200
 GameObject:

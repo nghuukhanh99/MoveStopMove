@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CharacterManager : MonoBehaviour, IHit
 {
@@ -18,32 +19,79 @@ public class CharacterManager : MonoBehaviour, IHit
         }
     }
 
-    [SerializeField] int heal;
+    [SerializeField] int heal; 
 
-    public List<GameObject> CharacterList = new List<GameObject>();
+    public List<GameObject> Characters = new List<GameObject>();
 
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    gameObject.GetComponent<Animator>().SetBool("IsAttack", true);
+    public Transform target;
 
-    //    transform.LookAt(new Vector3(other.gameObject.transform.position.x, 0.866f, other.gameObject.transform.position.z));
+    public float range;
 
-    //    transform.LookAt(new Vector3(gameObject.transform.position.x, 0.866f, gameObject.transform.position.z));
+    public bool playerIsMoving;
+    public void Start()
+    {
+        InvokeRepeating("Attack", 0f, 0.5f);
+    }
 
-    //    StartCoroutine(ResetAnim());
+    public void Update()
+    {
+        if (target == null)
+        {
+            return;
+        }
+    }
+    public void Attack()
+    {
+        float shortestDistance = Mathf.Infinity;
 
-    //}
+        GameObject nearestCharacter = null;
 
-    //IEnumerator ResetAnim()
-    //{
-    //    yield return new WaitForSeconds(0.6f);
-    //    gameObject.GetComponent<Animator>().SetBool("IsAttack", false);
-    //}
+        foreach(GameObject character in Characters)
+        {
+            float distanceToOtherCharacter = Vector3.Distance(transform.position, character.transform.position);
+
+            if (distanceToOtherCharacter < shortestDistance)
+            {
+                shortestDistance = distanceToOtherCharacter;
+
+                nearestCharacter = character;
+            }
+        }
+
+        if (nearestCharacter != null && shortestDistance < range)
+        {
+            target = nearestCharacter.transform;
+        }
+        else
+        {
+            target = null;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(transform.position, range);
+    }
 
     public void OnHit(int damage)
     {
         heal -= damage;
     }
 
-    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Character"))
+        {
+            Characters.Add(other.gameObject);
+
+            if(playerIsMoving == false)
+            {
+                transform.LookAt(other.gameObject.transform);
+            }
+
+            Characters = Characters.Distinct().ToList();
+        }
+    }
 }

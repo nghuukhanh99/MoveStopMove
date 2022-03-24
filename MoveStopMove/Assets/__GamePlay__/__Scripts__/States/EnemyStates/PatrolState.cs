@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 public class PatrolState : StateMachineBehaviour
 {
@@ -9,9 +10,12 @@ public class PatrolState : StateMachineBehaviour
 
     int currentWaypointIndex;
 
-    [SerializeField] List<Transform> WayPoints = new List<Transform>();
+    List<Transform> WayPoints = new List<Transform>();
 
     NavMeshAgent agent;
+
+    string wayPoints = "WayPoints";
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,7 +23,7 @@ public class PatrolState : StateMachineBehaviour
 
         currentWaypointIndex = Random.Range(Random.Range(0,10), WayPoints.Count);
 
-        Transform wayPointsObject = GameObject.FindGameObjectWithTag("WayPoints").transform;
+        Transform wayPointsObject = GameObject.FindGameObjectWithTag(wayPoints).transform;
 
         foreach (Transform t in wayPointsObject)
         {
@@ -36,11 +40,13 @@ public class PatrolState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        WayPoints = WayPoints.Distinct().ToList();
+
         Transform wp = WayPoints[currentWaypointIndex];
 
         if(Vector3.Distance(agent.transform.position, wp.position) < 0.01f)
         {
-            animator.SetBool("IsIdle", true);
+            Play(AnimState.IsIdle, true, animator);
 
             agent.transform.position = wp.position;
 
@@ -48,7 +54,7 @@ public class PatrolState : StateMachineBehaviour
         }
         else
         {
-            animator.SetBool("IsIdle", false);
+            Play(AnimState.IsIdle, false, animator);
 
             agent.SetDestination(wp.position);
 
@@ -59,16 +65,44 @@ public class PatrolState : StateMachineBehaviour
 
         if (timer > Random.Range(2.5f, 4f))
         {
-            animator.SetBool("IsIdle", true);
+            Play(AnimState.IsIdle, true, animator);
         }
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("IsIdle", true);
+        Play(AnimState.IsIdle, true, animator);
 
         agent.SetDestination(agent.transform.position);
     }
 
+    public void Play(AnimState state, bool value, Animator anim)
+    {
+        string animName = string.Empty;
+
+        switch (state)
+        {
+            case AnimState.IsIdle:
+                animName = "IsIdle";
+                break;
+            case AnimState.IsAttack:
+                animName = "IsAttack";
+                break;
+            case AnimState.IsDead:
+                animName = "IsDead";
+                break;
+            case AnimState.IsDance:
+                animName = "IsDance";
+                break;
+            case AnimState.IsWin:
+                animName = "IsWin";
+                break;
+            case AnimState.IsUlti:
+                animName = "IsUlti";
+                break;
+        }
+
+        anim.SetBool(animName, value);
+    }
 }

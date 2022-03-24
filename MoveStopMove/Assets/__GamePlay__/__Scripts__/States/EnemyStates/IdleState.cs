@@ -5,6 +5,7 @@ using UnityEngine;
 public class IdleState : StateMachineBehaviour
 {
     float timer;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,7 +19,36 @@ public class IdleState : StateMachineBehaviour
 
         if(timer > 3f)
         {
-            animator.SetBool("IsIdle", false);
+            Play(AnimState.IsIdle, false, animator);
         }
+    }
+
+    public void Play(AnimState state, bool value, Animator anim)
+    {
+        string animName = string.Empty;
+
+        switch (state)
+        {
+            case AnimState.IsIdle:
+                animName = "IsIdle";
+                break;
+            case AnimState.IsAttack:
+                animName = "IsAttack";
+                break;
+            case AnimState.IsDead:
+                animName = "IsDead";
+                break;
+            case AnimState.IsDance:
+                animName = "IsDance";
+                break;
+            case AnimState.IsWin:
+                animName = "IsWin";
+                break;
+            case AnimState.IsUlti:
+                animName = "IsUlti";
+                break;
+        }
+
+        anim.SetBool(animName, value);
     }
 }
