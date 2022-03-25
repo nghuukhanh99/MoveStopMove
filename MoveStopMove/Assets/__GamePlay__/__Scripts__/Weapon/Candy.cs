@@ -6,14 +6,11 @@ public class Candy : Weapon
 {
     [SerializeField] WeaponData weaponData;
 
-    private void Update()
-    {
-        Attack();
-    }
-
+    public WeaponType weaponType;
     public override void Attack()
     {
-        Debug.Log("Candy Attack");
-        base.Attack();
+        
+        
+        
     }
 }

@@ -15,10 +15,10 @@ public class PlayerCtrl : CharacterManager
 
     void FixedUpdate()
     {
-            PlayerMovement();
+        PlayerMovementAndAttack();
     }
 
-    public void PlayerMovement()
+    public void PlayerMovementAndAttack()
     {
         float xInput = joystick.Horizontal();
 
@@ -37,15 +37,24 @@ public class PlayerCtrl : CharacterManager
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
 
             Play(AnimState.IsIdle, false, animator);
-
-            playerIsMoving = true;
         }
         else
         {
-            playerIsMoving = false;
-
             Play(AnimState.IsIdle, true, animator);
+
+            Attack();
         }
+    }
+
+    public override void Attack()
+    {
+        if(target != null)
+        {
+            transform.LookAt(target);
+
+            animator.SetTrigger("IsAttack");
+        }
+        
     }
     public void Play(AnimState state, bool value, Animator anim)
     {

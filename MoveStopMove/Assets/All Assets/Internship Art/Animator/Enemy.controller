@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68b60ed53fef27418aaddac2066a727, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WayPoints: []
 --- !u!1101 &-1091983328920632873
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

@@ -32,21 +32,6 @@ public class IdleState : StateMachineBehaviour
             case AnimState.IsIdle:
                 animName = "IsIdle";
                 break;
-            case AnimState.IsAttack:
-                animName = "IsAttack";
-                break;
-            case AnimState.IsDead:
-                animName = "IsDead";
-                break;
-            case AnimState.IsDance:
-                animName = "IsDance";
-                break;
-            case AnimState.IsWin:
-                animName = "IsWin";
-                break;
-            case AnimState.IsUlti:
-                animName = "IsUlti";
-                break;
         }
 
         anim.SetBool(animName, value);

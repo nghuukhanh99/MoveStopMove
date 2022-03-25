@@ -21,7 +21,7 @@ public class PatrolState : StateMachineBehaviour
     {
         timer = 0f;
 
-        currentWaypointIndex = Random.Range(Random.Range(0,10), WayPoints.Count);
+        currentWaypointIndex = Random.Range(Random.Range(0, 10), WayPoints.Count);
 
         Transform wayPointsObject = GameObject.FindGameObjectWithTag(wayPoints).transform;
 
@@ -44,7 +44,7 @@ public class PatrolState : StateMachineBehaviour
 
         Transform wp = WayPoints[currentWaypointIndex];
 
-        if(Vector3.Distance(agent.transform.position, wp.position) < 0.01f)
+        if (Vector3.Distance(agent.transform.position, wp.position) < 0.01f)
         {
             Play(AnimState.IsIdle, true, animator);
 
@@ -85,21 +85,6 @@ public class PatrolState : StateMachineBehaviour
         {
             case AnimState.IsIdle:
                 animName = "IsIdle";
-                break;
-            case AnimState.IsAttack:
-                animName = "IsAttack";
-                break;
-            case AnimState.IsDead:
-                animName = "IsDead";
-                break;
-            case AnimState.IsDance:
-                animName = "IsDance";
-                break;
-            case AnimState.IsWin:
-                animName = "IsWin";
-                break;
-            case AnimState.IsUlti:
-                animName = "IsUlti";
                 break;
         }
 

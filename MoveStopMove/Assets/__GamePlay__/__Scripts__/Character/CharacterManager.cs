@@ -19,42 +19,40 @@ public class CharacterManager : MonoBehaviour, IHit
         }
     }
 
-    [SerializeField] int heal; 
+    [SerializeField] int heal;
 
     public List<GameObject> Characters = new List<GameObject>();
 
     public Transform target;
 
     public float range;
-
-    public bool playerIsMoving;
-    public void Start()
+    public virtual void Start()
     {
-        InvokeRepeating("Attack", 0f, 0.5f);
+        InvokeRepeating("FindTargets", 0f, 0.5f);
     }
 
-    public void Update()
+    public virtual void Update()
     {
         if (target == null)
         {
             return;
         }
     }
-    public void Attack()
+    public void FindTargets()
     {
         float shortestDistance = Mathf.Infinity;
 
         GameObject nearestCharacter = null;
 
-        foreach(GameObject character in Characters)
+        for(int i = 0; i < this.Characters.Count; i++)
         {
-            float distanceToOtherCharacter = Vector3.Distance(transform.position, character.transform.position);
+            float distanceToOtherCharacter = Vector3.Distance(transform.position, this.Characters[i].transform.position);
 
-            if (distanceToOtherCharacter < shortestDistance)
+            if(distanceToOtherCharacter < shortestDistance)
             {
                 shortestDistance = distanceToOtherCharacter;
 
-                nearestCharacter = character;
+                nearestCharacter = this.Characters[i];
             }
         }
 
@@ -66,6 +64,11 @@ public class CharacterManager : MonoBehaviour, IHit
         {
             target = null;
         }
+    }
+
+    public virtual void Attack()
+    {
+        
     }
 
     private void OnDrawGizmosSelected()
@@ -80,18 +83,14 @@ public class CharacterManager : MonoBehaviour, IHit
         heal -= damage;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Character"))
         {
-            Characters.Add(other.gameObject);
-
-            if(playerIsMoving == false)
+            if (!Characters.Contains(other.gameObject))
             {
-                transform.LookAt(other.gameObject.transform);
+                Characters.Add(other.gameObject);
             }
-
-            Characters = Characters.Distinct().ToList();
         }
     }
 }
