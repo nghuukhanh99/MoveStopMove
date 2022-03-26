@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class CharacterManager : MonoBehaviour, IHit
 {
@@ -33,7 +32,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public virtual void Update()
     {
-        if (target == null)
+        if(target == null)
         {
             return;
         }

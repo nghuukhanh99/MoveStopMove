@@ -15,10 +15,10 @@ public class PlayerCtrl : CharacterManager
 
     void FixedUpdate()
     {
-        PlayerMovementAndAttack();
+        PlayerMovement();
     }
 
-    public void PlayerMovementAndAttack()
+    public void PlayerMovement()
     {
         float xInput = joystick.Horizontal();
 
@@ -54,8 +54,8 @@ public class PlayerCtrl : CharacterManager
 
             animator.SetTrigger("IsAttack");
         }
-        
     }
+
     public void Play(AnimState state, bool value, Animator anim)
     {
         string animName = string.Empty;
