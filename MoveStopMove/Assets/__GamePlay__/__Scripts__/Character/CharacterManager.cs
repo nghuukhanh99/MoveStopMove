@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour, IHit
 {
-    private static CharacterManager instance;
-    public static CharacterManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = GameObject.FindObjectOfType<CharacterManager>();
-            }
-
-            return instance;
-        }
-    }
-
     [SerializeField] int heal;
 
     public List<GameObject> Characters = new List<GameObject>();
@@ -25,17 +11,55 @@ public class CharacterManager : MonoBehaviour, IHit
     public Transform target;
 
     public float range;
+
+    public int attackCount;
+
+    public int minAttackCount = 0;
+
+    public int maxAttackCount = 1;
+
+    public bool isMoving;
+
+    public bool attacked;
+
+    public bool haveTarget;
     public virtual void Start()
     {
         InvokeRepeating("FindTargets", 0f, 0.5f);
+
     }
 
     public virtual void Update()
     {
-        if(target == null)
+        if (target == null)
         {
             return;
         }
+
+        if (isMoving == false)
+        {
+            transform.LookAt(target);
+        }
+
+        if(attacked == true)
+        {
+            if (attackCount <= minAttackCount)
+            {
+                return;
+            }
+
+            attackCount--;
+        }
+
+        //if(haveTarget == true && isMoving == false)
+        //{
+        //    if(attackCount > maxAttackCount)
+        //    {
+        //        return;
+        //    }
+
+        //    attackCount++;
+        //}
     }
     public void FindTargets()
     {
@@ -43,11 +67,11 @@ public class CharacterManager : MonoBehaviour, IHit
 
         GameObject nearestCharacter = null;
 
-        for(int i = 0; i < this.Characters.Count; i++)
+        for (int i = 0; i < this.Characters.Count; i++)
         {
             float distanceToOtherCharacter = Vector3.Distance(transform.position, this.Characters[i].transform.position);
 
-            if(distanceToOtherCharacter < shortestDistance)
+            if (distanceToOtherCharacter < shortestDistance)
             {
                 shortestDistance = distanceToOtherCharacter;
 
@@ -58,16 +82,28 @@ public class CharacterManager : MonoBehaviour, IHit
         if (nearestCharacter != null && shortestDistance < range)
         {
             target = nearestCharacter.transform;
+
+            haveTarget = true;
         }
+
         else
         {
             target = null;
+
+            haveTarget = false;
         }
+
     }
 
     public virtual void Attack()
     {
-        
+        if(attackCount >= maxAttackCount)
+        {
+            GetComponent<Animator>().SetTrigger("IsAttack");
+
+            attacked = true;
+        }
+      
     }
 
     private void OnDrawGizmosSelected()
@@ -84,12 +120,26 @@ public class CharacterManager : MonoBehaviour, IHit
 
     private void OnTriggerEnter(Collider other)
     {
+        FindTargets();
+
         if (other.CompareTag("Character"))
         {
-            if (!Characters.Contains(other.gameObject))
-            {
-                Characters.Add(other.gameObject);
-            }
+            Characters.Add(other.gameObject);
+
+            Attack();
+
+            
         }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Character"))
+        {
+            target = null;
+            Characters.Remove(other.gameObject);
+        }
+
     }
 }

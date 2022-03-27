@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4366756, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2714,7 +2714,8 @@ MonoBehaviour:
   Characters: []
   target: {fileID: 0}
   range: 0.23
-  playerIsMoving: 0
+  isMoving: 0
+  canAttack: 0
   enemyName: John
 --- !u!54 &205767435
 Rigidbody:
@@ -9127,7 +9128,8 @@ MonoBehaviour:
   Characters: []
   target: {fileID: 0}
   range: 0.23
-  playerIsMoving: 0
+  isMoving: 0
+  canAttack: 0
   enemyName: John
 --- !u!54 &776951175
 Rigidbody:
@@ -11610,7 +11612,8 @@ MonoBehaviour:
   Characters: []
   target: {fileID: 0}
   range: 0.23
-  playerIsMoving: 0
+  isMoving: 0
+  canAttack: 0
   enemyName: John
 --- !u!54 &976666767
 Rigidbody:
@@ -14991,7 +14994,8 @@ MonoBehaviour:
   Characters: []
   target: {fileID: 0}
   range: 0.23
-  playerIsMoving: 0
+  isMoving: 0
+  canAttack: 0
   enemyName: John
 --- !u!54 &1246158398
 Rigidbody:
@@ -16655,7 +16659,8 @@ MonoBehaviour:
   Characters: []
   target: {fileID: 0}
   range: 0.01
-  playerIsMoving: 0
+  isMoving: 0
+  canAttack: 0
 --- !u!1 &1374774501
 GameObject:
   m_ObjectHideFlags: 0
@@ -17329,7 +17334,8 @@ MonoBehaviour:
   Characters: []
   target: {fileID: 0}
   range: 0.23
-  playerIsMoving: 0
+  isMoving: 0
+  canAttack: 0
   enemyName: John
 --- !u!54 &1431272879
 Rigidbody:
@@ -21298,7 +21304,8 @@ MonoBehaviour:
   Characters: []
   target: {fileID: 0}
   range: 0.23
-  playerIsMoving: 0
+  isMoving: 0
+  canAttack: 0
   enemyName: John
 --- !u!54 &1801869872
 Rigidbody:
@@ -23992,7 +23999,8 @@ MonoBehaviour:
   Characters: []
   target: {fileID: 0}
   range: 0.23
-  playerIsMoving: 0
+  isMoving: 0
+  canAttack: 0
   enemyName: John
 --- !u!54 &2020957099
 Rigidbody:
@@ -25684,6 +25692,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973535071830593961, guid: b99644599501ba0498c4ad45a82ed706,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973535071942579858, guid: b99644599501ba0498c4ad45a82ed706,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973535071942579858, guid: b99644599501ba0498c4ad45a82ed706,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b99644599501ba0498c4ad45a82ed706, type: 3}

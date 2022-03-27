@@ -37,24 +37,27 @@ public class PlayerCtrl : CharacterManager
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
 
             Play(AnimState.IsIdle, false, animator);
+
+            isMoving = true;
         }
         else
         {
             Play(AnimState.IsIdle, true, animator);
 
-            Attack();
+            isMoving = false;
         }
-    }
 
-    public override void Attack()
-    {
-        if(target != null)
+        if(isMoving == true)
         {
-            transform.LookAt(target);
+            if (attackCount >= maxAttackCount)
+            {
+                return;
+            }
 
-            animator.SetTrigger("IsAttack");
+            attackCount += 1;
         }
     }
+
 
     public void Play(AnimState state, bool value, Animator anim)
     {
