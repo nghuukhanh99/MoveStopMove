@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackRange : MonoBehaviour
+public class PlayerAttackRange : MonoBehaviour
 {
     [SerializeField]
-    private Enemy enemy;
+    private PlayerCtrl player;
 
     string CharacterTag = "Character";
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(CharacterTag))
+        if (other.CompareTag(CharacterTag))
         {
-            enemy.Target = other.gameObject.transform;
+            player.Target = other.gameObject.transform;
 
-            enemy.TargetList.Add(other.gameObject);
+            player.TargetList.Add(other.gameObject);
         }
     }
 
@@ -23,9 +23,9 @@ public class AttackRange : MonoBehaviour
     {
         if (other.CompareTag(CharacterTag))
         {
-            enemy.Target = null;
+            player.Target = null;
 
-            enemy.TargetList.Remove(other.gameObject);
+            player.TargetList.Remove(other.gameObject);
 
 
         }

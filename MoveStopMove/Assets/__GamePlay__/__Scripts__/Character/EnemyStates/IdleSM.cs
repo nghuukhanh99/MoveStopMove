@@ -13,19 +13,22 @@ public class IdleSM : IEnemyState
     {
         this.enemy = enemy;
 
-        enemy.MyAnimator.SetBool("IsIdle", true);
+        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
     }
 
     public void Execute()
     {
-        if(enemy.Target != null)
+        if(enemy.Target != null && enemy.isMoving == false)
         {
-            enemy.ChangeState(new AttackSM());
+            idleTimer += Time.deltaTime;
+
+            if(idleTimer >= 1)
+            {
+                enemy.ChangeState(new AttackSM());
+            }
         }
-        else
-        {
-            Idle();
-        }
+
+        Idle();
     }
 
     public void Exit()
@@ -42,7 +45,7 @@ public class IdleSM : IEnemyState
 
     private void Idle()
     {
-        enemy.MyAnimator.SetBool("IsIdle", true);
+        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
 
         idleTimer += Time.deltaTime;
 

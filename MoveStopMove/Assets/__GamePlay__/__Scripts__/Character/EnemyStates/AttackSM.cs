@@ -13,8 +13,6 @@ public class AttackSM : IEnemyState
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
-
-        enemy.attacked = false;
     }
 
     public void Execute()
@@ -24,6 +22,7 @@ public class AttackSM : IEnemyState
             IdleAndAttack();
         }
         
+       
     }
 
     public void Exit()
@@ -38,20 +37,17 @@ public class AttackSM : IEnemyState
 
     private void IdleAndAttack()
     {
-        
         enemy.transform.LookAt(enemy.Target.transform);
 
-        enemy.MyAnimator.SetBool("IsIdle", true);
+        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
 
-        enemy.MyAnimator.SetTrigger("IsAttack");
+        enemy.MyAnimator.SetTrigger(enemy.AnimAttackTag);
 
         attackTimer += Time.deltaTime;
 
         if (attackTimer >= attackDuration)
         {
             enemy.Target = null;
-
-            enemy.attacked = true;
 
             enemy.ChangeState(new IdleSM());
         }

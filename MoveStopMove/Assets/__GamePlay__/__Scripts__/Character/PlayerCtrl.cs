@@ -13,6 +13,9 @@ public class PlayerCtrl : CharacterManager
 
     [SerializeField] private Animator animator;
 
+    float attackTimer;
+
+    float attackDuration = 0f;
 
     public override void Start()
     {
@@ -22,13 +25,13 @@ public class PlayerCtrl : CharacterManager
     void FixedUpdate()
     {
         PlayerMovement();
+
+        PlayerIdleAndAttack();
     }
 
     public void PlayerMovement()
     {
         isMoving = true;
-
-        attacked = false;
 
         float xInput = joystick.Horizontal();
 
@@ -46,53 +49,32 @@ public class PlayerCtrl : CharacterManager
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
 
-            Play(AnimState.IsIdle, false, animator);
+            animator.SetBool(AnimIdleTag, false);
         }
         else
         {
-            Play(AnimState.IsIdle, true, animator);
-
             isMoving = false;
-        }
-
-        if(isMoving == true)
-        {
-            if (attackCount >= maxAttackCount)
-            {
-                return;
-            }
-
-            attackCount += 1;
+            
+            animator.SetBool(AnimIdleTag, true);
         }
     }
 
-
-    public void Play(AnimState state, bool value, Animator anim)
+    public void PlayerIdleAndAttack()
     {
-        string animName = string.Empty;
-
-        switch (state)
+        if (isMoving == false && Target != null)
         {
-            case AnimState.IsIdle:
-                animName = "IsIdle";
-                break;
-            case AnimState.IsAttack:
-                animName = "IsAttack";
-                break;
-            case AnimState.IsDead:
-                animName = "IsDead";
-                break;
-            case AnimState.IsDance:
-                animName = "IsDance";
-                break;
-            case AnimState.IsWin:
-                animName = "IsWin";
-                break;
-            case AnimState.IsUlti:
-                animName = "IsUlti";
-                break;
-        }
+            transform.LookAt(Target);
 
-        anim.SetBool(animName, value);
+            animator.SetBool(AnimAttackTag, true);
+
+            attackTimer += Time.deltaTime;
+
+            if(attackTimer >= attackDuration)
+            {
+                Target = null;
+
+                animator.SetBool(AnimIdleTag, true);
+            }
+        }
     }
 }

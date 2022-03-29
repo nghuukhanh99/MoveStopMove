@@ -10,7 +10,5 @@ public class Candy : Weapon
     public override void Attack()
     {
         
-        
-        
     }
 }

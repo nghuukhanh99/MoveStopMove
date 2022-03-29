@@ -14,25 +14,30 @@ public class PatrolSM : IEnemyState
     {
         this.enemy = enemy;
 
-        enemy.MyAnimator.SetBool("IsIdle", false);
+        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, false);
     }
 
     public void Execute()
     {
-        if (enemy.Target != null)
-        {
-            enemy.isMoving = false;
-
-            enemy.CancelDestination();
-
-            enemy.ChangeState(new IdleSM());
-        }
-
-        if(enemy.Target == null)
+        if (enemy.Target == null)
         {
             Patrol();
         }
-        
+        if(enemy.Target != null)
+        {
+            patrolTimer += Time.deltaTime;
+
+            if(patrolTimer >= 1f)
+            {
+                enemy.isMoving = false;
+
+                enemy.CancelDestination();
+
+                enemy.transform.LookAt(enemy.Target);
+
+                enemy.ChangeState(new IdleSM());
+            }
+        }
     }
 
     public void Exit()
@@ -48,9 +53,7 @@ public class PatrolSM : IEnemyState
     private void Patrol()
     {
         enemy.isMoving = true;
-
-        enemy.attacked = false;
-        
+   
         enemy.Move();
 
         patrolTimer += Time.deltaTime;

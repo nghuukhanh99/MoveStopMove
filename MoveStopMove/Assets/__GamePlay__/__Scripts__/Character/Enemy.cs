@@ -13,19 +13,13 @@ public class Enemy : CharacterManager
     private IEnemyState currentState;
 
     public List<Transform> wayPoints = new List<Transform>();
-
-    public List<GameObject> TargetList = new List<GameObject>();
     
     NavMeshAgent agent;
 
     int currentWaypointIndex;
 
-    public Transform Target { get; set; }
-
     public override void Start()
     {
-        attackCount += 1;
-        
         base.Start();
 
         agent = GetComponent<NavMeshAgent>();
@@ -39,14 +33,11 @@ public class Enemy : CharacterManager
     {
         base.Update();
 
-        if(isMoving == true && attacked == false)
+        if(isMoving == true)
         {
             FindAround();
-
-
         }
         
-
         currentState.Execute();
 
     }
@@ -62,7 +53,7 @@ public class Enemy : CharacterManager
 
         if (Vector3.Distance(agent.transform.position, wp.position) < 0.01f)
         {
-            Play(AnimState.IsIdle, true, MyAnimator);
+            MyAnimator.SetBool(AnimIdleTag, true);
 
             agent.transform.position = wp.position;
 
@@ -70,50 +61,11 @@ public class Enemy : CharacterManager
         }
         else
         {
-            Play(AnimState.IsIdle, false, MyAnimator);
+            MyAnimator.SetBool(AnimIdleTag, false);
 
             agent.SetDestination(wp.position);
 
             agent.transform.LookAt(wp.position);
-        }
-
-        if (attackCount >= maxAttackCount)
-        {
-            return;
-        }
-
-        attackCount += 1;
-    }
-
-    public void FindAround()
-    {
-        float shortestDistance = Mathf.Infinity;
-
-        GameObject nearestCharacter = null;
-
-        for(int i = 0; i < this.TargetList.Count; i++)
-        {
-            float distanceToOtherCharacter = Vector3.Distance(transform.position, this.TargetList[i].transform.position);
-
-            if(distanceToOtherCharacter < shortestDistance)
-            {
-                shortestDistance = distanceToOtherCharacter;
-
-                nearestCharacter = this.TargetList[i];
-            }
-        }
-
-        if (nearestCharacter != null && shortestDistance < range)
-        {
-            Target = nearestCharacter.transform;
-
-            haveTarget = true;
-        }
-        else
-        {
-            Target = null;
-
-            haveTarget = false;
         }
     }
 
@@ -135,37 +87,4 @@ public class Enemy : CharacterManager
 
         currentState.Enter(this);
     }
-
-
-
-    public void Play(AnimState state, bool value, Animator anim)
-    {
-        string animName = string.Empty;
-
-        switch (state)
-        {
-            case AnimState.IsIdle:
-                animName = "IsIdle";
-                break;
-            case AnimState.IsAttack:
-                animName = "IsAttack";
-                break;
-            case AnimState.IsDead:
-                animName = "IsDead";
-                break;
-            case AnimState.IsDance:
-                animName = "IsDance";
-                break;
-            case AnimState.IsWin:
-                animName = "IsWin";
-                break;
-            case AnimState.IsUlti:
-                animName = "IsUlti";
-                break;
-        }
-
-        anim.SetBool(animName, value);
-    }
-
-    
   }
