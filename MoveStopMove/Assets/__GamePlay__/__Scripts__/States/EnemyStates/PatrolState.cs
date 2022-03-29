@@ -16,6 +16,7 @@ public class PatrolState : StateMachineBehaviour
 
     string wayPoints = "WayPoints";
 
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -35,6 +36,7 @@ public class PatrolState : StateMachineBehaviour
         agent.SetDestination(WayPoints[currentWaypointIndex].position);
 
         agent.transform.LookAt(WayPoints[currentWaypointIndex].position);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -91,3 +93,4 @@ public class PatrolState : StateMachineBehaviour
         anim.SetBool(animName, value);
     }
 }
+

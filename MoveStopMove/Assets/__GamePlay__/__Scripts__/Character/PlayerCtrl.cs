@@ -13,6 +13,12 @@ public class PlayerCtrl : CharacterManager
 
     [SerializeField] private Animator animator;
 
+
+    public override void Start()
+    {
+        base.Start();
+    }
+
     void FixedUpdate()
     {
         PlayerMovement();
@@ -20,6 +26,10 @@ public class PlayerCtrl : CharacterManager
 
     public void PlayerMovement()
     {
+        isMoving = true;
+
+        attacked = false;
+
         float xInput = joystick.Horizontal();
 
         float zInput = joystick.Vertical();
@@ -37,8 +47,6 @@ public class PlayerCtrl : CharacterManager
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
 
             Play(AnimState.IsIdle, false, animator);
-
-            isMoving = true;
         }
         else
         {
