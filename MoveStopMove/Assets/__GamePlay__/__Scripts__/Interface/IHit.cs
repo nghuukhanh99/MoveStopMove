@@ -1,8 +1,4 @@
 ﻿public interface IHit
 {
-    void Attack();
-    void OnHit(int damage);
-
-    
-    
+    void OnHit(int damage);   
 }

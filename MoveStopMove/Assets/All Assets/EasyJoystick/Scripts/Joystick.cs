@@ -40,7 +40,7 @@ namespace EasyJoystick {
       private PointerEventData pointerEventData ;
       private Camera cam ;
 
-
+        public bool isDrag; 
 
       private void OnEnable () {
          OnPointerUp (null) ;
@@ -64,6 +64,7 @@ namespace EasyJoystick {
 
       public void OnDrag (PointerEventData e) {
          pointerEventData = e ;
+            isDrag = true;
       }
 
       void Update () {
@@ -83,6 +84,8 @@ namespace EasyJoystick {
          _isTouching = false ;
          normalizedPoint = Vector3.zero ;
          handle.anchoredPosition = Vector3.zero ;
+
+            isDrag = false;
       }
 
       /// <summary>

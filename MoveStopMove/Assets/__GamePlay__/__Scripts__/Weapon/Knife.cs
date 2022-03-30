@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hammer : Weapon
+public class Knife : Weapon
 {
     public override void Attacking()
     {

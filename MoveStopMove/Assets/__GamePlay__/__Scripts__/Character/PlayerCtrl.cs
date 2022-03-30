@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EasyJoystick;
+using System;
 
 public class PlayerCtrl : CharacterManager
 {
@@ -13,20 +14,48 @@ public class PlayerCtrl : CharacterManager
 
     [SerializeField] private Animator animator;
 
+    public GameObject bullet;
+
+    public Transform PointSpawnBullet;
+
     float attackTimer;
 
-    float attackDuration = 0f;
+    public float timeStart = 3f;
+    public float timeCountdownt = 0;
 
+    public static Action attacking;
+    
     public override void Start()
     {
         base.Start();
     }
 
-    void FixedUpdate()
+    public override void Update()
     {
+        base.Update();
         PlayerMovement();
+        if(nearestCharacter != null && timeCountdownt <= 0 )
+        {
+            timeCountdownt = timeStart;
 
-        PlayerIdleAndAttack();
+            if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range)
+            {
+                Attacking();
+            }
+        }
+        timeCountdownt -= Time.deltaTime;
+    }
+    public void Attacking()
+    {
+        if(nearestCharacter != null)
+        {
+            Vector3 directToEnemyOther = nearestCharacter.transform.position - transform.position;
+
+            GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
+
+            bulletSpawn.GetComponent<CandyBullet>().setTargetPosition(nearestCharacter.transform.position);
+        }
+
     }
 
     public void PlayerMovement()
@@ -43,38 +72,41 @@ public class PlayerCtrl : CharacterManager
 
         transform.Translate(movementDirection * moveSpeed * Time.deltaTime, Space.World);
 
-        if(movementDirection != Vector3.zero)
+        animator.SetBool(AnimIdleTag, false);
+
+        if (movementDirection != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
 
-            animator.SetBool(AnimIdleTag, false);
+            //animator.SetBool(AnimIdleTag, false);
         }
         else
         {
             isMoving = false;
-            
+
             animator.SetBool(AnimIdleTag, true);
         }
     }
+    //    public void PlayerIdleAndAttack()
+    //{
+    //    if (isMoving == false && Target != null)
+    //    {
+    //        attacking?.Invoke();
 
-    public void PlayerIdleAndAttack()
-    {
-        if (isMoving == false && Target != null)
-        {
-            transform.LookAt(Target);
+    //        transform.LookAt(Target);
 
-            animator.SetBool(AnimAttackTag, true);
+    //        animator.SetBool(AnimAttackTag, true);
 
-            attackTimer += Time.deltaTime;
+    //        attackTimer += Time.deltaTime;
 
-            if(attackTimer >= attackDuration)
-            {
-                Target = null;
+    //        if(attackTimer >= attackDuration)
+    //        {
+    //            Target = null;
 
-                animator.SetBool(AnimIdleTag, true);
-            }
-        }
-    }
+    //            animator.SetBool(AnimIdleTag, true);
+    //        }
+    //    }
+    //}
 }

@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class AttackRange : MonoBehaviour
 {
-    [SerializeField]
-    private Enemy enemy;
+    //[SerializeField]
+    //private Enemy enemy;
 
-    string CharacterTag = "Character";
+    //string CharacterTag = "Character";
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag(CharacterTag))
-        {
-            enemy.Target = other.gameObject.transform;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.CompareTag(CharacterTag))
+    //    {
+    //        enemy.Target = other.gameObject.transform;
 
-            enemy.TargetList.Add(other.gameObject);
-        }
-    }
+    //        enemy.TargetList.Add(other.gameObject);
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag(CharacterTag))
-        {
-            enemy.Target = null;
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag(CharacterTag))
+    //    {
+    //        enemy.Target = null;
 
-            enemy.TargetList.Remove(other.gameObject);
+    //        enemy.TargetList.Remove(other.gameObject);
 
 
-        }
-    }
+    //    }
+    //}
 }

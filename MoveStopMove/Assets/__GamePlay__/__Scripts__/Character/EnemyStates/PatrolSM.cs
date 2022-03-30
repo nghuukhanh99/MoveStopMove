@@ -19,25 +19,25 @@ public class PatrolSM : IEnemyState
 
     public void Execute()
     {
-        if (enemy.Target == null)
-        {
-            Patrol();
-        }
-        if(enemy.Target != null)
-        {
-            patrolTimer += Time.deltaTime;
+        //if (enemy.Target == null)
+        //{
+        //    Patrol();
+        //}
+        //if(enemy.Target != null)
+        //{
+        //    patrolTimer += Time.deltaTime;
 
-            if(patrolTimer >= 1f)
-            {
-                enemy.isMoving = false;
+        //    if(patrolTimer >= 1f)
+        //    {
+        //        enemy.isMoving = false;
 
-                enemy.CancelDestination();
+        //        enemy.CancelDestination();
 
-                enemy.transform.LookAt(enemy.Target);
+        //        enemy.transform.LookAt(enemy.Target);
 
-                enemy.ChangeState(new IdleSM());
-            }
-        }
+        //        enemy.ChangeState(new IdleSM());
+        //    }
+        //}
     }
 
     public void Exit()
@@ -52,19 +52,19 @@ public class PatrolSM : IEnemyState
 
     private void Patrol()
     {
-        enemy.isMoving = true;
+        //enemy.isMoving = true;
    
-        enemy.Move();
+        //enemy.Move();
 
-        patrolTimer += Time.deltaTime;
+        //patrolTimer += Time.deltaTime;
 
-        if (patrolTimer >= patrolDuration)
-        {
-            enemy.CancelDestination();
+        //if (patrolTimer >= patrolDuration)
+        //{
+        //    enemy.CancelDestination();
 
-            enemy.transform.LookAt(enemy.Target);
+        //    enemy.transform.LookAt(enemy.Target);
            
-            enemy.ChangeState(new IdleSM());
-        }
+        //    enemy.ChangeState(new IdleSM());
+        //}
     }
 }

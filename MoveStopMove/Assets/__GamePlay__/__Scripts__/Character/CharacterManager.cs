@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -12,12 +13,12 @@ public class CharacterManager : MonoBehaviour
 
     [HideInInspector] public string AnimDeadTag = "IsDead";
 
+    public Transform characterTransform;
+
+    public GameObject nearestCharacter;
+
     public Animator MyAnimator { get; private set; }
     public bool Attack { get; set; }
-
-    public List<GameObject> TargetList = new List<GameObject>();
-
-    public Transform Target { get; set; }
 
     [SerializeField] int heal;
 
@@ -25,48 +26,51 @@ public class CharacterManager : MonoBehaviour
 
     public bool isMoving;
 
-
-
     public virtual void Start()
     {
         MyAnimator = GetComponent<Animator>();
+
+        characterTransform = gameObject.GetComponent<Transform>();
+
+        GameManager.Instance._listCharacter.Add(gameObject.GetComponent<CharacterManager>());
+
+        nearestCharacter = null;
     }
 
     public virtual void Update()
     {
         if (isMoving == true)
         {
-            FindAround();
         }
+            FindAround();
     }
 
     public void FindAround()
     {
         float shortestDistance = Mathf.Infinity;
+        GameObject taget = null;
+        //nearestCharacter = null;
 
-        GameObject nearestCharacter = null;
-
-        for (int i = 0; i < this.TargetList.Count; i++)
+        for (int i = 0; i < GameManager.Instance._listCharacter.Count; i++)
         {
-            float distanceToOtherCharacter = Vector3.Distance(transform.position, this.TargetList[i].transform.position);
-
-            if (distanceToOtherCharacter < shortestDistance)
+            if(this != GameManager.Instance._listCharacter[i])
             {
-                shortestDistance = distanceToOtherCharacter;
+                float distanceToOtherCharacter = Vector3.Distance(this.gameObject.transform.position, GameManager.Instance._listCharacter[i].transform.position);
 
-                nearestCharacter = this.TargetList[i];
+                if (distanceToOtherCharacter < shortestDistance)
+                {
+                    shortestDistance = distanceToOtherCharacter;
+
+                    taget = GameManager.Instance._listCharacter[i].gameObject;
+                }
+                Debug.Log("distanceToOtherCharacter:" + distanceToOtherCharacter);
+                Debug.Log("shortestDistance:" + shortestDistance);
             }
         }
-
-        if (nearestCharacter != null && shortestDistance < range)
-        {
-            Target = nearestCharacter.transform;
-        }
-        else
-        {
-            Target = null;
-        }
+        nearestCharacter = taget;
     }
+
+    
 
     private void OnDrawGizmosSelected()
     {

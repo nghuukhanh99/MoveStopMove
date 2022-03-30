@@ -18,10 +18,16 @@ public class Enemy : CharacterManager
 
     int currentWaypointIndex;
 
+    private void Awake()
+    {
+        
+    }
+
     public override void Start()
     {
         base.Start();
 
+  
         agent = GetComponent<NavMeshAgent>();
 
         currentWaypointIndex = Random.Range(Random.Range(0, 10), wayPoints.Count);
@@ -38,13 +44,12 @@ public class Enemy : CharacterManager
             FindAround();
         }
         
-        currentState.Execute();
-
+        //currentState.Execute();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        currentState.OnTriggerEnter(other);
+        //currentState.OnTriggerEnter(other);
     }
     
     public void Move()

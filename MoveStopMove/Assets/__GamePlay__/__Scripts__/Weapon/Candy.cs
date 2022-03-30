@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Candy : Weapon
 {
-    [SerializeField] WeaponData weaponData;
+    float timer;
 
-    public WeaponType weaponType;
-    public override void Attack()
+    public GameObject CandyBullet;
+
+    public override void Attacking()
     {
-        
+        base.Attacking();
+
+        CandyHand.SetActive(false);
+
+        GameObject bullet = (GameObject)Instantiate(CandyBullet, spawnBullet.transform.position, Quaternion.identity);
+
+        bullet.GetComponent<CandyBullet>().setTargetPosition(transform.position);
     }
 }

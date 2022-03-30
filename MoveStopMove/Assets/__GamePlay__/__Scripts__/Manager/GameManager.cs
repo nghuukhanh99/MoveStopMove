@@ -5,19 +5,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static CharacterManager instance;
+    public static GameManager Instance;
 
-    public static CharacterManager Instance
+    public List<CharacterManager> _listCharacter = new List<CharacterManager>();
+    private void Awake()
     {
-        get
-        {
-            if (instance == null)
-            {
-                instance = GameObject.FindObjectOfType<CharacterManager>();
-            }
+        InitializeSingleton();
+    }
 
-            return instance;
+
+    private void InitializeSingleton()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
         }
     }
+    
 
 }

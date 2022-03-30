@@ -1834,7 +1834,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6973535070930991670}
-  - component: {fileID: 6973535070930991689}
   m_Layer: 0
   m_Name: Weapon Holder
   m_TagString: Untagged
@@ -1859,19 +1858,6 @@ Transform:
   m_Father: {fileID: 6973535072190452598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!114 &6973535070930991689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6973535070930991671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc61b6455c34a7d4abe068f64ad8409d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 0}
 --- !u!1 &6973535070989143604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,9 +1964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286960d5e6c272d4eabdc75747aa08a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 0}
-  weaponData: {fileID: 11400000, guid: 93e12004715e6e54795b18184dca8a35, type: 2}
-  weaponType: 0
+  bulletHolder: {fileID: 0}
+  CandyBullet: {fileID: 0}
 --- !u!1 &6973535071830593940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2029,16 +2014,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09447b60a5530364b808f6824cd534ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharacterTag: Character
+  AnimIdleTag: IsIdle
+  AnimAttackTag: IsAttack
+  AnimDeadTag: IsDead
+  weapon: {fileID: 0}
+  TargetList: []
   heal: 10
-  Characters: []
-  target: {fileID: 0}
   range: 0.23
-  playerIsMoving: 0
+  isMoving: 0
   joystick: {fileID: 0}
   moveSpeed: 0.2
   rotationSpeed: 500
   animator: {fileID: 6973535071830593963}
-  canAttack: 0
 --- !u!54 &6973535071830593960
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2177,7 +2165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc61b6455c34a7d4abe068f64ad8409d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponHolder: {fileID: 6973535070930991670}
+  bulletHolder: {fileID: 0}
 --- !u!1 &6977559232946842286
 GameObject:
   m_ObjectHideFlags: 0
