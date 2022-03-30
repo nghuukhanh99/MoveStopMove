@@ -8,14 +8,15 @@ public class Candy : Weapon
 
     public GameObject CandyBullet;
 
+    public Transform PointSpawnBullet;
     public override void Attacking()
     {
         base.Attacking();
 
         CandyHand.SetActive(false);
 
-        GameObject bullet = (GameObject)Instantiate(CandyBullet, spawnBullet.transform.position, Quaternion.identity);
+        GameObject bulletSpawn = (GameObject)Instantiate(CandyBullet, PointSpawnBullet.position, CandyBullet.transform.rotation);
 
-        bullet.GetComponent<CandyBullet>().setTargetPosition(transform.position);
+        bulletSpawn.GetComponent<CandyBullet>().setTargetPosition(characterManager.nearestCharacter.transform.position);
     }
 }

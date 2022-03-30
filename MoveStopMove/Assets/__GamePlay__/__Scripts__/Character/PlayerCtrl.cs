@@ -4,7 +4,7 @@ using UnityEngine;
 using EasyJoystick;
 using System;
 
-public class PlayerCtrl : CharacterManager
+public class PlayerCtrl : CharacterManager, IHit
 {
     [SerializeField] Joystick joystick;
 
@@ -18,12 +18,15 @@ public class PlayerCtrl : CharacterManager
 
     public Transform PointSpawnBullet;
 
-    float attackTimer;
+    public float timeStart = 1.5f;
 
-    public float timeStart = 3f;
     public float timeCountdownt = 0;
 
     public static Action attacking;
+
+    [SerializeField] private GameObject CandyHand;
+
+    int heal = 10;
     
     public override void Start()
     {
@@ -33,8 +36,10 @@ public class PlayerCtrl : CharacterManager
     public override void Update()
     {
         base.Update();
+
         PlayerMovement();
-        if(nearestCharacter != null && timeCountdownt <= 0 )
+
+        if(nearestCharacter != null && timeCountdownt <= 0)
         {
             timeCountdownt = timeStart;
 
@@ -47,15 +52,33 @@ public class PlayerCtrl : CharacterManager
     }
     public void Attacking()
     {
-        if(nearestCharacter != null)
-        {
-            Vector3 directToEnemyOther = nearestCharacter.transform.position - transform.position;
+        HideWeapon();
 
+        if (nearestCharacter != null)
+        {
             GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
 
             bulletSpawn.GetComponent<CandyBullet>().setTargetPosition(nearestCharacter.transform.position);
         }
+    }
 
+    public void ShowWeapon()
+    {
+        if(CandyHand != null)
+        {
+            CandyHand.SetActive(true);
+        }
+    }
+    public void HideWeapon()
+    {
+        if(PointSpawnBullet.childCount > 0)
+        {
+            CandyHand = PointSpawnBullet.GetChild(0).gameObject;
+        }
+        if(CandyHand != null)
+        {
+            CandyHand.SetActive(false);   
+        }
     }
 
     public void PlayerMovement()
@@ -89,24 +112,9 @@ public class PlayerCtrl : CharacterManager
             animator.SetBool(AnimIdleTag, true);
         }
     }
-    //    public void PlayerIdleAndAttack()
-    //{
-    //    if (isMoving == false && Target != null)
-    //    {
-    //        attacking?.Invoke();
 
-    //        transform.LookAt(Target);
-
-    //        animator.SetBool(AnimAttackTag, true);
-
-    //        attackTimer += Time.deltaTime;
-
-    //        if(attackTimer >= attackDuration)
-    //        {
-    //            Target = null;
-
-    //            animator.SetBool(AnimIdleTag, true);
-    //        }
-    //    }
-    //}
+    public void OnHit(int damage)
+    {
+        heal -= damage;
+    }
 }

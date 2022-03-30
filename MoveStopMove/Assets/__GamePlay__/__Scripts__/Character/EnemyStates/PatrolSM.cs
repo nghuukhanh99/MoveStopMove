@@ -19,25 +19,24 @@ public class PatrolSM : IEnemyState
 
     public void Execute()
     {
-        //if (enemy.Target == null)
-        //{
-        //    Patrol();
-        //}
-        //if(enemy.Target != null)
-        //{
-        //    patrolTimer += Time.deltaTime;
+        
+        Patrol();
 
-        //    if(patrolTimer >= 1f)
-        //    {
-        //        enemy.isMoving = false;
+        if (enemy.nearestCharacter != null)
+        {
+            patrolTimer += Time.deltaTime;
 
-        //        enemy.CancelDestination();
+            if (patrolTimer >= 1f)
+            {
+                enemy.isMoving = false;
 
-        //        enemy.transform.LookAt(enemy.Target);
+                enemy.CancelDestination();
 
-        //        enemy.ChangeState(new IdleSM());
-        //    }
-        //}
+                enemy.transform.LookAt(enemy.nearestCharacter.transform);
+
+                enemy.ChangeState(new IdleSM());
+            }
+        }
     }
 
     public void Exit()
@@ -52,19 +51,22 @@ public class PatrolSM : IEnemyState
 
     private void Patrol()
     {
-        //enemy.isMoving = true;
-   
-        //enemy.Move();
+        enemy.isMoving = true;
 
-        //patrolTimer += Time.deltaTime;
+        enemy.Move();
 
-        //if (patrolTimer >= patrolDuration)
-        //{
-        //    enemy.CancelDestination();
+        patrolTimer += Time.deltaTime;
 
-        //    enemy.transform.LookAt(enemy.Target);
-           
-        //    enemy.ChangeState(new IdleSM());
-        //}
+        if (patrolTimer >= patrolDuration)
+        {
+            enemy.CancelDestination();
+
+            if(enemy.nearestCharacter != null)
+            {
+                enemy.transform.LookAt(enemy.nearestCharacter.transform);
+            }
+
+            enemy.ChangeState(new IdleSM());
+        }
     }
 }

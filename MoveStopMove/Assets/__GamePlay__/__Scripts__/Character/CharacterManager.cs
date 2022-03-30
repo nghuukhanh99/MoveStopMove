@@ -39,17 +39,14 @@ public class CharacterManager : MonoBehaviour
 
     public virtual void Update()
     {
-        if (isMoving == true)
-        {
-        }
             FindAround();
     }
 
     public void FindAround()
     {
         float shortestDistance = Mathf.Infinity;
-        GameObject taget = null;
-        //nearestCharacter = null;
+
+        GameObject target = null;
 
         for (int i = 0; i < GameManager.Instance._listCharacter.Count; i++)
         {
@@ -61,13 +58,20 @@ public class CharacterManager : MonoBehaviour
                 {
                     shortestDistance = distanceToOtherCharacter;
 
-                    taget = GameManager.Instance._listCharacter[i].gameObject;
+                    target = GameManager.Instance._listCharacter[i].gameObject;
                 }
-                Debug.Log("distanceToOtherCharacter:" + distanceToOtherCharacter);
-                Debug.Log("shortestDistance:" + shortestDistance);
             }
         }
-        nearestCharacter = taget;
+        nearestCharacter = target;
+
+        if (target != null && shortestDistance < range)
+        {
+            nearestCharacter = target;
+        }
+        else
+        {
+            nearestCharacter = null;
+        }
     }
 
     

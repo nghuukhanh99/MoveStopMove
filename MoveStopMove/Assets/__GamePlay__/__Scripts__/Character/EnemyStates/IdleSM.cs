@@ -18,17 +18,17 @@ public class IdleSM : IEnemyState
 
     public void Execute()
     {
-        //if(enemy.Target != null && enemy.isMoving == false)
-        //{
-        //    idleTimer += Time.deltaTime;
+        if (enemy.nearestCharacter != null && enemy.isMoving == false)
+        {
+            idleTimer += Time.deltaTime;
 
-        //    if(idleTimer >= 1)
-        //    {
-        //        enemy.ChangeState(new AttackSM());
-        //    }
-        //}
+            if (idleTimer >= 1f)
+            {
+                enemy.ChangeState(new AttackSM());
+            }
+        }
 
-        //Idle();
+        Idle();
     }
 
     public void Exit()
@@ -41,17 +41,22 @@ public class IdleSM : IEnemyState
         
     }
 
-    
 
-    //private void Idle()
-    //{
-    //    enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
 
-    //    idleTimer += Time.deltaTime;
+    private void Idle()
+    {
+        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
 
-    //    if(idleTimer >= idleDuration)
-    //    {
-    //        enemy.ChangeState(new PatrolSM());
-    //    }
-    //}
+        if(enemy.nearestCharacter != null)
+        {
+            enemy.transform.LookAt(enemy.nearestCharacter.transform);
+        }
+
+        idleTimer += Time.deltaTime;
+
+        if (idleTimer >= idleDuration)
+        {
+            enemy.ChangeState(new PatrolSM());
+        }
+    }
 }

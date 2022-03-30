@@ -18,6 +18,13 @@ public class Enemy : CharacterManager
 
     int currentWaypointIndex;
 
+    public float timeStart = 3f;
+
+    public float timeCountdownt = 0;
+
+    public GameObject bullet;
+
+    public Transform PointSpawnBullet;
     private void Awake()
     {
         
@@ -27,7 +34,6 @@ public class Enemy : CharacterManager
     {
         base.Start();
 
-  
         agent = GetComponent<NavMeshAgent>();
 
         currentWaypointIndex = Random.Range(Random.Range(0, 10), wayPoints.Count);
@@ -39,19 +45,38 @@ public class Enemy : CharacterManager
     {
         base.Update();
 
-        if(isMoving == true)
+        currentState.Execute();
+
+        if (nearestCharacter != null && timeCountdownt <= 0)
         {
-            FindAround();
+            timeCountdownt = timeStart;
+
+            if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range)
+            {
+                Attacking();
+            }
         }
-        
-        //currentState.Execute();
+        timeCountdownt -= Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        //currentState.OnTriggerEnter(other);
+        currentState.OnTriggerEnter(other);
     }
-    
+
+    public void Attacking()
+    {
+        if (nearestCharacter != null)
+        {
+            Vector3 directToEnemyOther = nearestCharacter.transform.position - transform.position;
+
+            GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
+
+            bulletSpawn.GetComponent<CandyBullet>().setTargetPosition(nearestCharacter.transform.position);
+        }
+
+    }
+
     public void Move()
     {
         Transform wp = wayPoints[currentWaypointIndex];

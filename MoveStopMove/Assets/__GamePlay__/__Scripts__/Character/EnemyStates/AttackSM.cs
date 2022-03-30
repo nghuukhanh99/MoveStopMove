@@ -17,17 +17,17 @@ public class AttackSM : IEnemyState
 
     public void Execute()
     {
-        //if(enemy.Target != null && enemy.isMoving == false)
-        //{
-        //    attackTimer += Time.deltaTime;
+        if (enemy.nearestCharacter != null && enemy.isMoving == false)
+        {
+            attackTimer += Time.deltaTime;
 
-        //    if(attackTimer >= 1)
-        //    {
-        //        IdleAndAttack();
-        //    }
-        //}
-        
-       
+            if (attackTimer >= 1f)
+            {
+                Attack();
+            }
+        }
+
+
     }
 
     public void Exit()
@@ -40,21 +40,22 @@ public class AttackSM : IEnemyState
         
     }
 
-    //private void IdleAndAttack()
-    //{
-    //    enemy.transform.LookAt(enemy.Target.transform);
+    private void Attack()
+    {
+        if (enemy.nearestCharacter != null)
+        {
+            enemy.transform.LookAt(enemy.nearestCharacter.transform);
+        }
 
-    //    enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
+        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
 
-    //    enemy.MyAnimator.SetTrigger(enemy.AnimAttackTag);
+        enemy.MyAnimator.SetTrigger(enemy.AnimAttackTag);
 
-    //    attackTimer += Time.deltaTime;
+        attackTimer += Time.deltaTime;
 
-    //    if (attackTimer >= attackDuration)
-    //    {
-    //        enemy.Target = null;
-
-    //        enemy.ChangeState(new IdleSM());
-    //    }
-    //}
+        if (attackTimer >= attackDuration)
+        {
+            enemy.ChangeState(new IdleSM());
+        }
+    }
 }

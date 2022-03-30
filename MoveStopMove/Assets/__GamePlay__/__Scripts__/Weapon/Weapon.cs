@@ -10,16 +10,20 @@ using UnityEngine;
 //}
 public class Weapon : MonoBehaviour
 {
+    protected CharacterManager characterManager;
+
     public GameObject spawnBullet;
 
     public GameObject CandyHand;
 
     private void Start()
     {
+        characterManager = GetComponent<CharacterManager>();
+
         PlayerCtrl.attacking += Attacking;
     }
     public virtual void Attacking()
     {
-        Debug.Log("IsAttack");
+        
     }
 }
