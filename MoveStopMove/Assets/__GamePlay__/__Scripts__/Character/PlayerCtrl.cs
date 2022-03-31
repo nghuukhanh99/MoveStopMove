@@ -4,7 +4,7 @@ using UnityEngine;
 using EasyJoystick;
 using System;
 
-public class PlayerCtrl : CharacterManager, IHit
+public class PlayerCtrl : CharacterManager
 {
     [SerializeField] Joystick joystick;
 
@@ -22,11 +22,9 @@ public class PlayerCtrl : CharacterManager, IHit
 
     public float timeCountdownt = 0;
 
-    public static Action attacking;
-
     [SerializeField] private GameObject CandyHand;
 
-    int heal = 10;
+    float timer;
     
     public override void Start()
     {
@@ -39,17 +37,24 @@ public class PlayerCtrl : CharacterManager, IHit
 
         PlayerMovement();
 
-        if(nearestCharacter != null && timeCountdownt <= 0)
+        if(nearestCharacter != null &&  timeCountdownt <= 0)
         {
             timeCountdownt = timeStart;
 
             if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range)
             {
-                Attacking();
+                if(checkFirstAttack && isMoving == false)
+                {
+                    checkFirstAttack = false;
+                    Attacking();
+                }
             }
+            canAttack = false;
         }
         timeCountdownt -= Time.deltaTime;
+
     }
+
     public void Attacking()
     {
         HideWeapon();
@@ -59,6 +64,10 @@ public class PlayerCtrl : CharacterManager, IHit
             GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
 
             bulletSpawn.GetComponent<CandyBullet>().setTargetPosition(nearestCharacter.transform.position);
+
+            bulletSpawn.GetComponent<CandyBullet>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
+
+            bulletSpawn.GetComponent<CandyBullet>().setOwnerPos(this.transform.position);
         }
     }
 
@@ -104,6 +113,8 @@ public class PlayerCtrl : CharacterManager, IHit
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
 
             //animator.SetBool(AnimIdleTag, false);
+
+            checkFirstAttack = true;
         }
         else
         {
@@ -111,10 +122,5 @@ public class PlayerCtrl : CharacterManager, IHit
 
             animator.SetBool(AnimIdleTag, true);
         }
-    }
-
-    public void OnHit(int damage)
-    {
-        heal -= damage;
     }
 }

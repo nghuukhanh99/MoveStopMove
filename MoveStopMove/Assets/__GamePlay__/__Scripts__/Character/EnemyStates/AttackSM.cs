@@ -17,27 +17,22 @@ public class AttackSM : IEnemyState
 
     public void Execute()
     {
-        if (enemy.nearestCharacter != null && enemy.isMoving == false)
+        if (enemy.checkFirstAttack && enemy.nearestCharacter != null)
         {
-            attackTimer += Time.deltaTime;
+            enemy.checkFirstAttack = false;
 
-            if (attackTimer >= 1f)
-            {
-                Attack();
-            }
+            Attack();
         }
-
-
     }
 
     public void Exit()
     {
-        
+        enemy.MyAnimator.ResetTrigger(enemy.AnimAttackTag);
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        
+
     }
 
     private void Attack()
@@ -47,15 +42,16 @@ public class AttackSM : IEnemyState
             enemy.transform.LookAt(enemy.nearestCharacter.transform);
         }
 
-        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
+        enemy.Attacking();
 
         enemy.MyAnimator.SetTrigger(enemy.AnimAttackTag);
 
         attackTimer += Time.deltaTime;
 
-        if (attackTimer >= attackDuration)
+        if(attackTimer >= attackDuration)
         {
             enemy.ChangeState(new IdleSM());
         }
+        
     }
 }

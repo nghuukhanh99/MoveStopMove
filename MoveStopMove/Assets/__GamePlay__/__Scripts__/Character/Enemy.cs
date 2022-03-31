@@ -16,6 +16,12 @@ public class Enemy : CharacterManager
     
     NavMeshAgent agent;
 
+    Rigidbody rb;
+
+    Enemy scripts;
+
+    Collider _collider;
+
     int currentWaypointIndex;
 
     public float timeStart = 3f;
@@ -27,7 +33,7 @@ public class Enemy : CharacterManager
     public Transform PointSpawnBullet;
     private void Awake()
     {
-        
+        checkFirstAttack = true;
     }
 
     public override void Start()
@@ -35,6 +41,12 @@ public class Enemy : CharacterManager
         base.Start();
 
         agent = GetComponent<NavMeshAgent>();
+
+       _collider = GetComponent<Collider>();
+
+        rb = GetComponent<Rigidbody>();
+
+        scripts = GetComponent<Enemy>();
 
         currentWaypointIndex = Random.Range(Random.Range(0, 10), wayPoints.Count);
 
@@ -47,38 +59,56 @@ public class Enemy : CharacterManager
 
         currentState.Execute();
 
+        Debug.Log(currentState);
+
         if (nearestCharacter != null && timeCountdownt <= 0)
         {
             timeCountdownt = timeStart;
 
             if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range)
             {
-                Attacking();
+                if(checkFirstAttack && isMoving == false)
+                {
+                    ChangeState(new AttackSM());
+                }
             }
         }
-        timeCountdownt -= Time.deltaTime;
-    }
 
-    void OnTriggerEnter(Collider other)
-    {
-        currentState.OnTriggerEnter(other);
+        deadFunction();
     }
 
     public void Attacking()
     {
         if (nearestCharacter != null)
         {
-            Vector3 directToEnemyOther = nearestCharacter.transform.position - transform.position;
-
             GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
 
             bulletSpawn.GetComponent<CandyBullet>().setTargetPosition(nearestCharacter.transform.position);
-        }
 
+            bulletSpawn.GetComponent<CandyBullet>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
+
+            bulletSpawn.GetComponent<CandyBullet>().setOwnerPos(this.transform.position);
+        }
+    }
+
+    public void deadFunction()
+    {
+        if(isDead == true)
+        {
+            _collider.enabled = false;
+
+            rb.detectCollisions = false;
+
+            scripts.enabled = false;
+
+            agent.enabled = false;
+        }
     }
 
     public void Move()
     {
+        timeCountdownt -= Time.deltaTime;
+
         Transform wp = wayPoints[currentWaypointIndex];
 
         if (Vector3.Distance(agent.transform.position, wp.position) < 0.01f)

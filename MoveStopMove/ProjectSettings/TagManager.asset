@@ -9,6 +9,7 @@ TagManager:
   - Character
   - Character Range
   - WayPoints
+  - Bullet
   layers:
   - Default
   - TransparentFX

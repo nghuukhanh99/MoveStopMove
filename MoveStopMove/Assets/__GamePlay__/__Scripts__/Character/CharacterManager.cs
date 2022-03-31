@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CharacterManager : MonoBehaviour
+public class CharacterManager : MonoBehaviour, IHit
 {
     [HideInInspector] public string CharacterTag = "Character";
 
@@ -26,6 +26,13 @@ public class CharacterManager : MonoBehaviour
 
     public bool isMoving;
 
+    public bool canAttack;
+
+    public bool isDead;
+
+    float timer;
+
+    public bool checkFirstAttack;
     public virtual void Start()
     {
         MyAnimator = GetComponent<Animator>();
@@ -39,7 +46,9 @@ public class CharacterManager : MonoBehaviour
 
     public virtual void Update()
     {
-            FindAround();
+        FindAround();
+
+        
     }
 
     public void FindAround()
@@ -59,6 +68,8 @@ public class CharacterManager : MonoBehaviour
                     shortestDistance = distanceToOtherCharacter;
 
                     target = GameManager.Instance._listCharacter[i].gameObject;
+
+                    
                 }
             }
         }
@@ -74,13 +85,47 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            CandyBullet bulletWeaponScript = other.gameObject.GetComponent<CandyBullet>();
 
+            
+            if (this != bulletWeaponScript.characterOwner) // kiem tra neu thang nem vu khi khac chinh no thi thuc hien
+            {
+                OnHit(10);
+
+                Destroy(other.gameObject);
+                
+                Debug.Log(heal);
+            }
+        }
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
 
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    
+    
+
+    public void OnHit(int damage)
+    {
+        heal -= damage;
+
+        if(heal <= 0)
+        {
+            Debug.Log("dead");
+            heal = 0;
+        }
+
+        MyAnimator.SetBool("IsDead", true);
+
+        isDead = true;
+        
     }
 }
 

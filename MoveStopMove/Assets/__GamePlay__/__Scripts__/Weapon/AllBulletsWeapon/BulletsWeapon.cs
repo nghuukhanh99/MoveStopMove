@@ -10,6 +10,10 @@ public class BulletsWeapon : MonoBehaviour
 
     public float speed;
 
+
+
+  
+
     private void Update()
     {
         timer += Time.deltaTime;
@@ -20,13 +24,10 @@ public class BulletsWeapon : MonoBehaviour
         }
 
         updateState();
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<IHit>().OnHit(10);
-
         Despawn(other.gameObject);
     }
 
@@ -44,8 +45,7 @@ public class BulletsWeapon : MonoBehaviour
 
     private void Despawn(GameObject gameObject)
     {
-        gameObject.SetActive(false);
+        
     }
-    
     
 }
