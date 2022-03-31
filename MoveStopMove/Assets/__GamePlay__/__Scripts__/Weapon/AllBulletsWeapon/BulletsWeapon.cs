@@ -10,10 +10,6 @@ public class BulletsWeapon : MonoBehaviour
 
     public float speed;
 
-
-
-  
-
     private void Update()
     {
         timer += Time.deltaTime;

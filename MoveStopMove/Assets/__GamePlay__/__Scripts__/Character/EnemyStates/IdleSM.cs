@@ -18,7 +18,7 @@ public class IdleSM : IEnemyState
     {
         if(enemy.nearestCharacter != null && enemy.isMoving == false)
         {
-
+            enemy.ChangeState(new AttackSM());
         }
 
         Idle();

@@ -34,14 +34,13 @@ public class CandyBullet : BulletsWeapon
 
     private void autoDespawnIfOutOfRange()
     {
-        Debug.Log(charOwnerPos + " " + transform.position + " " + Vector3.Distance(charOwnerPos, transform.position) + " " + characterOwner.range);
 
         if (Vector3.Distance(charOwnerPos, transform.position) > characterOwner.range)
         {
             Destroy(gameObject);
         }
     }
-    public void setOwnerPos(Vector3 _charOwnerPos) // set owner for bullet
+    public void setOwnerPos(Vector3 _charOwnerPos)
     {
         //Debug.Log(_characterOwner);
         charOwnerPos = _charOwnerPos;
@@ -53,9 +52,8 @@ public class CandyBullet : BulletsWeapon
         positionTarget = _targetPos;
     }
 
-    public void setOwnerChar(CharacterManager _characterOwner) // set owner for bullet
+    public void setOwnerChar(CharacterManager _characterOwner)
     {
-        //Debug.Log(_characterOwner);
         characterOwner = _characterOwner;
     }
 

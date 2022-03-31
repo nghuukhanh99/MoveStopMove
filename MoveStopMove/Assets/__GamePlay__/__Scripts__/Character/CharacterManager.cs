@@ -18,6 +18,7 @@ public class CharacterManager : MonoBehaviour, IHit
     public GameObject nearestCharacter;
 
     public Animator MyAnimator { get; private set; }
+
     public bool Attack { get; set; }
 
     [SerializeField] int heal;
@@ -31,6 +32,8 @@ public class CharacterManager : MonoBehaviour, IHit
     public bool isDead;
 
     float timer;
+
+    public float timeResetWeapon;
 
     public bool checkFirstAttack;
     public virtual void Start()
@@ -91,7 +94,6 @@ public class CharacterManager : MonoBehaviour, IHit
         {
             CandyBullet bulletWeaponScript = other.gameObject.GetComponent<CandyBullet>();
 
-            
             if (this != bulletWeaponScript.characterOwner) // kiem tra neu thang nem vu khi khac chinh no thi thuc hien
             {
                 OnHit(10);

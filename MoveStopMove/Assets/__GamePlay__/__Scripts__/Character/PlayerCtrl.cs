@@ -24,8 +24,6 @@ public class PlayerCtrl : CharacterManager
 
     [SerializeField] private GameObject CandyHand;
 
-    float timer;
-    
     public override void Start()
     {
         base.Start();
@@ -53,11 +51,18 @@ public class PlayerCtrl : CharacterManager
         }
         timeCountdownt -= Time.deltaTime;
 
+        if (nearestCharacter != null && isMoving == false)
+        {
+            transform.LookAt(nearestCharacter.transform);
+        }
+
     }
 
     public void Attacking()
     {
         HideWeapon();
+        
+        MyAnimator.SetTrigger("IsAttack");
 
         if (nearestCharacter != null)
         {
@@ -73,9 +78,16 @@ public class PlayerCtrl : CharacterManager
 
     public void ShowWeapon()
     {
-        if(CandyHand != null)
+        if(CandyHand == null)
         {
             CandyHand.SetActive(true);
+        }
+
+        timeResetWeapon += Time.deltaTime;
+
+        if(timeResetWeapon >= 0.3 )
+        {
+
         }
     }
     public void HideWeapon()

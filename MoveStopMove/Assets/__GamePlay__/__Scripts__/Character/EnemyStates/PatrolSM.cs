@@ -15,6 +15,8 @@ public class PatrolSM : IEnemyState
         this.enemy = enemy;
 
         enemy.MyAnimator.SetBool(enemy.AnimIdleTag, false);
+
+        enemy.checkFirstAttack = true;
     }
 
     public void Execute()
@@ -48,8 +50,6 @@ public class PatrolSM : IEnemyState
 
     private void Patrol()
     {
-        enemy.checkFirstAttack = true;
-
         enemy.isMoving = true;
 
         enemy.Move();
