@@ -30,7 +30,8 @@ public class Enemy : CharacterManager
 
     public GameObject bullet;
 
-    public Transform PointSpawnBullet;
+    public bool needPatrolToAttack;
+
     private void Awake()
     {
         checkFirstAttack = true;
@@ -61,24 +62,25 @@ public class Enemy : CharacterManager
 
         Debug.Log(currentState);
 
-        if (nearestCharacter != null && timeCountdownt <= 0)
+        if (nearestCharacter != null)
         {
-            timeCountdownt = timeStart;
-
-            if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range)
+            if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
             {
-                if(checkFirstAttack && isMoving == false)
-                {
-                    ChangeState(new AttackSM());
-                }
+                timeCountdownt = timeStart;
             }
         }
+
+        timeCountdownt -= Time.deltaTime;
+
+        timeCountdownt = Mathf.Clamp(timeCountdownt, 0, Mathf.Infinity);
 
         deadFunction();
     }
 
     public void Attacking()
     {
+        MyAnimator.SetTrigger("IsAttack");
+
         if (nearestCharacter != null)
         {
             GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
@@ -107,8 +109,6 @@ public class Enemy : CharacterManager
 
     public void Move()
     {
-        timeCountdownt -= Time.deltaTime;
-
         Transform wp = wayPoints[currentWaypointIndex];
 
         if (Vector3.Distance(agent.transform.position, wp.position) < 0.01f)

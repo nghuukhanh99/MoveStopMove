@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EasyJoystick;
 using System;
+
 
 public class PlayerCtrl : CharacterManager
 {
-    [SerializeField] Joystick joystick;
+    [SerializeField] FloatingJoystick joystick;
 
     [SerializeField] private float moveSpeed;
     
@@ -16,13 +16,11 @@ public class PlayerCtrl : CharacterManager
 
     public GameObject bullet;
 
-    public Transform PointSpawnBullet;
-
     public float timeStart = 1.5f;
 
     public float timeCountdownt = 0;
 
-    [SerializeField] private GameObject CandyHand;
+    public Vector3 mousePos;
 
     public override void Start()
     {
@@ -33,35 +31,36 @@ public class PlayerCtrl : CharacterManager
     {
         base.Update();
 
+        
+
         PlayerMovement();
 
-        if(nearestCharacter != null &&  timeCountdownt <= 0)
+        if(nearestCharacter != null)
         {
-            timeCountdownt = timeStart;
-
-            if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range)
+            if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
             {
-                if(checkFirstAttack && isMoving == false)
-                {
+                    timeCountdownt = timeStart;
+
                     checkFirstAttack = false;
+
                     Attacking();
-                }
             }
-            canAttack = false;
         }
         timeCountdownt -= Time.deltaTime;
+
+        timeCountdownt = Mathf.Clamp(timeCountdownt, 0, Mathf.Infinity);
 
         if (nearestCharacter != null && isMoving == false)
         {
             transform.LookAt(nearestCharacter.transform);
         }
-
+    
     }
 
     public void Attacking()
     {
         HideWeapon();
-        
+
         MyAnimator.SetTrigger("IsAttack");
 
         if (nearestCharacter != null)
@@ -76,39 +75,15 @@ public class PlayerCtrl : CharacterManager
         }
     }
 
-    public void ShowWeapon()
-    {
-        if(CandyHand == null)
-        {
-            CandyHand.SetActive(true);
-        }
-
-        timeResetWeapon += Time.deltaTime;
-
-        if(timeResetWeapon >= 0.3 )
-        {
-
-        }
-    }
-    public void HideWeapon()
-    {
-        if(PointSpawnBullet.childCount > 0)
-        {
-            CandyHand = PointSpawnBullet.GetChild(0).gameObject;
-        }
-        if(CandyHand != null)
-        {
-            CandyHand.SetActive(false);   
-        }
-    }
+   
 
     public void PlayerMovement()
     {
         isMoving = true;
 
-        float xInput = joystick.Horizontal();
+        float xInput = joystick.Horizontal;
 
-        float zInput = joystick.Vertical();
+        float zInput = joystick.Vertical;
 
         Vector3 movementDirection = new Vector3(xInput, 0f, zInput);
 

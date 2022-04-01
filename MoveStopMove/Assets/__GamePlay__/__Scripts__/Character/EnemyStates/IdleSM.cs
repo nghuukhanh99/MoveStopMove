@@ -8,38 +8,35 @@ public class IdleSM : IEnemyState
 
     private float idleTimer;
 
-    private float idleDuration = 3;
+    private float idleDuration = 2f;
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
+
+        enemy.showWeapon();
+
+        enemy.CancelDestination();
     }
 
     public void Execute()
     {
-        if(enemy.nearestCharacter != null && enemy.isMoving == false)
+        enemy.FindAround();
+
+        Idle();
+
+        if (enemy.nearestCharacter != null)
         {
             enemy.ChangeState(new AttackSM());
         }
-
-        Idle();
     }
 
     public void Exit()
     {
-        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, false);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
         
     }
 
-
-
     private void Idle()
     {
-        enemy.isMoving = false;
-
         enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
 
         if(enemy.nearestCharacter != null)

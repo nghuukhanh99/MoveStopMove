@@ -10,5 +10,4 @@ public interface IEnemyState
 
     void Exit();
 
-    void OnTriggerEnter(Collider other);
 }

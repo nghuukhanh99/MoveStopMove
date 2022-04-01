@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowKeysSimulationEnabled: 0
+  isDrag: 0
 --- !u!1 &1429493111903604
 GameObject:
   m_ObjectHideFlags: 0

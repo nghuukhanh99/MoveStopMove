@@ -6,7 +6,7 @@ public class PatrolSM : IEnemyState
 {
     private float patrolTimer;
 
-    private float patrolDuration = 3;
+    private float patrolDuration = 3f;
 
     private Enemy enemy;
 
@@ -14,25 +14,24 @@ public class PatrolSM : IEnemyState
     {
         this.enemy = enemy;
 
-        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, false);
-
-        enemy.checkFirstAttack = true;
     }
 
     public void Execute()
     {
-       
         Patrol();
 
-        
+        patrolTimer += Time.deltaTime;
+
+        enemy.FindAround();
+
         if (enemy.nearestCharacter != null)
         {
-            patrolTimer += Time.deltaTime;
-
             if(patrolTimer >= 2f)
             {
                 enemy.CancelDestination();
+
                 enemy.MyAnimator.SetBool("IsIdle", true);
+
                 enemy.ChangeState(new IdleSM());
             }
         }
@@ -40,26 +39,17 @@ public class PatrolSM : IEnemyState
 
     public void Exit()
     {
-        
-    }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        
     }
 
     private void Patrol()
     {
-        enemy.isMoving = true;
+        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, false);
 
         enemy.Move();
 
-        patrolTimer += Time.deltaTime;
-
         if (patrolTimer >= patrolDuration)
         {
-            enemy.CancelDestination();
-
             enemy.ChangeState(new IdleSM());
         }
     }

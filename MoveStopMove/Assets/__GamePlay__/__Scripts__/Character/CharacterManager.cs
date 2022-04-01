@@ -27,15 +27,18 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public bool isMoving;
 
-    public bool canAttack;
-
     public bool isDead;
 
-    float timer;
-
-    public float timeResetWeapon;
+    public float timer;
 
     public bool checkFirstAttack;
+
+    public bool canAttack;
+
+    public GameObject WeaponHand;
+
+    public Transform PointSpawnBullet;
+
     public virtual void Start()
     {
         MyAnimator = GetComponent<Animator>();
@@ -45,13 +48,14 @@ public class CharacterManager : MonoBehaviour, IHit
         GameManager.Instance._listCharacter.Add(gameObject.GetComponent<CharacterManager>());
 
         nearestCharacter = null;
+
+        canAttack = true;
     }
 
     public virtual void Update()
     {
-        FindAround();
 
-        
+        FindAround();
     }
 
     public void FindAround()
@@ -88,6 +92,31 @@ public class CharacterManager : MonoBehaviour, IHit
         }
     }
 
+    public void OnDead()
+    {
+        if(isDead == true)
+        {
+            Destroy(gameObject, 1.2f);
+
+            MyAnimator.SetBool("IsDead", true);
+
+            GameManager.Instance._listCharacter.Remove(this);
+        }
+    }
+
+    public void HideWeapon()
+    {
+        
+        WeaponHand.SetActive(false);
+
+    }
+
+    public void showWeapon()
+    {
+        WeaponHand.SetActive(true);
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
@@ -99,8 +128,6 @@ public class CharacterManager : MonoBehaviour, IHit
                 OnHit(10);
 
                 Destroy(other.gameObject);
-                
-                Debug.Log(heal);
             }
         }
     }
@@ -120,14 +147,12 @@ public class CharacterManager : MonoBehaviour, IHit
 
         if(heal <= 0)
         {
-            Debug.Log("dead");
             heal = 0;
         }
 
-        MyAnimator.SetBool("IsDead", true);
-
         isDead = true;
-        
+
+        OnDead();
     }
 }
 
