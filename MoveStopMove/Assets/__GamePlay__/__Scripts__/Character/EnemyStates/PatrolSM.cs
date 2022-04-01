@@ -20,13 +20,13 @@ public class PatrolSM : IEnemyState
     {
         Patrol();
 
-        patrolTimer += Time.deltaTime;
-
         enemy.FindAround();
 
         if (enemy.nearestCharacter != null)
         {
-            if(patrolTimer >= 2f)
+            patrolTimer += Time.deltaTime;
+
+            if (patrolTimer >= 2f)
             {
                 enemy.CancelDestination();
 

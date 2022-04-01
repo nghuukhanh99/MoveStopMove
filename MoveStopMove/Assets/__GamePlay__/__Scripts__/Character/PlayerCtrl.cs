@@ -30,10 +30,11 @@ public class PlayerCtrl : CharacterManager
     public override void Update()
     {
         base.Update();
-
         
-
-        PlayerMovement();
+        if(isDead == false)
+        {
+            PlayerMovement();
+        }
 
         if(nearestCharacter != null)
         {

@@ -148,9 +148,9 @@ public class CharacterManager : MonoBehaviour, IHit
         if(heal <= 0)
         {
             heal = 0;
-        }
 
-        isDead = true;
+            isDead = true;
+        }
 
         OnDead();
     }

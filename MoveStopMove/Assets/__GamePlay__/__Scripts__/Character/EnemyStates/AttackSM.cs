@@ -19,8 +19,6 @@ public class AttackSM : IEnemyState
 
             enemy.HideWeapon();
         }
-
-
     }
 
     public void Execute()
