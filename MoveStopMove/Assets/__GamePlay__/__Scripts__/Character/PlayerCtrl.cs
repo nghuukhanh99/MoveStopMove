@@ -62,6 +62,8 @@ public class PlayerCtrl : CharacterManager
     {
         HideWeapon();
 
+        Attacked = true;
+
         MyAnimator.SetTrigger("IsAttack");
 
         if (nearestCharacter != null)

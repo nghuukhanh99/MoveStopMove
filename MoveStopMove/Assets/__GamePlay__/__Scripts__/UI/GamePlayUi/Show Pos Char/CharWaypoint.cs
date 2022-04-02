@@ -20,7 +20,7 @@ public class CharWaypoint : MonoBehaviour
 
             Vector2 pos = Camera.main.WorldToScreenPoint(GameManager.Instance._listCharacter[i].transform.position + offset);
 
-            if (Vector3.Dot((GameManager.Instance._listCharacter[i].transform.position - transform.position), transform.forward) < 0)
+            if (Vector3.Dot((GameManager.Instance._listCharacter[i].transform.position - transform.position), transform.forward) < 1)
             {
                 //target is behind the player
                 if (pos.x < Screen.width / 2)
@@ -30,7 +30,7 @@ public class CharWaypoint : MonoBehaviour
                 else
                 {
                     pos.x = minX;
-                }
+                } 
             }
 
             pos.x = Mathf.Clamp(pos.x, minX, maxX);

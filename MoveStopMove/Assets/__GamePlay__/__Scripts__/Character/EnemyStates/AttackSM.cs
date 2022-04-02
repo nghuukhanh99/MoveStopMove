@@ -17,6 +17,7 @@ public class AttackSM : IEnemyState
 
             Attack();
 
+            
             enemy.HideWeapon();
         }
     }

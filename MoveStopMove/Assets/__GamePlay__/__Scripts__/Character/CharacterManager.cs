@@ -39,6 +39,8 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public Transform PointSpawnBullet;
 
+    public bool Attacked;
+
     public virtual void Start()
     {
         MyAnimator = GetComponent<Animator>();
@@ -49,14 +51,16 @@ public class CharacterManager : MonoBehaviour, IHit
 
         nearestCharacter = null;
 
-        canAttack = true;
     }
 
     public virtual void Update()
     {
-
         FindAround();
-        timer += Time.deltaTime;
+
+        if (Attacked)
+        {
+            showWeapon();
+        }
     }
 
     public void FindAround()
@@ -95,10 +99,8 @@ public class CharacterManager : MonoBehaviour, IHit
     {
         if(isDead == true)
         {
-            if(timer >= 1.2f)
-            {
-                gameObject.SetActive(false);
-            }
+            Invoke("OnDespawn", 1.2f);
+
             MyAnimator.SetBool("IsDead", true);
 
             GameManager.Instance._listCharacter.Remove(this);
@@ -106,11 +108,17 @@ public class CharacterManager : MonoBehaviour, IHit
         }
     }
 
+    public void showWeapon()
+    {
+        if(Attacked == true)
+        {
+            WeaponHand.SetActive(true);
+        }
+    }
+
     public void HideWeapon()
     {
-        
         WeaponHand.SetActive(false);
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -135,7 +143,10 @@ public class CharacterManager : MonoBehaviour, IHit
     }
 
     
-    
+    public void OnDespawn()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void OnHit(int damage)
     {
