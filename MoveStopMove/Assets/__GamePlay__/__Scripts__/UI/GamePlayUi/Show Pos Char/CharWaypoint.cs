@@ -7,9 +7,12 @@ public class CharWaypoint : MonoBehaviour
 {
     public Vector3 offset;
 
-    public CharacterManager _characterManager;
-
     public List<Transform> target = new List<Transform>();
+
+    private void Start()
+    {
+        
+    }
 
     void FixedUpdate()
     {
@@ -44,7 +47,7 @@ public class CharWaypoint : MonoBehaviour
 
             GUIManager.Instance._imgList[i].transform.position = pos;
 
-            if(target[i].gameObject.activeSelf == false)
+            if (target[i].gameObject.activeInHierarchy == false)
             {
                 GUIManager.Instance._imgList[i].gameObject.SetActive(false);
             }

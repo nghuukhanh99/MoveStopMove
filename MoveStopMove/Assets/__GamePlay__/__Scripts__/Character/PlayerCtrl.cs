@@ -20,8 +20,6 @@ public class PlayerCtrl : CharacterManager
 
     public float timeCountdownt = 0;
 
-    public Vector3 mousePos;
-
     public override void Start()
     {
         base.Start();
@@ -55,20 +53,17 @@ public class PlayerCtrl : CharacterManager
         {
             transform.LookAt(nearestCharacter.transform);
         }
-    
     }
 
     public void Attacking()
     {
         HideWeapon();
 
-        Attacked = true;
-
-        MyAnimator.SetTrigger("IsAttack");
+        MyAnimator.SetTrigger(AnimAttackTag);
 
         if (nearestCharacter != null)
         {
-            GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
+            GameObject bulletSpawn = (GameObject) SimplePool.Spawn(bullet, PointSpawnBullet.position, bullet.transform.rotation);
 
             bulletSpawn.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
 
@@ -77,8 +72,6 @@ public class PlayerCtrl : CharacterManager
             bulletSpawn.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
         }
     }
-
-   
 
     public void PlayerMovement()
     {
@@ -101,8 +94,6 @@ public class PlayerCtrl : CharacterManager
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
-
-            //animator.SetBool(AnimIdleTag, false);
 
             checkFirstAttack = true;
         }

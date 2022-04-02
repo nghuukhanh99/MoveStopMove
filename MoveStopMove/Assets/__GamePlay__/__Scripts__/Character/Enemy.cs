@@ -60,8 +60,6 @@ public class Enemy : CharacterManager
 
         currentState.Execute();
 
-        Debug.Log(currentState);
-
         if (nearestCharacter != null)
         {
             if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)

@@ -24,7 +24,7 @@ public class BulletsWeapon : MonoBehaviour
 
         if(timer > 4f)
         {
-            Destroy(gameObject);
+            SimplePool.Despawn(gameObject);
         }
 
         updateState();
@@ -46,7 +46,7 @@ public class BulletsWeapon : MonoBehaviour
 
         if (Vector3.Distance(charOwnerPos, transform.position) > characterOwner.range)
         {
-            Destroy(gameObject);
+            SimplePool.Despawn(gameObject);
         }
     }
     public void setOwnerPos(Vector3 _charOwnerPos)

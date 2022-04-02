@@ -30,7 +30,7 @@ public class PatrolSM : IEnemyState
             {
                 enemy.CancelDestination();
 
-                enemy.MyAnimator.SetBool("IsIdle", true);
+                enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
 
                 enemy.ChangeState(new IdleSM());
             }

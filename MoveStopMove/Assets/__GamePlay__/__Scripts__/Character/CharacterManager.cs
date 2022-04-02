@@ -5,6 +5,8 @@ using System;
 
 public class CharacterManager : MonoBehaviour, IHit
 {
+    //string
+    #region
     [HideInInspector] public string CharacterTag = "Character";
 
     [HideInInspector] public string AnimIdleTag = "IsIdle";
@@ -13,34 +15,48 @@ public class CharacterManager : MonoBehaviour, IHit
 
     [HideInInspector] public string AnimDeadTag = "IsDead";
 
-    public Transform characterTransform;
+    [HideInInspector] public string OndespawnTag = "OnDespawn";
 
-    public GameObject nearestCharacter;
+    [HideInInspector] public string showWeaponTag = "showWeapon";
 
-    public Animator MyAnimator { get; private set; }
+    [HideInInspector] public string bulletTag = "Bullet";
 
-    public bool Attack { get; set; }
+    #endregion
 
-    [SerializeField] int heal;
-
-    public float range;
-
-    public bool isMoving;
-
+    //bool
+    #region
     public bool isDead;
-
-    public float timer;
 
     public bool checkFirstAttack;
 
-    public bool canAttack;
+    public bool isMoving;
 
+    #endregion
+
+    //float
+    #region
+    public float range;
+
+    public float timer;
+    #endregion
+
+    //GameObject
+    #region
     public GameObject WeaponHand;
 
+    [HideInInspector] public GameObject nearestCharacter;
+    #endregion
+
+    //Transform
+    #region
     public Transform PointSpawnBullet;
 
-    public bool Attacked;
+    [HideInInspector] public Transform characterTransform;
+    #endregion
 
+    [SerializeField] int heal;
+
+    public Animator MyAnimator { get; private set; }
     public virtual void Start()
     {
         MyAnimator = GetComponent<Animator>();
@@ -50,8 +66,6 @@ public class CharacterManager : MonoBehaviour, IHit
         GameManager.Instance._listCharacter.Add(gameObject.GetComponent<CharacterManager>());
 
         nearestCharacter = null;
-
-        
     }
 
     public virtual void Update()
@@ -60,10 +74,8 @@ public class CharacterManager : MonoBehaviour, IHit
 
         if(WeaponHand.activeSelf == false)
         {
-            Invoke("showWeapon", 0.5f);
+            Invoke(showWeaponTag, 0.5f);
         }
-
-
     }
 
     public void FindAround()
@@ -102,11 +114,9 @@ public class CharacterManager : MonoBehaviour, IHit
     {
         if(isDead == true)
         {
-            Invoke("OnDespawn", 1.2f);
+            Invoke(OndespawnTag, 1.2f);
 
-            MyAnimator.SetBool("IsDead", true);
-
-            GameManager.Instance._listCharacter.Remove(this);           
+            MyAnimator.SetBool(AnimDeadTag, true);
         }
     }
 
@@ -122,7 +132,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag(bulletTag))
         {
             CandyBullet bulletWeaponScript = other.gameObject.GetComponent<CandyBullet>();
 
@@ -145,6 +155,8 @@ public class CharacterManager : MonoBehaviour, IHit
     public void OnDespawn()
     {
         gameObject.SetActive(false);
+
+        GameManager.Instance._listCharacter.Remove(this);
     }
 
     public void OnHit(int damage)
