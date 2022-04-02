@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-
-public class GameManager : MonoBehaviour
+public class GUIManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GUIManager Instance;
 
-    public List<CharacterManager> _listCharacter = new List<CharacterManager>();
+    public List<Image> _imgList = new List<Image>();
 
     private void Awake()
     {
@@ -26,6 +26,4 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
-    
-
 }

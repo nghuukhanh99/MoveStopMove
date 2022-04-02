@@ -6,7 +6,7 @@ public class PatrolSM : IEnemyState
 {
     private float patrolTimer;
 
-    private float patrolDuration = 3f;
+    private float patrolDuration = 2f;
 
     private Enemy enemy;
 
@@ -26,7 +26,7 @@ public class PatrolSM : IEnemyState
         {
             patrolTimer += Time.deltaTime;
 
-            if (patrolTimer >= 2f)
+            if (patrolTimer >= 1.5f)
             {
                 enemy.CancelDestination();
 

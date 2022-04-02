@@ -5,16 +5,50 @@ using UnityEngine.UI;
 
 public class CharWaypoint : MonoBehaviour
 {
-    public List<Image> charUiPosList = new List<Image>();
-
-    public List<Transform> charPosList = new List<Transform>();
-    
-
+    public Vector3 offset;
     void Update()
     {
-        for(int i = 0; i < charPosList.Count; i++)
+        for (int i = 0; i < GameManager.Instance._listCharacter.Count; i++)
         {
-            charUiPosList[i].transform.position = Camera.main.WorldToScreenPoint(charPosList[i].position);
+            float minX = GUIManager.Instance._imgList[i].GetPixelAdjustedRect().width / 2;
+
+            float maxX = Screen.width - minX;
+
+            float minY = GUIManager.Instance._imgList[i].GetPixelAdjustedRect().height / 2;
+
+            float maxY = Screen.height - minY;
+
+            Vector2 pos = Camera.main.WorldToScreenPoint(GameManager.Instance._listCharacter[i].transform.position + offset);
+
+            if (Vector3.Dot((GameManager.Instance._listCharacter[i].transform.position - transform.position), transform.forward) < 0)
+            {
+                //target is behind the player
+                if (pos.x < Screen.width / 2)
+                {
+                    pos.x = maxX;
+                }
+                else
+                {
+                    pos.x = minX;
+                }
+            }
+
+            pos.x = Mathf.Clamp(pos.x, minX, maxX);
+
+            pos.y = Mathf.Clamp(pos.y, minY, maxY);
+
+            GUIManager.Instance._imgList[i].transform.position = pos;
+
+            if(GUIManager.Instance._imgList[i].transform == null)
+            {
+                GUIManager.Instance._imgList.Remove(GUIManager.Instance._imgList[i]);
+            }
         }
+       
+           
+
+        
+        
+       
     }
 }
