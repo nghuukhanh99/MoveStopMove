@@ -1820,13 +1820,14 @@ MonoBehaviour:
   timer: 0
   checkFirstAttack: 0
   canAttack: 0
-  WeaponHand: {fileID: 6780154753262184469}
+  WeaponHand: {fileID: 8655769570086675422}
   PointSpawnBullet: {fileID: 6780154753914523509}
+  Attacked: 0
   joystick: {fileID: 0}
   moveSpeed: 0.2
   rotationSpeed: 500
   animator: {fileID: 6780154752750675176}
-  bullet: {fileID: 1837506665760548694, guid: 0427dd85b6515dd45ba30b4683359e21, type: 3}
+  bullet: {fileID: 1837506665760548694, guid: ac23e46503ac2034baacfbd81b167d5f, type: 3}
   timeStart: 1
   timeCountdownt: 0
   mousePos: {x: 0, y: 0, z: 0}
@@ -1894,7 +1895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6780154753262184490
 Transform:
   m_ObjectHideFlags: 0
@@ -2635,7 +2636,7 @@ PrefabInstance:
     - target: {fileID: 2740592395119576968, guid: 2b4147bac87552245bf1dd266dfbeefc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3605057082100511653, guid: 2b4147bac87552245bf1dd266dfbeefc,
         type: 3}
@@ -2757,6 +2758,12 @@ PrefabInstance:
 --- !u!4 &7786810083995867123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3605057082100511653, guid: 2b4147bac87552245bf1dd266dfbeefc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6780154752276341846}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8655769570086675422 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2740592395119576968, guid: 2b4147bac87552245bf1dd266dfbeefc,
     type: 3}
   m_PrefabInstance: {fileID: 6780154752276341846}
   m_PrefabAsset: {fileID: 0}

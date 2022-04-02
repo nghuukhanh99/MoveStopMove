@@ -998,9 +998,9 @@ MonoBehaviour:
   timer: 0
   checkFirstAttack: 0
   canAttack: 0
-  WeaponHand: {fileID: 2297044164894951783, guid: a4adc40c2c4eef448bcf8b720736ff72,
-    type: 3}
+  WeaponHand: {fileID: 2932769796329203299}
   PointSpawnBullet: {fileID: 8877474080945005528}
+  Attacked: 0
   enemyName: John
   wayPoints:
   - {fileID: 0}
@@ -2468,7 +2468,7 @@ PrefabInstance:
     - target: {fileID: 2740592395119576968, guid: 2b4147bac87552245bf1dd266dfbeefc,
         type: 3}
       propertyPath: m_Name
-      value: Hammer (1)
+      value: Hammer
       objectReference: {fileID: 0}
     - target: {fileID: 3605057082100511653, guid: 2b4147bac87552245bf1dd266dfbeefc,
         type: 3}
@@ -2527,6 +2527,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b4147bac87552245bf1dd266dfbeefc, type: 3}
+--- !u!1 &2932769796329203299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2740592395119576968, guid: 2b4147bac87552245bf1dd266dfbeefc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1061654154059915755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4376509847807742542 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3605057082100511653, guid: 2b4147bac87552245bf1dd266dfbeefc,

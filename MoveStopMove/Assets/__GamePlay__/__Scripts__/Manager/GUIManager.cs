@@ -43,9 +43,9 @@ public class GUIManager : MonoBehaviour
 
         VibrateButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
 
-        SkinShopButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
+        SkinShopButton.DOAnchorPos(new Vector2(-1000f, transform.position.y), 0.5f);
 
-        WeaponShopButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
+        WeaponShopButton.DOAnchorPos(new Vector2(-1000f, transform.position.y), 0.5f);
 
         ExpButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
     }

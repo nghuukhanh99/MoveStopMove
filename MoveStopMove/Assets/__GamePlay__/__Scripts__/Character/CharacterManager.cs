@@ -51,16 +51,19 @@ public class CharacterManager : MonoBehaviour, IHit
 
         nearestCharacter = null;
 
+        
     }
 
     public virtual void Update()
     {
         FindAround();
 
-        if (Attacked)
+        if(WeaponHand.activeSelf == false)
         {
-            showWeapon();
+            Invoke("showWeapon", 0.5f);
         }
+
+
     }
 
     public void FindAround()
@@ -103,17 +106,13 @@ public class CharacterManager : MonoBehaviour, IHit
 
             MyAnimator.SetBool("IsDead", true);
 
-            GameManager.Instance._listCharacter.Remove(this);
-
+            GameManager.Instance._listCharacter.Remove(this);           
         }
     }
 
     public void showWeapon()
     {
-        if(Attacked == true)
-        {
-            WeaponHand.SetActive(true);
-        }
+        WeaponHand.SetActive(true);
     }
 
     public void HideWeapon()
@@ -152,7 +151,7 @@ public class CharacterManager : MonoBehaviour, IHit
     {
         heal -= damage;
 
-        if(heal <= 0)
+        if (heal <= 0)
         {
             heal = 0;
 

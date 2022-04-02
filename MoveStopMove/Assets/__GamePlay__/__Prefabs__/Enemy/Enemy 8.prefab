@@ -1091,9 +1091,9 @@ MonoBehaviour:
   timer: 0
   checkFirstAttack: 0
   canAttack: 0
-  WeaponHand: {fileID: 8319843690065334355, guid: 1e1b2290ae316dd439d38a135226f035,
-    type: 3}
+  WeaponHand: {fileID: 8983368669827222697}
   PointSpawnBullet: {fileID: 508791071192547069}
+  Attacked: 0
   enemyName: John
   wayPoints:
   - {fileID: 0}
@@ -2617,6 +2617,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae57473443f416418962b8563187411, type: 3}
+--- !u!1 &8983368669827222697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2691555597006255822, guid: aae57473443f416418962b8563187411,
+    type: 3}
+  m_PrefabInstance: {fileID: 6480967641755908711}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7604330460851675818 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3492831748911683789, guid: aae57473443f416418962b8563187411,
