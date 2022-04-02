@@ -13,8 +13,6 @@ public class IdleSM : IEnemyState
     {
         this.enemy = enemy;
 
-        enemy.showWeapon();
-
         enemy.CancelDestination();
     }
 
@@ -27,6 +25,13 @@ public class IdleSM : IEnemyState
         if (enemy.nearestCharacter != null)
         {
             enemy.ChangeState(new AttackSM());
+        }
+
+        idleTimer += Time.deltaTime;
+
+        if (idleTimer >= idleDuration)
+        {
+            enemy.ChangeState(new PatrolSM());
         }
     }
 
@@ -44,11 +49,5 @@ public class IdleSM : IEnemyState
             enemy.transform.LookAt(enemy.nearestCharacter.transform);
         }
 
-        idleTimer += Time.deltaTime;
-
-        if (idleTimer >= idleDuration)
-        {
-            enemy.ChangeState(new PatrolSM());
-        }
     }
 }

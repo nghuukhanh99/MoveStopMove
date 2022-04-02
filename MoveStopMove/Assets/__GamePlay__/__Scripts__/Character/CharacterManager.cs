@@ -56,6 +56,7 @@ public class CharacterManager : MonoBehaviour, IHit
     {
 
         FindAround();
+        timer += Time.deltaTime;
     }
 
     public void FindAround()
@@ -75,8 +76,6 @@ public class CharacterManager : MonoBehaviour, IHit
                     shortestDistance = distanceToOtherCharacter;
 
                     target = GameManager.Instance._listCharacter[i].gameObject;
-
-                    
                 }
             }
         }
@@ -96,11 +95,14 @@ public class CharacterManager : MonoBehaviour, IHit
     {
         if(isDead == true)
         {
-            Destroy(gameObject, 1.2f);
-
+            if(timer >= 1.2f)
+            {
+                gameObject.SetActive(false);
+            }
             MyAnimator.SetBool("IsDead", true);
 
             GameManager.Instance._listCharacter.Remove(this);
+
         }
     }
 
@@ -110,12 +112,6 @@ public class CharacterManager : MonoBehaviour, IHit
         WeaponHand.SetActive(false);
 
     }
-
-    public void showWeapon()
-    {
-        WeaponHand.SetActive(true);
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {

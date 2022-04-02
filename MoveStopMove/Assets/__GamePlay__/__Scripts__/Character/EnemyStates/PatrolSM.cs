@@ -35,6 +35,13 @@ public class PatrolSM : IEnemyState
                 enemy.ChangeState(new IdleSM());
             }
         }
+
+        patrolTimer += Time.deltaTime;
+
+        if (patrolTimer >= patrolDuration)
+        {
+            enemy.ChangeState(new IdleSM());
+        }
     }
 
     public void Exit()
@@ -47,10 +54,5 @@ public class PatrolSM : IEnemyState
         enemy.MyAnimator.SetBool(enemy.AnimIdleTag, false);
 
         enemy.Move();
-
-        if (patrolTimer >= patrolDuration)
-        {
-            enemy.ChangeState(new IdleSM());
-        }
     }
 }

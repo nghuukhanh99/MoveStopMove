@@ -10,13 +10,21 @@ public class BulletsWeapon : MonoBehaviour
 
     public float speed;
 
+    public Vector3 positionTarget;
+
+    public Vector3 charOwnerPos;
+
+    public Vector3 fixedDirectToCharacter;
+
+    public CharacterManager characterOwner;
+
     private void Update()
     {
         timer += Time.deltaTime;
 
         if(timer > 4f)
         {
-            Despawn(gameObject);
+            Destroy(gameObject);
         }
 
         updateState();
@@ -24,7 +32,7 @@ public class BulletsWeapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Despawn(other.gameObject);
+        
     }
 
     public virtual void updateState()
@@ -33,15 +41,29 @@ public class BulletsWeapon : MonoBehaviour
     }
 
 
-    public virtual void OnHit()
+    public void autoDespawnIfOutOfRange()
     {
 
+        if (Vector3.Distance(charOwnerPos, transform.position) > characterOwner.range)
+        {
+            Destroy(gameObject);
+        }
     }
-    
-
-    private void Despawn(GameObject gameObject)
+    public void setOwnerPos(Vector3 _charOwnerPos)
     {
-        
+        //Debug.Log(_characterOwner);
+        charOwnerPos = _charOwnerPos;
+
+        fixedDirectToCharacter = (positionTarget - charOwnerPos).normalized;
     }
-    
+    public void setTargetPosition(Vector3 _targetPos)
+    {
+        positionTarget = _targetPos;
+    }
+
+    public void setOwnerChar(CharacterManager _characterOwner)
+    {
+        characterOwner = _characterOwner;
+    }
+
 }

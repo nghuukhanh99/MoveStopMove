@@ -855,7 +855,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6149805314325609848}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.065, y: 0.866, z: 0.781}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -937,7 +937,8 @@ MonoBehaviour:
   timer: 0
   checkFirstAttack: 0
   canAttack: 0
-  WeaponHand: {fileID: 8071062787025573199}
+  WeaponHand: {fileID: 4820968331138248073, guid: d9029441eb5c9ba4fb6dc81564fb9c88,
+    type: 3}
   PointSpawnBullet: {fileID: 6149805313722395139}
   enemyName: John
   wayPoints:
@@ -952,7 +953,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  timeStart: 0.2
+  timeStart: 1
   timeCountdownt: 0
   bullet: {fileID: 1837506665760548694, guid: 0427dd85b6515dd45ba30b4683359e21, type: 3}
   needPatrolToAttack: 0
@@ -2616,12 +2617,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aae57473443f416418962b8563187411, type: 3}
---- !u!1 &8071062787025573199 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2691555597006255822, guid: aae57473443f416418962b8563187411,
-    type: 3}
-  m_PrefabInstance: {fileID: 6149805314495292289}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7287238309214649164 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3492831748911683789, guid: aae57473443f416418962b8563187411,

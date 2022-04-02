@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CharWaypoint : MonoBehaviour
 {
     public Vector3 offset;
-    void Update()
+    void FixedUpdate()
     {
         for (int i = 0; i < GameManager.Instance._listCharacter.Count; i++)
         {
@@ -37,18 +37,8 @@ public class CharWaypoint : MonoBehaviour
 
             pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
-            GUIManager.Instance._imgList[i].transform.position = pos;
-
-            if(GUIManager.Instance._imgList[i].transform == null)
-            {
-                GUIManager.Instance._imgList.Remove(GUIManager.Instance._imgList[i]);
-            }
+            GUIManager.Instance._imgList[i].transform.position = pos;         
+            
         }
-       
-           
-
-        
-        
-       
     }
 }

@@ -85,11 +85,11 @@ public class Enemy : CharacterManager
         {
             GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
 
-            bulletSpawn.GetComponent<CandyBullet>().setTargetPosition(nearestCharacter.transform.position);
+            bulletSpawn.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
 
-            bulletSpawn.GetComponent<CandyBullet>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
+            bulletSpawn.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
 
-            bulletSpawn.GetComponent<CandyBullet>().setOwnerPos(this.transform.position);
+            bulletSpawn.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
         }
     }
 

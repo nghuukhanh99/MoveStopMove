@@ -214,7 +214,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2300969683874010959}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.829, y: 0.866, z: -0.959}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -296,7 +296,8 @@ MonoBehaviour:
   timer: 0
   checkFirstAttack: 0
   canAttack: 0
-  WeaponHand: {fileID: 4230283245567232862}
+  WeaponHand: {fileID: 2297044164894951783, guid: a4adc40c2c4eef448bcf8b720736ff72,
+    type: 3}
   PointSpawnBullet: {fileID: 2300969684034405291}
   enemyName: John
   wayPoints:
@@ -311,9 +312,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  timeStart: 0.2
+  timeStart: 1
   timeCountdownt: 0
-  bullet: {fileID: 1837506665760548694, guid: 0427dd85b6515dd45ba30b4683359e21, type: 3}
+  bullet: {fileID: 1837506665760548694, guid: ac23e46503ac2034baacfbd81b167d5f, type: 3}
   needPatrolToAttack: 0
 --- !u!195 &2300969683874010952
 NavMeshAgent:
@@ -871,13 +872,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2300969684237111104}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.11952705, y: 0.103532754, z: 0.11875945, w: 0.9802502}
+  m_LocalPosition: {x: 0.0056627006, y: -0.02002721, z: 0.0052487548}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2300969684034405291}
-  m_Father: {fileID: 2300969685320234816}
-  m_RootOrder: 2
+  m_Father: {fileID: 2300969684961417667}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2300969684247830072
 GameObject:
@@ -1674,6 +1675,7 @@ Transform:
   m_LocalScale: {x: 0.9999999, y: 1.0000007, z: 1.0000001}
   m_Children:
   - {fileID: 2300969684159004790}
+  - {fileID: 2300969684237111105}
   m_Father: {fileID: 2300969685320234816}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2016,7 +2018,6 @@ Transform:
   m_Children:
   - {fileID: 2300969684961417667}
   - {fileID: 2300969685288144853}
-  - {fileID: 2300969684237111105}
   m_Father: {fileID: 2300969685021599812}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2604,12 +2605,6 @@ PrefabInstance:
 --- !u!4 &3429394654322337117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3492831748911683789, guid: aae57473443f416418962b8563187411,
-    type: 3}
-  m_PrefabInstance: {fileID: 2300969685708438928}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4230283245567232862 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2691555597006255822, guid: aae57473443f416418962b8563187411,
     type: 3}
   m_PrefabInstance: {fileID: 2300969685708438928}
   m_PrefabAsset: {fileID: 0}

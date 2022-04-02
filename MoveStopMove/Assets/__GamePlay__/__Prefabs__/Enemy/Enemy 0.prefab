@@ -2521,7 +2521,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927402579286443862}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.004, y: 0.866, z: -0.381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2618,9 +2618,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  timeStart: 0.15
+  timeStart: 1
   timeCountdownt: 0
-  bullet: {fileID: 1837506665760548694, guid: 0427dd85b6515dd45ba30b4683359e21, type: 3}
+  bullet: {fileID: 1837506665760548694, guid: ac23e46503ac2034baacfbd81b167d5f, type: 3}
   needPatrolToAttack: 0
 --- !u!195 &927402579286443863
 NavMeshAgent:

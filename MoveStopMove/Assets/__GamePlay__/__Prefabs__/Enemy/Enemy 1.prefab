@@ -1857,7 +1857,7 @@ MonoBehaviour:
   - {fileID: 0}
   timeStart: 1
   timeCountdownt: 0
-  bullet: {fileID: 1837506665760548694, guid: 0427dd85b6515dd45ba30b4683359e21, type: 3}
+  bullet: {fileID: 1837506665760548694, guid: bc3503aa8f9e8454785c1361d8aa98af, type: 3}
   needPatrolToAttack: 0
 --- !u!195 &4525070524972131410
 NavMeshAgent:

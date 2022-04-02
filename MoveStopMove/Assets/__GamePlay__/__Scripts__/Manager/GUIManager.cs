@@ -9,6 +9,8 @@ public class GUIManager : MonoBehaviour
 
     public List<Image> _imgList = new List<Image>();
 
+    public GameObject UiImgPos;
+
     private void Awake()
     {
         InitializeSingleton();

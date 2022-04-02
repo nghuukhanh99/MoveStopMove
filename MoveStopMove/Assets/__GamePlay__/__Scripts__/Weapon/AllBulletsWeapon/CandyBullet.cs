@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class CandyBullet : BulletsWeapon
 {
-    Vector3 positionTarget;
-
-    Vector3 directBetweenPlayToTarget;
-
-    Vector3 charOwnerPos;
-
-    public CharacterManager characterOwner;
-
-    Vector3 fixedDirectToCharacter;
-
     public override void updateState()
     {
         base.updateState();
@@ -31,30 +21,4 @@ public class CandyBullet : BulletsWeapon
         autoDespawnIfOutOfRange();
 
     }
-
-    private void autoDespawnIfOutOfRange()
-    {
-
-        if (Vector3.Distance(charOwnerPos, transform.position) > characterOwner.range)
-        {
-            Destroy(gameObject);
-        }
-    }
-    public void setOwnerPos(Vector3 _charOwnerPos)
-    {
-        //Debug.Log(_characterOwner);
-        charOwnerPos = _charOwnerPos;
-
-        fixedDirectToCharacter = (positionTarget - charOwnerPos).normalized;
-    }
-    public void setTargetPosition(Vector3 _targetPos)
-    {
-        positionTarget = _targetPos;
-    }
-
-    public void setOwnerChar(CharacterManager _characterOwner)
-    {
-        characterOwner = _characterOwner;
-    }
-
 }
