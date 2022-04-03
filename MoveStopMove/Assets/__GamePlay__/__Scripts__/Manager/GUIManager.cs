@@ -12,7 +12,7 @@ public class GUIManager : MonoBehaviour
 
     public RectTransform PlayButton, SkinShopButton, WeaponShopButton,
                          ZombieModeButton, GoldButton, SoundButton, 
-                         RemoveAdsButton, VibrateButton, ExpButton;
+                         RemoveAdsButton, VibrateButton, ExpButton, SkinSelector;
 
     private void Awake()
     {
@@ -33,6 +33,8 @@ public class GUIManager : MonoBehaviour
 
     public void PlayButtonClick()
     {
+        GameManager.Instance.isGameActive = true;
+
         PlayButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
 
         ZombieModeButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
@@ -86,5 +88,9 @@ public class GUIManager : MonoBehaviour
         WeaponShopButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
 
         ExpButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
+
+        SkinSelector.DOAnchorPos(new Vector2(-370f, -1620f), 0.5f);
     }
+
+    
 }

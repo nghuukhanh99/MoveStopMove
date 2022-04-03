@@ -9,47 +9,45 @@ public class CharWaypoint : MonoBehaviour
 
     public List<Transform> target = new List<Transform>();
 
-    private void Start()
-    {
-        
-    }
-
     void FixedUpdate()
     {
-        for (int i = 0; i < 10; i++)
+        if(GameManager.Instance.isGameActive == true)
         {
-            float minX = GUIManager.Instance._imgList[i].GetPixelAdjustedRect().width / 2;
-
-            float maxX = Screen.width - minX;
-
-            float minY = GUIManager.Instance._imgList[i].GetPixelAdjustedRect().height / 2;
-
-            float maxY = Screen.height - minY;
-
-            Vector2 pos = Camera.main.WorldToScreenPoint(target[i].position + offset);
-
-            if (Vector3.Dot((target[i].position - transform.position), transform.forward) < 1)
+            for (int i = 0; i < 10; i++)
             {
-                //target is behind the player
-                if (pos.x < Screen.width / 2)
+                float minX = GUIManager.Instance._imgList[i].GetPixelAdjustedRect().width / 2;
+
+                float maxX = Screen.width - minX;
+
+                float minY = GUIManager.Instance._imgList[i].GetPixelAdjustedRect().height / 2;
+
+                float maxY = Screen.height - minY;
+
+                Vector2 pos = Camera.main.WorldToScreenPoint(target[i].position + offset);
+
+                if (Vector3.Dot((target[i].position - transform.position), transform.forward) < 1)
                 {
-                    pos.x = maxX;
+                    //target is behind the player
+                    if (pos.x < Screen.width / 2)
+                    {
+                        pos.x = maxX;
+                    }
+                    else
+                    {
+                        pos.x = minX;
+                    }
                 }
-                else
+
+                pos.x = Mathf.Clamp(pos.x, minX, maxX);
+
+                pos.y = Mathf.Clamp(pos.y, minY, maxY);
+
+                GUIManager.Instance._imgList[i].transform.position = pos;
+
+                if (target[i].gameObject.activeInHierarchy == false)
                 {
-                    pos.x = minX;
-                } 
-            }
-
-            pos.x = Mathf.Clamp(pos.x, minX, maxX);
-
-            pos.y = Mathf.Clamp(pos.y, minY, maxY);
-
-            GUIManager.Instance._imgList[i].transform.position = pos;
-
-            if (target[i].gameObject.activeInHierarchy == false)
-            {
-                GUIManager.Instance._imgList[i].gameObject.SetActive(false);
+                    GUIManager.Instance._imgList[i].gameObject.SetActive(false);
+                }
             }
         }
     }

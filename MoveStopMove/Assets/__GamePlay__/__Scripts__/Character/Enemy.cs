@@ -56,23 +56,25 @@ public class Enemy : CharacterManager
 
     public override void Update()
     {
-        base.Update();
-
-        currentState.Execute();
-
-        if (nearestCharacter != null)
+        if (GameManager.Instance.isGameActive == true)
         {
-            if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
+            currentState.Execute();
+
+            if (nearestCharacter != null)
             {
-                timeCountdownt = timeStart;
+                if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
+                {
+                    timeCountdownt = timeStart;
+                }
             }
+
+            timeCountdownt -= Time.deltaTime;
+
+            timeCountdownt = Mathf.Clamp(timeCountdownt, 0, Mathf.Infinity);
+
+            deadFunction();
         }
-
-        timeCountdownt -= Time.deltaTime;
-
-        timeCountdownt = Mathf.Clamp(timeCountdownt, 0, Mathf.Infinity);
-
-        deadFunction();
+        base.Update();
     }
 
     public void Attacking()

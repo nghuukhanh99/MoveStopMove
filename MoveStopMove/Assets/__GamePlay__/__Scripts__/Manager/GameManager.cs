@@ -9,9 +9,13 @@ public class GameManager : MonoBehaviour
 
     public List<CharacterManager> _listCharacter = new List<CharacterManager>();
 
+    public bool isGameActive;
+
     private void Awake()
     {
         InitializeSingleton();
+
+        isGameActive = false;
     }
 
 

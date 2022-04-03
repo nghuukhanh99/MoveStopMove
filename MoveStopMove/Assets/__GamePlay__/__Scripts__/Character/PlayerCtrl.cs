@@ -8,6 +8,8 @@ public class PlayerCtrl : CharacterManager
 {
     [SerializeField] FloatingJoystick joystick;
 
+    [SerializeField] GameObject joystickObject;
+
     [SerializeField] private float moveSpeed;
     
     [SerializeField] private float rotationSpeed;
@@ -23,35 +25,45 @@ public class PlayerCtrl : CharacterManager
     public override void Start()
     {
         base.Start();
+
+        
     }
 
     public override void Update()
     {
-        base.Update();
-        
-        if(isDead == false)
+        if (GameManager.Instance.isGameActive == true)
         {
-            PlayerMovement();
+            joystickObject.SetActive(true);
         }
 
-        if(nearestCharacter != null)
+        base.Update();
+        
+        if(GameManager.Instance.isGameActive == true)
         {
-            if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
+            if (isDead == false)
             {
+                PlayerMovement();
+            }
+
+            if (nearestCharacter != null)
+            {
+                if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
+                {
                     timeCountdownt = timeStart;
 
                     checkFirstAttack = false;
 
                     Attacking();
+                }
             }
-        }
-        timeCountdownt -= Time.deltaTime;
+            timeCountdownt -= Time.deltaTime;
 
-        timeCountdownt = Mathf.Clamp(timeCountdownt, 0, Mathf.Infinity);
+            timeCountdownt = Mathf.Clamp(timeCountdownt, 0, Mathf.Infinity);
 
-        if (nearestCharacter != null && isMoving == false)
-        {
-            transform.LookAt(nearestCharacter.transform);
+            if (nearestCharacter != null && isMoving == false)
+            {
+                transform.LookAt(nearestCharacter.transform);
+            }
         }
     }
 
