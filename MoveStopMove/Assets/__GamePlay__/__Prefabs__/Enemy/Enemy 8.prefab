@@ -1082,18 +1082,21 @@ MonoBehaviour:
   AnimIdleTag: IsIdle
   AnimAttackTag: IsAttack
   AnimDeadTag: IsDead
-  characterTransform: {fileID: 0}
-  nearestCharacter: {fileID: 0}
-  heal: 10
-  range: 0.25
-  isMoving: 0
+  OndespawnTag: OnDespawn
+  showWeaponTag: showWeapon
+  bulletTag: Bullet
   isDead: 0
-  timer: 0
   checkFirstAttack: 0
-  canAttack: 0
+  isMoving: 0
+  range: 0.25
+  timer: 0
   WeaponHand: {fileID: 8983368669827222697}
+  nearestCharacter: {fileID: 0}
   PointSpawnBullet: {fileID: 508791071192547069}
-  Attacked: 0
+  characterTransform: {fileID: 0}
+  heal: 10
+  effectOnDead: {fileID: 198111662513787000, guid: d786e2d05a34bf741b1bd7fd569828cd,
+    type: 3}
   enemyName: John
   wayPoints:
   - {fileID: 0}

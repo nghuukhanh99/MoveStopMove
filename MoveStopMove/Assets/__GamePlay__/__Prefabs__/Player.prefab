@@ -1811,18 +1811,21 @@ MonoBehaviour:
   AnimIdleTag: IsIdle
   AnimAttackTag: IsAttack
   AnimDeadTag: IsDead
-  characterTransform: {fileID: 0}
-  nearestCharacter: {fileID: 0}
-  heal: 10
-  range: 0.25
-  isMoving: 0
+  OndespawnTag: OnDespawn
+  showWeaponTag: showWeapon
+  bulletTag: Bullet
   isDead: 0
-  timer: 0
   checkFirstAttack: 0
-  canAttack: 0
+  isMoving: 0
+  range: 0.25
+  timer: 0
   WeaponHand: {fileID: 8655769570086675422}
+  nearestCharacter: {fileID: 0}
   PointSpawnBullet: {fileID: 6780154753914523509}
-  Attacked: 0
+  characterTransform: {fileID: 0}
+  heal: 10
+  effectOnDead: {fileID: 198111662513787000, guid: d786e2d05a34bf741b1bd7fd569828cd,
+    type: 3}
   joystick: {fileID: 0}
   moveSpeed: 0.2
   rotationSpeed: 500
@@ -1830,7 +1833,6 @@ MonoBehaviour:
   bullet: {fileID: 1837506665760548694, guid: ac23e46503ac2034baacfbd81b167d5f, type: 3}
   timeStart: 1
   timeCountdownt: 0
-  mousePos: {x: 0, y: 0, z: 0}
 --- !u!54 &6780154752750675179
 Rigidbody:
   m_ObjectHideFlags: 0

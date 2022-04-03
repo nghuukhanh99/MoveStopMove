@@ -63,7 +63,7 @@ public class PlayerCtrl : CharacterManager
 
         if (nearestCharacter != null)
         {
-            GameObject bulletSpawn = (GameObject) SimplePool.Spawn(bullet, PointSpawnBullet.position, bullet.transform.rotation);
+            GameObject bulletSpawn = (GameObject)SimplePool.Spawn(bullet, PointSpawnBullet.position, bullet.transform.rotation);
 
             bulletSpawn.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
 

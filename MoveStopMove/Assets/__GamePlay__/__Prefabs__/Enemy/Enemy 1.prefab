@@ -1831,17 +1831,21 @@ MonoBehaviour:
   AnimIdleTag: IsIdle
   AnimAttackTag: IsAttack
   AnimDeadTag: IsDead
-  characterTransform: {fileID: 0}
-  nearestCharacter: {fileID: 0}
-  heal: 10
-  range: 0.25
-  isMoving: 0
+  OndespawnTag: OnDespawn
+  showWeaponTag: showWeapon
+  bulletTag: Bullet
   isDead: 0
-  timer: 0
   checkFirstAttack: 0
-  canAttack: 0
+  isMoving: 0
+  range: 0.25
+  timer: 0
   WeaponHand: {fileID: 6220984076634420016}
+  nearestCharacter: {fileID: 0}
   PointSpawnBullet: {fileID: 4525070523250376168}
+  characterTransform: {fileID: 0}
+  heal: 10
+  effectOnDead: {fileID: 198111662513787000, guid: d786e2d05a34bf741b1bd7fd569828cd,
+    type: 3}
   enemyName: John
   wayPoints:
   - {fileID: 0}
@@ -2558,6 +2562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691555597006255822, guid: aae57473443f416418962b8563187411,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3492831748911683789, guid: aae57473443f416418962b8563187411,
         type: 3}

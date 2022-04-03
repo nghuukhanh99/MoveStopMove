@@ -56,6 +56,8 @@ public class CharacterManager : MonoBehaviour, IHit
 
     [SerializeField] int heal;
 
+    public ParticleSystem effectOnDead;
+
     public Animator MyAnimator { get; private set; }
     public virtual void Start()
     {
@@ -114,6 +116,8 @@ public class CharacterManager : MonoBehaviour, IHit
     {
         if(isDead == true)
         {
+            ParticleSystem effectDead = Instantiate(effectOnDead, transform.position, Quaternion.identity);
+
             Invoke(OndespawnTag, 1.2f);
 
             MyAnimator.SetBool(AnimDeadTag, true);
