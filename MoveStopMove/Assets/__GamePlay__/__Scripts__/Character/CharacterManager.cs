@@ -121,6 +121,8 @@ public class CharacterManager : MonoBehaviour, IHit
             Invoke(OndespawnTag, 1.2f);
 
             MyAnimator.SetBool(AnimDeadTag, true);
+
+            GameManager.Instance._listCharacter.Remove(this);
         }
     }
 
@@ -159,8 +161,6 @@ public class CharacterManager : MonoBehaviour, IHit
     public void OnDespawn()
     {
         gameObject.SetActive(false);
-
-        GameManager.Instance._listCharacter.Remove(this);
     }
 
     public void OnHit(int damage)

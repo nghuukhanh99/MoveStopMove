@@ -13,7 +13,10 @@ public class GUIManager : MonoBehaviour
     public RectTransform PlayButton, SkinShopButton, WeaponShopButton,
                          ZombieModeButton, GoldButton, SoundButton,
                          RemoveAdsButton, VibrateButton, ExpButton, SkinSelector, CloseButton;
-
+    public Button pantIcon;
+    public Button HeadIcon;
+    public GameObject pantPanel;
+    public GameObject headPanel;
     private void Awake()
     {
         InitializeSingleton();
@@ -119,5 +122,19 @@ public class GUIManager : MonoBehaviour
         GoldButton.DOAnchorPos(new Vector2(-51f, -61f), 0.5f);
 
         SkinSelector.DOAnchorPos(new Vector2(-1723f, -1620f), 0.5f);
+    }
+
+    public void openHeadTab()
+    {
+        pantPanel.gameObject.SetActive(false);
+
+        headPanel.gameObject.SetActive(true);
+    }
+
+    public void openPantTab()
+    {
+        pantPanel.gameObject.SetActive(true);
+
+        headPanel.gameObject.SetActive(false);
     }
 }
