@@ -118,6 +118,8 @@ public class CharacterManager : MonoBehaviour, IHit
         {
             ParticleSystem effectDead = Instantiate(effectOnDead, transform.position, Quaternion.identity);
 
+            Destroy(effectDead.gameObject, 1f);
+
             Invoke(OndespawnTag, 1.2f);
 
             MyAnimator.SetBool(AnimDeadTag, true);

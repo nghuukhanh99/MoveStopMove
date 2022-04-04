@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GUIManager : MonoBehaviour
 {
@@ -10,13 +12,20 @@ public class GUIManager : MonoBehaviour
 
     public List<Image> _imgList = new List<Image>();
 
-    public RectTransform PlayButton, SkinShopButton, WeaponShopButton,
-                         ZombieModeButton, GoldButton, SoundButton,
-                         RemoveAdsButton, VibrateButton, ExpButton, SkinSelector, CloseButton;
+    public RectTransform PlayButton;
+
     public Button pantIcon;
+
     public Button HeadIcon;
+
+    public Button SettingButton;
+
+    public Button HomeButton;
+
     public GameObject pantPanel;
+
     public GameObject headPanel;
+
     private void Awake()
     {
         InitializeSingleton();
@@ -38,90 +47,31 @@ public class GUIManager : MonoBehaviour
     {
         GameManager.Instance.isGameActive = true;
 
-        PlayButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
+        PlayButton.DOMoveX(200f, 0.5f);
 
-        ZombieModeButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        SoundButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        RemoveAdsButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        VibrateButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        SkinShopButton.DOAnchorPos(new Vector2(-1000f, transform.position.y), 0.5f);
-
-        WeaponShopButton.DOAnchorPos(new Vector2(-1000f, transform.position.y), 0.5f);
-
-        ExpButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
-
-        GoldButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
+        if (CameraSwitcher.IsActiveCamera(GameManager.Instance.cameraOnMenu))
+        {
+            CameraSwitcher.SwitchCamera(GameManager.Instance.cameraOnShop);
+        }
+        else if (CameraSwitcher.IsActiveCamera(GameManager.Instance.cameraOnShop))
+        {
+            CameraSwitcher.SwitchCamera(GameManager.Instance.cameraOnMenu);
+        }
     }
 
     public void WeaponShopButtonClick()
     {
-        PlayButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        ZombieModeButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        SoundButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        RemoveAdsButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        VibrateButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        SkinShopButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
-
-        WeaponShopButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
-
-        ExpButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
+        
     }
 
     public void SkinShopButtonClick()
     {
-        PlayButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        ZombieModeButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        SoundButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        RemoveAdsButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        VibrateButton.DOAnchorPos(new Vector2(600f, transform.position.y), 0.5f);
-
-        SkinShopButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
-
-        WeaponShopButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
-
-        ExpButton.DOAnchorPos(new Vector2(-600f, transform.position.y), 0.5f);
-
-        SkinSelector.DOAnchorPos(new Vector2(-370f, -1620f), 0.5f);
-
-        CloseButton.DOAnchorPos(new Vector2(-90f, -1400f), 0.5f);
+        
     }
 
     public void closeButtonClick()
     {
-        CloseButton.DOAnchorPos(new Vector2(800, transform.position.y), 0.5f);
-
-        PlayButton.DOAnchorPos(new Vector2(-128f, 228f), 0.5f);
-
-        ZombieModeButton.DOAnchorPos(new Vector2(-161f, -334f), 0.5f);
-
-        SoundButton.DOAnchorPos(new Vector2(-24.5f, -148.9f), 0.5f);
-
-        RemoveAdsButton.DOAnchorPos(new Vector2(-24.5f, -238f), 0.5f);
-
-        VibrateButton.DOAnchorPos(new Vector2(-24.5f, -323), 0.5f);
-
-        SkinShopButton.DOAnchorPos(new Vector2(170f, 155), 0.5f);
-
-        WeaponShopButton.DOAnchorPos(new Vector2(170f, 305f), 0.5f);
-
-        ExpButton.DOAnchorPos(new Vector2(50f, -50f), 0.5f);
-
-        GoldButton.DOAnchorPos(new Vector2(-51f, -61f), 0.5f);
-
-        SkinSelector.DOAnchorPos(new Vector2(-1723f, -1620f), 0.5f);
+        
     }
 
     public void openHeadTab()
@@ -136,5 +86,15 @@ public class GUIManager : MonoBehaviour
         pantPanel.gameObject.SetActive(true);
 
         headPanel.gameObject.SetActive(false);
+    }
+
+    public void HomeButtonClick()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void settingButtonClick()
+    {
+        HomeButton.gameObject.SetActive(true);
     }
 }

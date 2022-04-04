@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,28 @@ public class GameManager : MonoBehaviour
     public List<CharacterManager> _listCharacter = new List<CharacterManager>();
 
     public bool isGameActive;
+
+    public CinemachineVirtualCamera cameraOnMenu;
+
+    public CinemachineVirtualCamera cameraOnShop;
+
+    private void OnEnable()
+    {
+        CameraSwitcher.Register(cameraOnMenu);
+
+        CameraSwitcher.Register(cameraOnShop);
+
+        CameraSwitcher.SwitchCamera(cameraOnShop);
+    }
+
+    private void OnDisable()
+    {
+        CameraSwitcher.Unregister(cameraOnMenu);
+
+        CameraSwitcher.Unregister(cameraOnShop);
+
+        CameraSwitcher.SwitchCamera(cameraOnShop);
+    }
 
     private void Awake()
     {
