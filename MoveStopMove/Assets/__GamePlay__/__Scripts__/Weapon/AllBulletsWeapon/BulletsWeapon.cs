@@ -20,14 +20,10 @@ public class BulletsWeapon : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-
-        if(timer > 4f)
-        {
-            SimplePool.Despawn(gameObject);
-        }
 
         updateState();
+
+        autoDespawnIfOutOfRange();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +42,7 @@ public class BulletsWeapon : MonoBehaviour
 
         if (Vector3.Distance(charOwnerPos, transform.position) > characterOwner.range)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
     public void setOwnerPos(Vector3 _charOwnerPos)
@@ -65,5 +61,4 @@ public class BulletsWeapon : MonoBehaviour
     {
         characterOwner = _characterOwner;
     }
-
 }

@@ -12,9 +12,15 @@ public class GameManager : MonoBehaviour
 
     public bool isGameActive;
 
+    public bool isWin;
+
+    public bool isLose;
+
     public CinemachineVirtualCamera cameraOnMenu;
 
     public CinemachineVirtualCamera cameraOnShop;
+
+    public int Coins;
 
     private void OnEnable()
     {
@@ -39,8 +45,9 @@ public class GameManager : MonoBehaviour
         InitializeSingleton();
 
         isGameActive = false;
-    }
 
+
+    }
 
     private void InitializeSingleton()
     {
@@ -54,5 +61,4 @@ public class GameManager : MonoBehaviour
         }
     }
     
-
 }

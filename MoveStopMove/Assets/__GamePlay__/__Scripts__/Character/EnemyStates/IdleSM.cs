@@ -8,7 +8,9 @@ public class IdleSM : IEnemyState
 
     private float idleTimer;
 
-    private float idleDuration = 2f;
+    private float idleDuration = Random.Range(2f, 4f);
+
+    private float idleToAttackDelay = Random.Range(0.5f, 1f);
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
@@ -24,7 +26,13 @@ public class IdleSM : IEnemyState
 
         if (enemy.nearestCharacter != null)
         {
-            enemy.ChangeState(new AttackSM());
+            idleTimer += Time.deltaTime;
+
+            if(idleTimer >= idleToAttackDelay)
+            {
+                enemy.ChangeState(new AttackSM());
+            }
+            
         }
 
         idleTimer += Time.deltaTime;

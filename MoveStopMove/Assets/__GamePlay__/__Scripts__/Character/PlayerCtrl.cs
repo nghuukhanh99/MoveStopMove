@@ -29,13 +29,32 @@ public class PlayerCtrl : CharacterManager
 
     public override void Update()
     {
+        base.Update();
+
         if (GameManager.Instance.isGameActive == true)
         {
             joystickObject.SetActive(true);
+
+            MyAnimator.SetBool(AnimDanceTag, false);
+        }
+        else
+        {
+            MyAnimator.SetBool(AnimDanceTag, true);
         }
 
-        base.Update();
-        
+        for(int i = 0; i < GameManager.Instance._listCharacter.Count; i++)
+        {
+            if (GameManager.Instance._listCharacter.Count == 1 && this == GameManager.Instance._listCharacter[i])
+            {
+                GameManager.Instance.isWin = true;
+            }
+        }
+
+        if(this.isDead == true)
+        {
+            GameManager.Instance.isLose = true;
+        }
+      
         if(GameManager.Instance.isGameActive == true)
         {
             if (isDead == false)
@@ -51,7 +70,7 @@ public class PlayerCtrl : CharacterManager
 
                     checkFirstAttack = false;
 
-                    Attacking();
+                    StartCoroutine(Attacking());
                 }
             }
             timeCountdownt -= Time.deltaTime;
@@ -63,24 +82,48 @@ public class PlayerCtrl : CharacterManager
                 transform.LookAt(nearestCharacter.transform);
             }
         }
+
+        if(timeCountdownt <= 0)
+        {
+            showWeapon();
+        }
     }
 
-    public void Attacking()
+    IEnumerator Attacking()
     {
-        HideWeapon();
+        StartCoroutine(HideWeapon());
+
+        yield return new WaitForSeconds(0.2f);
 
         MyAnimator.SetTrigger(AnimAttackTag);
 
-        if (nearestCharacter != null)
+        GameObject poolingBullet = null;
+
+        if (bullet.name == HammerBulletName)
         {
-            GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
-
-            bulletSpawn.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
-
-            bulletSpawn.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
-
-            bulletSpawn.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
+            poolingBullet = PoolBullet.Instance.GetPooledBullet();
         }
+        else if(bullet.name == CandyBulletName)
+        {
+            poolingBullet = PoolCandyBullet.Instance.GetPooledBullet();
+        }
+        else if(bullet.name == KnifeBulletName)
+        {
+            poolingBullet = PoolKnife.Instance.GetPooledBullet();
+        }
+     
+        poolingBullet.transform.position = PointSpawnBullet.position;
+
+        poolingBullet.transform.rotation = poolingBullet.transform.rotation;
+
+        poolingBullet.SetActive(true);
+
+        poolingBullet.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
+
+        poolingBullet.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
+
+        poolingBullet.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
+
     }
 
     public void PlayerMovement()

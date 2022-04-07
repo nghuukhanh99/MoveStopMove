@@ -65,35 +65,57 @@ public class Enemy : CharacterManager
                 if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
                 {
                     timeCountdownt = timeStart;
+
                 }
             }
-
-            timeCountdownt -= Time.deltaTime;
-
-            timeCountdownt = Mathf.Clamp(timeCountdownt, 0, Mathf.Infinity);
-
             deadFunction();
         }
+
+        timeCountdownt -= Time.deltaTime;
+
+        timeCountdownt = Mathf.Clamp(timeCountdownt, 0, Mathf.Infinity);
+
         base.Update();
+
+        if (timeCountdownt <= 0)
+        {
+            showWeapon();
+        }
     }
 
     public void Attacking()
     {
         MyAnimator.SetTrigger("IsAttack");
 
-        if (nearestCharacter != null)
+        GameObject poolingBullet = null;
+
+        if (bullet.name == "Hammer Bullet")
         {
-            GameObject bulletSpawn = (GameObject)Instantiate(bullet, PointSpawnBullet.position, bullet.transform.rotation);
-
-            bulletSpawn.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
-
-            bulletSpawn.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
-
-            bulletSpawn.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
+            poolingBullet = PoolBullet.Instance.GetPooledBullet();
         }
-    }
+        else if (bullet.name == "Candy Bullet")
+        {
+            poolingBullet = PoolCandyBullet.Instance.GetPooledBullet();
+        }
+        else if (bullet.name == "Knife Bullet")
+        {
+            poolingBullet = PoolKnife.Instance.GetPooledBullet();
+        }
 
-    public void deadFunction()
+        poolingBullet.transform.position = PointSpawnBullet.position;
+
+        poolingBullet.transform.rotation = poolingBullet.transform.rotation;
+
+        poolingBullet.SetActive(true);
+
+        poolingBullet.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
+
+        poolingBullet.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
+
+        poolingBullet.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
+
+    }
+        public void deadFunction()
     {
         if(isDead == true)
         {

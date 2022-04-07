@@ -2379,6 +2379,10 @@ MonoBehaviour:
   OndespawnTag: OnDespawn
   showWeaponTag: showWeapon
   bulletTag: Bullet
+  AnimDanceTag: IsDance
+  HammerBulletName: Hammer Bullet
+  CandyBulletName: Candy Bullet
+  KnifeBulletName: Knife Bullet
   isDead: 0
   checkFirstAttack: 0
   isMoving: 0
@@ -2386,11 +2390,13 @@ MonoBehaviour:
   timer: 0
   WeaponHand: {fileID: 670388351369720779}
   nearestCharacter: {fileID: 0}
-  PointSpawnBullet: {fileID: 8370139763532901925}
+  PointSpawnBullet: {fileID: 8370139764405867205}
   characterTransform: {fileID: 0}
   heal: 10
   effectOnDead: {fileID: 198111662513787000, guid: d786e2d05a34bf741b1bd7fd569828cd,
     type: 3}
+  ScoreText: {fileID: 0}
+  Score: 0
   enemyName: John
   wayPoints:
   - {fileID: 0}

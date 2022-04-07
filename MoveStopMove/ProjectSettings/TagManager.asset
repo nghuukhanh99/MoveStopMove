@@ -9,6 +9,11 @@ TagManager:
   - Character
   - Character Range
   - WayPoints
+  - FxTemporaire
+  - Event
+  - Candy Bullet
+  - Hammer Bullet
+  - Knife Bullet
   - Bullet
   layers:
   - Default

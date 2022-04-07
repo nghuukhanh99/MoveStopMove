@@ -17,8 +17,6 @@ public class CandyBullet : BulletsWeapon
         transform.Translate(fixedDirectToCharacter * Time.deltaTime * speed, Space.World);
 
         transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-
-        autoDespawnIfOutOfRange();
         
     }
 }

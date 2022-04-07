@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 public class CharacterManager : MonoBehaviour, IHit
 {
@@ -21,6 +23,13 @@ public class CharacterManager : MonoBehaviour, IHit
 
     [HideInInspector] public string bulletTag = "Bullet";
 
+    [HideInInspector] public string AnimDanceTag = "IsDance";
+
+    [HideInInspector] public string HammerBulletName = "Hammer Bullet";
+
+    [HideInInspector] public string CandyBulletName = "Candy Bullet";
+
+    [HideInInspector] public string KnifeBulletName = "Knife Bullet";
     #endregion
 
     //bool
@@ -58,6 +67,10 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public ParticleSystem effectOnDead;
 
+    public TextMeshProUGUI ScoreText;
+
+    public int Score = 0;
+
     public Animator MyAnimator { get; private set; }
     public virtual void Start()
     {
@@ -68,16 +81,13 @@ public class CharacterManager : MonoBehaviour, IHit
         GameManager.Instance._listCharacter.Add(gameObject.GetComponent<CharacterManager>());
 
         nearestCharacter = null;
+
+        //InvokeRepeating("showWeapon", 0, 2);
     }
 
     public virtual void Update()
     {
         FindAround();
-
-        if(WeaponHand.activeSelf == false)
-        {
-            Invoke(showWeaponTag, 0.5f);
-        }
     }
 
     public void FindAround()
@@ -133,22 +143,35 @@ public class CharacterManager : MonoBehaviour, IHit
         WeaponHand.SetActive(true);
     }
 
-    public void HideWeapon()
+    public IEnumerator HideWeapon()
     {
+        yield return new WaitForSeconds(0.3f);
+
         WeaponHand.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        CandyBullet bulletWeaponScript = other.gameObject.GetComponent<CandyBullet>();
+
         if (other.gameObject.CompareTag(bulletTag))
         {
-            CandyBullet bulletWeaponScript = other.gameObject.GetComponent<CandyBullet>();
-
             if (this != bulletWeaponScript.characterOwner) // kiem tra neu thang nem vu khi khac chinh no thi thuc hien
             {
                 OnHit(10);
 
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
+            }
+
+            if(this.name != bulletWeaponScript.characterOwner.name)
+            {
+                bulletWeaponScript.characterOwner.Score++;
+
+                bulletWeaponScript.characterOwner.ScoreText.text = bulletWeaponScript.characterOwner.Score.ToString();
+
+                bulletWeaponScript.characterOwner.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+
+                bulletWeaponScript.characterOwner.range += 0.025f;
             }
         }
     }

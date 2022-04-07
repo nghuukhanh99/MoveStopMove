@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AttackSM : IEnemyState
 {
-    private Enemy enemy;
+    private Enemy _Enemy;
 
     private float delayTime;
     public void Enter(Enemy enemy)
     {
-        this.enemy = enemy;
+        this._Enemy = enemy;
 
         if(enemy.nearestCharacter != null)
         {
@@ -17,7 +17,7 @@ public class AttackSM : IEnemyState
 
             Attack();
 
-            enemy.HideWeapon();
+            enemy.WeaponHand.SetActive(false);
         }
     }
 
@@ -27,12 +27,12 @@ public class AttackSM : IEnemyState
 
         if(delayTime >= Time.time)
         {
-            enemy.ChangeState(new IdleSM());
+            _Enemy.ChangeState(new IdleSM());
         }
         
-        if(enemy.nearestCharacter == null)
+        if(_Enemy.nearestCharacter == null)
         {
-            enemy.ChangeState(new IdleSM());
+            _Enemy.ChangeState(new IdleSM());
         }
     }
 
@@ -43,11 +43,10 @@ public class AttackSM : IEnemyState
 
     private void Attack()
     {
-        if (enemy.nearestCharacter != null)
+        if (_Enemy.nearestCharacter != null)
         {
-            enemy.transform.LookAt(enemy.nearestCharacter.transform);
+            _Enemy.transform.LookAt(_Enemy.nearestCharacter.transform);
         }
-
-        enemy.Attacking();
+        _Enemy.Attacking();
     }
 }
