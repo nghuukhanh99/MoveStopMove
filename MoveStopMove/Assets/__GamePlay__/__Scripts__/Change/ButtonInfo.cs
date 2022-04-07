@@ -39,6 +39,8 @@ public class ButtonInfo : MonoBehaviour
             priceText.text = ShopManager.GetComponent<ShopManager>().shopItems[2, ItemID].ToString();
         }
         
+
+
         DisplayItem();
     }
 

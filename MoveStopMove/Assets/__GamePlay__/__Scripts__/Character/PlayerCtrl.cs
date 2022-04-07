@@ -70,7 +70,7 @@ public class PlayerCtrl : CharacterManager
 
                     checkFirstAttack = false;
 
-                    StartCoroutine(Attacking());
+                    Invoke("Attacking", 0.2f);
                 }
             }
             timeCountdownt -= Time.deltaTime;
@@ -89,11 +89,9 @@ public class PlayerCtrl : CharacterManager
         }
     }
 
-    IEnumerator Attacking()
+    public void Attacking()
     {
         StartCoroutine(HideWeapon());
-
-        yield return new WaitForSeconds(0.2f);
 
         MyAnimator.SetTrigger(AnimAttackTag);
 

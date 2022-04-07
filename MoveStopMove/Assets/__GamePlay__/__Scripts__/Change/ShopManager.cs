@@ -9,9 +9,7 @@ public class ShopManager : MonoBehaviour
 {
     public int[,] shopItems = new int[6, 6];
 
-    public List<GameObject> PantToChange = new List<GameObject>();
-
-    public float coins;
+    public int coins;
 
     public TextMeshProUGUI CoinsText;
 
