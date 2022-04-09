@@ -9,7 +9,13 @@ public class ShopManager : MonoBehaviour
 {
     public int[,] shopItems = new int[6, 6];
 
+<<<<<<< HEAD
     public int coins;
+=======
+    public List<GameObject> PantToChange = new List<GameObject>();
+
+    public float coins;
+>>>>>>> parent of ade8c88 (Up Again)
 
     public TextMeshProUGUI CoinsText;
 
