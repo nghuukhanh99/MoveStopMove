@@ -64,6 +64,11 @@ public class GUIManager : MonoBehaviour
         InitializeSingleton();
     }
 
+    private void Start()
+    {
+
+    }
+
     void Update()
     {
         if(GameManager.Instance.isWin == true)
@@ -79,6 +84,8 @@ public class GUIManager : MonoBehaviour
 
             CanvasGameplay.SetActive(false);
         }
+
+        
     }
 
     private void InitializeSingleton()
@@ -171,11 +178,9 @@ public class GUIManager : MonoBehaviour
 
         WeaponShopButton.animator.SetTrigger(AnimGUITagOpen);
 
+        CanvasSkin.gameObject.SetActive(false);
+
         closeButton.gameObject.SetActive(false);
-
-        pantPanel.gameObject.SetActive(false);
-
-        showCasePant.gameObject.SetActive(false);
     }
 
     public void openHeadTab()
@@ -225,17 +230,6 @@ public class GUIManager : MonoBehaviour
     {
         closeButton.gameObject.SetActive(true);
 
-        pantPanel.gameObject.SetActive(true);
-
-        showCasePant.gameObject.SetActive(true);
-    }
-
-    public void GetCoin()
-    {
-        GameManager.Instance.Coins += 100;
-
-        PlayerPrefs.SetInt("Coins", GameManager.Instance.Coins);
-
-        GameManager.Instance.CoinsText.text = PlayerPrefs.GetInt("Coins").ToString();
+        CanvasSkin.SetActive(true);
     }
 }

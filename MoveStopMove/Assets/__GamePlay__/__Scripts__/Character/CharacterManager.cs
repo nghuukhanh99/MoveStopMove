@@ -145,7 +145,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public IEnumerator HideWeapon()
     {
-        yield return new WaitForSeconds(0.49f);
+        yield return new WaitForSeconds(0.3f);
 
         WeaponHand.SetActive(false);
     }
