@@ -72,7 +72,7 @@ public class PlayerCtrl : CharacterManager
 
                     checkFirstAttack = false;
 
-                    StartCoroutine(Attacking());
+                    Invoke("Attacking", 0.2f);
                 }
             }
             timeCountdownt -= Time.deltaTime;
@@ -90,14 +90,23 @@ public class PlayerCtrl : CharacterManager
             showWeapon();
         }
     }
+<<<<<<< HEAD
     
     public IEnumerator Attacking()
+=======
+
+    public void Attacking()
+>>>>>>> 8c21d62371680a45191db04638e5ee2e8ae9dca4
     {
         MyAnimator.SetTrigger(AnimAttackTag);
 
+<<<<<<< HEAD
         StartCoroutine(HideWeapon());
 
         yield return new WaitForSeconds(0.5f);
+=======
+        MyAnimator.SetTrigger(AnimAttackTag);
+>>>>>>> 8c21d62371680a45191db04638e5ee2e8ae9dca4
 
         GameObject poolingBullet = null;
 
