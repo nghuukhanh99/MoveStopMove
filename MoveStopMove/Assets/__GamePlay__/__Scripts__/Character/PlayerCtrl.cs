@@ -47,12 +47,14 @@ public class PlayerCtrl : CharacterManager
             if (GameManager.Instance._listCharacter.Count == 1 && this == GameManager.Instance._listCharacter[i])
             {
                 GameManager.Instance.isWin = true;
+
             }
         }
 
         if(this.isDead == true)
         {
             GameManager.Instance.isLose = true;
+
         }
       
         if(GameManager.Instance.isGameActive == true)
@@ -88,14 +90,14 @@ public class PlayerCtrl : CharacterManager
             showWeapon();
         }
     }
-
-    IEnumerator Attacking()
+    
+    public IEnumerator Attacking()
     {
+        MyAnimator.SetTrigger(AnimAttackTag);
+
         StartCoroutine(HideWeapon());
 
-        yield return new WaitForSeconds(0.2f);
-
-        MyAnimator.SetTrigger(AnimAttackTag);
+        yield return new WaitForSeconds(0.5f);
 
         GameObject poolingBullet = null;
 

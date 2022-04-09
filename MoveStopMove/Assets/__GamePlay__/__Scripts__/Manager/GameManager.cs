@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using TMPro;
 
 
 public class GameManager : MonoBehaviour
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     public CinemachineVirtualCamera cameraOnShop;
 
     public int Coins;
+
+    public TextMeshProUGUI CoinsText;
 
     private void OnEnable()
     {
@@ -45,8 +48,18 @@ public class GameManager : MonoBehaviour
         InitializeSingleton();
 
         isGameActive = false;
+    }
 
+    public void Start()
+    {
+        Coins = PlayerPrefs.GetInt("Coins");
 
+        CoinsText.text = PlayerPrefs.GetInt("Coins").ToString();
+    }
+
+    public void Update()
+    {
+        CoinsText.text = PlayerPrefs.GetInt("Coins").ToString();
     }
 
     private void InitializeSingleton()
@@ -60,5 +73,6 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
+
     
 }
