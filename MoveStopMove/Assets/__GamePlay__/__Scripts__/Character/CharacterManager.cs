@@ -145,12 +145,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public IEnumerator HideWeapon()
     {
-<<<<<<< HEAD
-
         yield return new WaitForSeconds(0.49f);
-=======
-        yield return new WaitForSeconds(0.3f);
->>>>>>> parent of ade8c88 (Up Again)
 
         WeaponHand.SetActive(false);
     }
