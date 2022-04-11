@@ -91,11 +91,11 @@ public class PlayerCtrl : CharacterManager
 
     IEnumerator Attacking()
     {
+        MyAnimator.SetTrigger(AnimAttackTag);
+
         StartCoroutine(HideWeapon());
 
-        yield return new WaitForSeconds(0.2f);
-
-        MyAnimator.SetTrigger(AnimAttackTag);
+        yield return new WaitForSeconds(0.4f);
 
         GameObject poolingBullet = null;
 
@@ -140,8 +140,6 @@ public class PlayerCtrl : CharacterManager
 
         transform.Translate(movementDirection * moveSpeed * Time.deltaTime, Space.World);
 
-        animator.SetBool(AnimIdleTag, false);
-
         if (movementDirection != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
@@ -149,6 +147,8 @@ public class PlayerCtrl : CharacterManager
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
 
             checkFirstAttack = true;
+
+            animator.SetBool(AnimIdleTag, false);
         }
         else
         {

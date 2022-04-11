@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  speed: 0.28
+  speed: 0.25
   positionTarget: {x: 0, y: 0, z: 0}
   charOwnerPos: {x: 0, y: 0, z: 0}
   fixedDirectToCharacter: {x: 0, y: 0, z: 0}
