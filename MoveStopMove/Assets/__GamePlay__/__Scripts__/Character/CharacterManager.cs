@@ -9,27 +9,27 @@ public class CharacterManager : MonoBehaviour, IHit
 {
     //string
     #region
-    [HideInInspector] public string CharacterTag = "Character";
+    [HideInInspector] public const string CharacterTag = "Character";
 
-    [HideInInspector] public string AnimIdleTag = "IsIdle";
+    [HideInInspector] public const string AnimIdleTag = "IsIdle";
 
-    [HideInInspector] public string AnimAttackTag = "IsAttack";
+    [HideInInspector] public const string AnimAttackTag = "IsAttack";
 
-    [HideInInspector] public string AnimDeadTag = "IsDead";
+    [HideInInspector] public const string AnimDeadTag = "IsDead";
 
-    [HideInInspector] public string OndespawnTag = "OnDespawn";
+    [HideInInspector] public const string OndespawnTag = "OnDespawn";
 
-    [HideInInspector] public string showWeaponTag = "showWeapon";
+    [HideInInspector] public const string showWeaponTag = "showWeapon";
 
-    [HideInInspector] public string bulletTag = "Bullet";
+    [HideInInspector] public const string bulletTag = "Bullet";
 
-    [HideInInspector] public string AnimDanceTag = "IsDance";
+    [HideInInspector] public const string AnimDanceTag = "IsDance";
 
-    [HideInInspector] public string HammerBulletName = "Hammer Bullet";
+    [HideInInspector] public const string HammerBulletName = "Hammer Bullet";
 
-    [HideInInspector] public string CandyBulletName = "Candy Bullet";
+    [HideInInspector] public const string CandyBulletName = "Candy Bullet";
 
-    [HideInInspector] public string KnifeBulletName = "Knife Bullet";
+    [HideInInspector] public const string KnifeBulletName = "Knife Bullet";
     #endregion
 
     //bool
@@ -71,6 +71,8 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public int Score = 0;
 
+    public GameObject bullet;
+
     public Animator MyAnimator { get; private set; }
     public virtual void Start()
     {
@@ -88,6 +90,11 @@ public class CharacterManager : MonoBehaviour, IHit
     public virtual void Update()
     {
         FindAround();
+
+        if(this.gameObject.activeInHierarchy == false)
+        {
+            Debug.Log("aljdhakshd");
+        }
     }
 
     public void FindAround()
@@ -130,11 +137,15 @@ public class CharacterManager : MonoBehaviour, IHit
 
             Destroy(effectDead.gameObject, 1f);
 
+            this.gameObject.SetActive(false);
+
             Invoke(OndespawnTag, 1.2f);
 
             MyAnimator.SetBool(AnimDeadTag, true);
 
             GameManager.Instance._listCharacter.Remove(this);
+
+            GameManager.Instance.enemyCount -= 1;
         }
     }
 
@@ -145,9 +156,56 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public IEnumerator HideWeapon()
     {
-        yield return new WaitForSeconds(0.43f);
+        yield return new WaitForSeconds(0.45f);
 
         WeaponHand.SetActive(false);
+    }
+
+    public void FireBullet()
+    {
+        if(isMoving == true)
+        {
+            return;
+        }
+
+        GameObject poolingBullet = null;
+
+        if (bullet.name == HammerBulletName)
+        {
+            poolingBullet = PoolBullet.Instance.GetPooledBullet();
+        }
+        else if (bullet.name == CandyBulletName)
+        {
+            poolingBullet = PoolCandyBullet.Instance.GetPooledBullet();
+        }
+        else if (bullet.name == KnifeBulletName)
+        {
+            poolingBullet = PoolKnife.Instance.GetPooledBullet();
+        }
+
+        poolingBullet.transform.position = PointSpawnBullet.position;
+
+        poolingBullet.transform.rotation = poolingBullet.transform.rotation;
+
+        poolingBullet.SetActive(true);
+
+        poolingBullet.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
+
+        poolingBullet.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
+
+        poolingBullet.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
+
+    }
+
+    public IEnumerator Attacking()
+    {
+        MyAnimator.SetTrigger(AnimAttackTag);
+
+        StartCoroutine(HideWeapon());
+
+        yield return new WaitForSeconds(0.46f);
+
+        FireBullet();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -161,6 +219,10 @@ public class CharacterManager : MonoBehaviour, IHit
                 OnHit(10);
 
                 other.gameObject.SetActive(false);
+
+                isDead = true;
+
+                bulletWeaponScript.transform.localScale = bulletWeaponScript.characterOwner.transform.localScale;
             }
 
             if(this.name != bulletWeaponScript.characterOwner.name)
@@ -172,6 +234,16 @@ public class CharacterManager : MonoBehaviour, IHit
                 bulletWeaponScript.characterOwner.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
 
                 bulletWeaponScript.characterOwner.range += 0.025f;
+
+                if(bulletWeaponScript.characterOwner.range >= 0.4f)
+                {
+                    bulletWeaponScript.characterOwner.range = 0.4f;
+                }
+
+                if(bulletWeaponScript.characterOwner.transform.localScale.x >= 1.5)
+                {
+                    bulletWeaponScript.characterOwner.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                }
             }
         }
     }

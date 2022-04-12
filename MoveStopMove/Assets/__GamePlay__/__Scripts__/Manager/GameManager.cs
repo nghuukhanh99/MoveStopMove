@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public int Coins;
 
+    public int enemyCount = 15;
+
     private void OnEnable()
     {
         CameraSwitcher.Register(cameraOnMenu);

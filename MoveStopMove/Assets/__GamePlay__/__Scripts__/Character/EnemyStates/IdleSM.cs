@@ -11,6 +11,8 @@ public class IdleSM : IEnemyState
     private float idleDuration = Random.Range(2f, 4f);
 
     private float idleToAttackDelay = Random.Range(0.5f, 1f);
+
+    private const string AnimIdleTag = "IsIdle";
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
@@ -50,7 +52,7 @@ public class IdleSM : IEnemyState
 
     private void Idle()
     {
-        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
+        enemy.MyAnimator.SetBool(AnimIdleTag, true);
 
         if(enemy.nearestCharacter != null)
         {

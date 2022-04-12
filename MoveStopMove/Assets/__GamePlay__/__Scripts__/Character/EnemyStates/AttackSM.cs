@@ -13,6 +13,10 @@ public class AttackSM : IEnemyState
 
         if(enemy.nearestCharacter != null)
         {
+            if(Vector3.Distance(enemy.transform.position, enemy.nearestCharacter.transform.position) < enemy.range && enemy.timeCountdownt <= 0 && enemy.checkFirstAttack && enemy.isMoving == false)
+
+            enemy.timeCountdownt = enemy.timeStart;
+
             enemy.checkFirstAttack = false;
 
             Attack();
@@ -38,7 +42,7 @@ public class AttackSM : IEnemyState
 
     public void Exit()
     {
-        delayTime = 0;
+        //delayTime = 0;
     }
 
     private void Attack()
@@ -47,6 +51,7 @@ public class AttackSM : IEnemyState
         {
             _Enemy.transform.LookAt(_Enemy.nearestCharacter.transform);
         }
-        _Enemy.Attacking();
+
+        _Enemy.StartCoroutine(_Enemy.Attacked());
     }
 }

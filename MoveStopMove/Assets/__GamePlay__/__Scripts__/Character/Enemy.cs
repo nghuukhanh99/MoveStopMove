@@ -28,8 +28,6 @@ public class Enemy : CharacterManager
 
     public float timeCountdownt = 0;
 
-    public GameObject bullet;
-
     public bool needPatrolToAttack;
 
     private void Awake()
@@ -60,16 +58,16 @@ public class Enemy : CharacterManager
         {
             currentState.Execute();
 
-            if (nearestCharacter != null)
-            {
-                if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
-                {
-                    timeCountdownt = timeStart;
-
-                }
-            }
-            deadFunction();
+            //if (nearestCharacter != null)
+            //{
+            //    if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
+            //    {
+            //        timeCountdownt = timeStart;
+            //    }
+            //}
         }
+
+        deadFunction();
 
         timeCountdownt -= Time.deltaTime;
 
@@ -82,22 +80,25 @@ public class Enemy : CharacterManager
             showWeapon();
         }
     }
-
-    public void Attacking()
+    public void Fire()
     {
-        MyAnimator.SetTrigger("IsAttack");
+        if(nearestCharacter == null)
+        {
+            MyAnimator.ResetTrigger(AnimAttackTag);
+            return;
+        }
 
         GameObject poolingBullet = null;
 
-        if (bullet.name == "Hammer Bullet")
+        if (bullet.name == HammerBulletName)
         {
             poolingBullet = PoolBullet.Instance.GetPooledBullet();
         }
-        else if (bullet.name == "Candy Bullet")
+        else if (bullet.name == CandyBulletName)
         {
             poolingBullet = PoolCandyBullet.Instance.GetPooledBullet();
         }
-        else if (bullet.name == "Knife Bullet")
+        else if (bullet.name == KnifeBulletName)
         {
             poolingBullet = PoolKnife.Instance.GetPooledBullet();
         }
@@ -115,7 +116,18 @@ public class Enemy : CharacterManager
         poolingBullet.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
 
     }
-        public void deadFunction()
+    public IEnumerator Attacked()
+    {
+        MyAnimator.SetTrigger(AnimAttackTag);
+
+        StartCoroutine(HideWeapon());
+
+        yield return new WaitForSeconds(0.4f);
+
+        Fire();
+    }
+
+    public void deadFunction()
     {
         if(isDead == true)
         {

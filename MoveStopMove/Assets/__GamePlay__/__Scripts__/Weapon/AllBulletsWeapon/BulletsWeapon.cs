@@ -47,7 +47,6 @@ public class BulletsWeapon : MonoBehaviour
     }
     public void setOwnerPos(Vector3 _charOwnerPos)
     {
-        //Debug.Log(_characterOwner);
         charOwnerPos = _charOwnerPos;
 
         fixedDirectToCharacter = (positionTarget - charOwnerPos).normalized;

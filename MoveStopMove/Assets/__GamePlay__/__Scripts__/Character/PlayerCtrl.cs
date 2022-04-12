@@ -16,8 +16,6 @@ public class PlayerCtrl : CharacterManager
 
     [SerializeField] private Animator animator;
 
-    public GameObject bullet;
-
     public float timeStart = 1.5f;
 
     public float timeCountdownt = 0;
@@ -50,6 +48,11 @@ public class PlayerCtrl : CharacterManager
             }
         }
 
+        if(GameManager.Instance.isWin == true)
+        {
+            this.transform.position = this.transform.position;
+        }
+
         if(this.isDead == true)
         {
             GameManager.Instance.isLose = true;
@@ -64,7 +67,7 @@ public class PlayerCtrl : CharacterManager
 
             if (nearestCharacter != null)
             {
-                if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
+                if(Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
                 {
                     timeCountdownt = timeStart;
 
@@ -89,42 +92,6 @@ public class PlayerCtrl : CharacterManager
         }
     }
 
-    IEnumerator Attacking()
-    {
-        MyAnimator.SetTrigger(AnimAttackTag);
-
-        StartCoroutine(HideWeapon());
-
-        yield return new WaitForSeconds(0.4f);
-
-        GameObject poolingBullet = null;
-
-        if (bullet.name == HammerBulletName)
-        {
-            poolingBullet = PoolBullet.Instance.GetPooledBullet();
-        }
-        else if(bullet.name == CandyBulletName)
-        {
-            poolingBullet = PoolCandyBullet.Instance.GetPooledBullet();
-        }
-        else if(bullet.name == KnifeBulletName)
-        {
-            poolingBullet = PoolKnife.Instance.GetPooledBullet();
-        }
-     
-        poolingBullet.transform.position = PointSpawnBullet.position;
-
-        poolingBullet.transform.rotation = poolingBullet.transform.rotation;
-
-        poolingBullet.SetActive(true);
-
-        poolingBullet.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
-
-        poolingBullet.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
-
-        poolingBullet.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
-
-    }
 
     public void PlayerMovement()
     {
@@ -148,13 +115,13 @@ public class PlayerCtrl : CharacterManager
 
             checkFirstAttack = true;
 
-            animator.SetBool(AnimIdleTag, false);
+            MyAnimator.SetBool(AnimIdleTag, false);
         }
         else
         {
             isMoving = false;
 
-            animator.SetBool(AnimIdleTag, true);
+            MyAnimator.SetBool(AnimIdleTag, true);
         }
     }
 }

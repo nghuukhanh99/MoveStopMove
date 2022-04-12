@@ -10,6 +10,8 @@ public class PatrolSM : IEnemyState
 
     private float patrolToAttackDelay = Random.Range(1.5f, 2f);
 
+    private const string AnimIdleTag = "IsIdle";
+
     private Enemy enemy;
 
     public void Enter(Enemy enemy)
@@ -32,7 +34,7 @@ public class PatrolSM : IEnemyState
             {
                 enemy.CancelDestination();
 
-                enemy.MyAnimator.SetBool(enemy.AnimIdleTag, true);
+                enemy.MyAnimator.SetBool(AnimIdleTag, true);
 
                 enemy.ChangeState(new IdleSM());
             }
@@ -53,7 +55,7 @@ public class PatrolSM : IEnemyState
 
     private void Patrol()
     {
-        enemy.MyAnimator.SetBool(enemy.AnimIdleTag, false);
+        enemy.MyAnimator.SetBool(AnimIdleTag, false);
 
         enemy.Move();
     }

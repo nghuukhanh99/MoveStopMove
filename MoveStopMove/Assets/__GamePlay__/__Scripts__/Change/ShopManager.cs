@@ -39,25 +39,25 @@ public class ShopManager : MonoBehaviour
 
    public void Buy()
     {
-        GameObject ButtonRef = GameObject.FindGameObjectWithTag(EventTag).GetComponent<EventSystem>().currentSelectedGameObject;
+        ButtonInfo ButtonRef = GameObject.FindGameObjectWithTag(EventTag).GetComponent<EventSystem>().currentSelectedGameObject.GetComponent<ButtonInfo>();
 
-        if(coins >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID] && ButtonRef.GetComponent<ButtonInfo>().Puchased == false)
+        if(coins >= shopItems[2, ButtonRef.ItemID] && ButtonRef.Puchased == false)
         {
-            coins -= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID];
+            coins -= shopItems[2, ButtonRef.ItemID];
 
             CoinsText.text = coins.ToString();
 
-            ButtonRef.GetComponent<ButtonInfo>().BuyStatus(true);
+            ButtonRef.BuyStatus(true);
 
-            ButtonRef.GetComponent<ButtonInfo>().DisplayItemStatus(true);
+            ButtonRef.DisplayItemStatus(true);
         }
-        else if(coins >= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID] && (ButtonRef.GetComponent<ButtonInfo>().Puchased == true))
+        else if(coins >= shopItems[2, ButtonRef.ItemID] && (ButtonRef.Puchased == true))
         {
-            ButtonRef.GetComponent<ButtonInfo>().DisplayItemStatus(true);
+            ButtonRef.DisplayItemStatus(true);
         }
-        else if(coins <= shopItems[2, ButtonRef.GetComponent<ButtonInfo>().ItemID] && (ButtonRef.GetComponent<ButtonInfo>().Puchased == true))
+        else if(coins <= shopItems[2, ButtonRef.ItemID] && (ButtonRef.Puchased == true))
         {
-            ButtonRef.GetComponent<ButtonInfo>().DisplayItemStatus(true);
+            ButtonRef.DisplayItemStatus(true);
         }
     }
 }
