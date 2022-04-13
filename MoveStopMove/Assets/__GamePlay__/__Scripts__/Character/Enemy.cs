@@ -30,14 +30,11 @@ public class Enemy : CharacterManager
 
     public bool needPatrolToAttack;
 
-    private void Awake()
-    {
-        checkFirstAttack = true;
-    }
-
     public override void Start()
     {
         base.Start();
+
+        checkFirstAttack = true;
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -79,6 +76,7 @@ public class Enemy : CharacterManager
         {
             showWeapon();
         }
+
     }
     public void Fire()
     {
@@ -138,6 +136,9 @@ public class Enemy : CharacterManager
             scripts.enabled = false;
 
             agent.enabled = false;
+
+            GameManager.Instance._listCharacter.Remove(this);
+
         }
     }
 

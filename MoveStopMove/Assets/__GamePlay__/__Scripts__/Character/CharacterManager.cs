@@ -83,8 +83,6 @@ public class CharacterManager : MonoBehaviour, IHit
         GameManager.Instance._listCharacter.Add(gameObject.GetComponent<CharacterManager>());
 
         nearestCharacter = null;
-
-        //InvokeRepeating("showWeapon", 0, 2);
     }
 
     public virtual void Update()
@@ -93,7 +91,9 @@ public class CharacterManager : MonoBehaviour, IHit
 
         if(this.gameObject.activeInHierarchy == false)
         {
-            Debug.Log("aljdhakshd");
+            isDead = true;
+
+            GameManager.Instance._listCharacter.Remove(this);
         }
     }
 
@@ -137,15 +137,17 @@ public class CharacterManager : MonoBehaviour, IHit
 
             Destroy(effectDead.gameObject, 1f);
 
-            this.gameObject.SetActive(false);
-
             Invoke(OndespawnTag, 1.2f);
 
             MyAnimator.SetBool(AnimDeadTag, true);
 
             GameManager.Instance._listCharacter.Remove(this);
 
-            GameManager.Instance.enemyCount -= 1;
+            isDead = false;
+
+            GameManager.Instance.TotalEnemy -= 1;
+
+            GUIManager.Instance.EnemyCountNumber.text = GameManager.Instance.TotalEnemy.ToString();
         }
     }
 
@@ -163,7 +165,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public void FireBullet()
     {
-        if(isMoving == true)
+        if(isMoving == true || nearestCharacter == null)
         {
             return;
         }
@@ -182,6 +184,8 @@ public class CharacterManager : MonoBehaviour, IHit
         {
             poolingBullet = PoolKnife.Instance.GetPooledBullet();
         }
+
+        poolingBullet.transform.localScale = this.transform.localScale;
 
         poolingBullet.transform.position = PointSpawnBullet.position;
 
@@ -221,8 +225,6 @@ public class CharacterManager : MonoBehaviour, IHit
                 other.gameObject.SetActive(false);
 
                 isDead = true;
-
-                bulletWeaponScript.transform.localScale = bulletWeaponScript.characterOwner.transform.localScale;
             }
 
             if(this.name != bulletWeaponScript.characterOwner.name)
@@ -254,7 +256,6 @@ public class CharacterManager : MonoBehaviour, IHit
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    
     public void OnDespawn()
     {
         gameObject.SetActive(false);

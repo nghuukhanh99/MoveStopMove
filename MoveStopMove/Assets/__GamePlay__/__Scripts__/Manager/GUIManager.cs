@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Cinemachine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GUIManager : MonoBehaviour
 {
@@ -40,6 +41,8 @@ public class GUIManager : MonoBehaviour
 
     public Button closeButton;
 
+    public Button ContinueButton;
+
     public GameObject showCasePant;
 
     public GameObject pantPanel;
@@ -58,17 +61,23 @@ public class GUIManager : MonoBehaviour
 
     public GameObject CanvasTopButton;
 
+    public GameObject ControlBoard;
+
+    public Toggle changeSound;
+
+    public Toggle changeVibrate;
+
+    public Image BgchangeSound;
+
+    public Image BgchangeVibrate;
+
+    public TextMeshProUGUI EnemyCountNumber;
+
     //public GameObject CanvasPlayButton;
     private void Awake()
     {
         InitializeSingleton();
     }
-
-    private void Start()
-    {
-
-    }
-
     void Update()
     {
         if(GameManager.Instance.isWin == true)
@@ -85,7 +94,7 @@ public class GUIManager : MonoBehaviour
             CanvasGameplay.SetActive(false);
         }
 
-        
+        EnemyCountNumber.text = GameManager.Instance.TotalEnemy.ToString();
     }
 
     private void InitializeSingleton()
@@ -121,6 +130,8 @@ public class GUIManager : MonoBehaviour
         SkinShopButton.animator.SetTrigger(AnimGUITagClose);
 
         WeaponShopButton.animator.SetTrigger(AnimGUITagClose);
+
+        SettingButton.gameObject.SetActive(true);
 
         Invoke("ShowSettingDelay", 1.2f);
 
@@ -210,9 +221,19 @@ public class GUIManager : MonoBehaviour
 
     }
 
+    public void ContinueButtonClick()
+    {
+        ControlBoard.SetActive(false);
+
+        CanvasGameplay.SetActive(true);
+    }
+
     public void settingButtonClick()
     {
-        HomeButton.gameObject.SetActive(true);
+        ControlBoard.SetActive(true);
+
+        CanvasGameplay.SetActive(false);
+
     }
 
     IEnumerator loadSceneDelay(int buildIndex)
@@ -231,5 +252,35 @@ public class GUIManager : MonoBehaviour
         closeButton.gameObject.SetActive(true);
 
         CanvasSkin.SetActive(true);
+    }
+
+    public void SoundToggle()
+    {
+        if(changeSound.isOn == true)
+        {
+            BgchangeSound.rectTransform.DOAnchorPosX(50, 0.25f);
+
+            Debug.Log("On");
+        }
+        else
+        {
+            BgchangeSound.rectTransform.DOAnchorPosX(-50, 0.25f);
+            Debug.Log("Off");
+        }
+    }
+
+    public void VibrateToggle()
+    {
+        if (changeVibrate.isOn == true)
+        {
+            BgchangeVibrate.rectTransform.DOAnchorPosX(50, 0.25f);
+
+            Debug.Log("On");
+        }
+        else
+        {
+            BgchangeVibrate.rectTransform.DOAnchorPosX(-50, 0.25f);
+            Debug.Log("Off");
+        }
     }
 }

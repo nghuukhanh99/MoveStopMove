@@ -14,31 +14,28 @@ public class RespawnEnemy : MonoBehaviour
     void Start()
     {
         InvokeRepeating("Respawn", 0, 5f);
-
     }
 
     public void Respawn()
     {
-        if(GameManager.Instance.enemyCount <= 0)
+        if(GameManager.Instance.TotalEnemy < 10)
         {
             return;
         }
 
-        for(int i = 0; i < SpawnPos.Count; i++)
+        for (int i = 0; i < SpawnPos.Count; i++)
         {
             if(EnemyList[i].gameObject.activeInHierarchy == false)
             {
                 EnemyList[i].transform.position = SpawnPos[Random.Range(Random.Range(0, 10), i)].transform.position;
 
-                StartCoroutine(Spawn(EnemyList[i]));
+                Spawn(EnemyList[i]);
             }
         }
     }
 
-    public IEnumerator Spawn(Enemy _enemy)
+    public void Spawn(Enemy _enemy)
     {
-        yield return new WaitForSeconds(Random.Range(5, 10));
-
         _enemy.gameObject.SetActive(true);
 
         _enemy.isDead = false;
@@ -59,5 +56,6 @@ public class RespawnEnemy : MonoBehaviour
         {
             GameManager.Instance._listCharacter.Add(_enemy.GetComponent<CharacterManager>());
         }
+        _enemy.ChangeState(new PatrolSM());
     }
 }

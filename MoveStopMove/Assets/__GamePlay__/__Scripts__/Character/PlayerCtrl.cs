@@ -16,13 +16,16 @@ public class PlayerCtrl : CharacterManager
 
     [SerializeField] private Animator animator;
 
+    Collider _collider;
+
     public float timeStart = 1.5f;
 
     public float timeCountdownt = 0;
-
     public override void Start()
     {
         base.Start();
+
+        _collider = GetComponent<Collider>();
     }
 
     public override void Update()
@@ -33,7 +36,7 @@ public class PlayerCtrl : CharacterManager
         {
             joystickObject.SetActive(true);
 
-            MyAnimator.SetBool(AnimDanceTag, false);
+            MyAnimator.SetBool(AnimDanceTag, false);    
         }
         else
         {
@@ -50,15 +53,17 @@ public class PlayerCtrl : CharacterManager
 
         if(GameManager.Instance.isWin == true)
         {
-            this.transform.position = this.transform.position;
+            moveSpeed = 0;
+
+            _collider.enabled = false;
         }
 
         if(this.isDead == true)
         {
             GameManager.Instance.isLose = true;
         }
-      
-        if(GameManager.Instance.isGameActive == true)
+
+        if (GameManager.Instance.isGameActive == true)
         {
             if (isDead == false)
             {
@@ -91,7 +96,6 @@ public class PlayerCtrl : CharacterManager
             showWeapon();
         }
     }
-
 
     public void PlayerMovement()
     {

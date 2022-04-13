@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     public int Coins;
 
-    public int enemyCount = 15;
+    public int TotalEnemy;
 
     private void OnEnable()
     {
@@ -47,6 +47,13 @@ public class GameManager : MonoBehaviour
         InitializeSingleton();
 
         isGameActive = false;
+
+
+    }
+
+    void Update()
+    {
+      
 
 
     }
