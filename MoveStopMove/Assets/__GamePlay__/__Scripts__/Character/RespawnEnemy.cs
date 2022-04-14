@@ -13,21 +13,23 @@ public class RespawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        InvokeRepeating("Respawn", 0, 5f);
+        InvokeRepeating("Respawn", 0, 0.05f);
     }
 
     public void Respawn()
     {
-        if(GameManager.Instance.TotalEnemy < 10)
+        if (GameManager.Instance.EnemyCount <= 0)
         {
             return;
         }
 
         for (int i = 0; i < SpawnPos.Count; i++)
         {
-            if(EnemyList[i].gameObject.activeInHierarchy == false)
+            if (EnemyList[i].gameObject.activeInHierarchy == false)
             {
                 EnemyList[i].transform.position = SpawnPos[Random.Range(Random.Range(0, 10), i)].transform.position;
+
+                GameManager.Instance.EnemyCount -= 1;
 
                 Spawn(EnemyList[i]);
             }
@@ -46,11 +48,11 @@ public class RespawnEnemy : MonoBehaviour
 
         _enemy.ScoreText.text = _enemy.Score.ToString();
 
-        _enemy.GetComponent<NavMeshAgent>().enabled = true;
+        _enemy.agent.enabled = true;
 
-        _enemy.GetComponent<Collider>().enabled = true;
+        _enemy._collider.enabled = true;
 
-        _enemy.GetComponent<Rigidbody>().detectCollisions = true;
+        _enemy.rb.detectCollisions = true;
 
         if (!GameManager.Instance._listCharacter.Contains(_enemy.GetComponent<CharacterManager>()))
         {

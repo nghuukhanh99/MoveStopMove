@@ -51,7 +51,7 @@ public class PlayerCtrl : CharacterManager
             }
         }
 
-        if(GameManager.Instance.isWin == true)
+        if (GameManager.Instance.isWin == true)
         {
             moveSpeed = 0;
 
@@ -72,7 +72,7 @@ public class PlayerCtrl : CharacterManager
 
             if (nearestCharacter != null)
             {
-                if(Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
+                if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
                 {
                     timeCountdownt = timeStart;
 

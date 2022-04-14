@@ -24,17 +24,23 @@ public class ButtonInfo : MonoBehaviour
 
     public GameObject sItem4;
 
-    public bool Puchased;
+    public int display;
 
-    public bool display;
+    public int _buyValue;
+
+    public string PrefsBuyValue = "PrefsBuyValue";
 
     void Start()
     {
-        Puchased = false;
+        _buyValue = 0;
+
+        display = 0;
+
+
     }
     void Update()
     {
-        if(Puchased == false)
+        if(_buyValue == 0)
         {
             priceText.text = ShopManager.GetComponent<ShopManager>().shopItems[2, ItemID].ToString();
         }
@@ -44,7 +50,7 @@ public class ButtonInfo : MonoBehaviour
 
     public void DisplayItem()
     {
-        if (display == true && Puchased == true)
+        if (display == 1 && _buyValue == 1)
         {
             mItem.SetActive(true);
 
@@ -56,7 +62,7 @@ public class ButtonInfo : MonoBehaviour
 
             sItem4.SetActive(false);
 
-            display = false;
+            display = 0;
 
             priceText.text = "Unlock";
 
@@ -64,13 +70,13 @@ public class ButtonInfo : MonoBehaviour
         }
     }
 
-    public void DisplayItemStatus(bool tOf)
+    public void DisplayItemStatus(int DisplayOrUndisplay) // 1 or 0
     {
-        display = tOf;
+        display = DisplayOrUndisplay;
     }
 
-    public void BuyStatus(bool Buyed)
+    public void BuyStatus(int buyValue)
     {
-        Puchased = Buyed;
+        _buyValue = buyValue;   
     }
 }

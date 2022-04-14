@@ -16,14 +16,17 @@ public class GameManager : MonoBehaviour
 
     public bool isLose;
 
+    [HideInInspector] public const string prefsCoinsTag = "Coins";
+
     public CinemachineVirtualCamera cameraOnMenu;
 
     public CinemachineVirtualCamera cameraOnShop;
 
     public int Coins;
 
-    public int TotalEnemy;
+    public int EnemyCount;
 
+    public int TotalAlive;
     private void OnEnable()
     {
         CameraSwitcher.Register(cameraOnMenu);
@@ -48,14 +51,13 @@ public class GameManager : MonoBehaviour
 
         isGameActive = false;
 
-
+        Coins = PlayerPrefs.GetInt(prefsCoinsTag);
     }
-
-    void Update()
+    private void Update()
     {
-      
+        GUIManager.Instance.CoinsText.text = Coins.ToString();
 
-
+        SaveCoins();
     }
 
     private void InitializeSingleton()
@@ -69,5 +71,33 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
-    
+
+    public void AddCoins(int CoinsToAdd)
+    {
+        Coins += CoinsToAdd;
+    }
+
+    public void DeleteKey()
+    {
+        PlayerPrefs.DeleteKey(prefsCoinsTag);
+
+        PlayerPrefs.DeleteKey("BuyValue");
+
+        PlayerPrefs.DeleteKey("ItemsId");
+
+        PlayerPrefs.DeleteKey("DisplayValue");
+
+        Coins = 0;
+
+        PlayerPrefs.SetInt(prefsCoinsTag, Coins);
+
+        GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt(prefsCoinsTag).ToString();
+    }
+
+    public void SaveCoins()
+    {
+        PlayerPrefs.SetInt(prefsCoinsTag, Coins);
+    }
+
+
 }

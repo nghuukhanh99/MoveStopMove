@@ -63,6 +63,8 @@ public class GUIManager : MonoBehaviour
 
     public GameObject ControlBoard;
 
+    public GameObject CanvasEnemyCount;
+
     public Toggle changeSound;
 
     public Toggle changeVibrate;
@@ -72,6 +74,10 @@ public class GUIManager : MonoBehaviour
     public Image BgchangeVibrate;
 
     public TextMeshProUGUI EnemyCountNumber;
+
+    public TextMeshProUGUI CoinsText;
+
+    public Button AddCoinsButton;
 
     //public GameObject CanvasPlayButton;
     private void Awake()
@@ -94,7 +100,7 @@ public class GUIManager : MonoBehaviour
             CanvasGameplay.SetActive(false);
         }
 
-        EnemyCountNumber.text = GameManager.Instance.TotalEnemy.ToString();
+        EnemyCountNumber.text = GameManager.Instance.TotalAlive.ToString();
     }
 
     private void InitializeSingleton()
@@ -132,6 +138,8 @@ public class GUIManager : MonoBehaviour
         WeaponShopButton.animator.SetTrigger(AnimGUITagClose);
 
         SettingButton.gameObject.SetActive(true);
+
+        CanvasEnemyCount.gameObject.SetActive(true);
 
         Invoke("ShowSettingDelay", 1.2f);
 
@@ -259,13 +267,10 @@ public class GUIManager : MonoBehaviour
         if(changeSound.isOn == true)
         {
             BgchangeSound.rectTransform.DOAnchorPosX(50, 0.25f);
-
-            Debug.Log("On");
         }
         else
         {
             BgchangeSound.rectTransform.DOAnchorPosX(-50, 0.25f);
-            Debug.Log("Off");
         }
     }
 
@@ -274,13 +279,10 @@ public class GUIManager : MonoBehaviour
         if (changeVibrate.isOn == true)
         {
             BgchangeVibrate.rectTransform.DOAnchorPosX(50, 0.25f);
-
-            Debug.Log("On");
         }
         else
         {
             BgchangeVibrate.rectTransform.DOAnchorPosX(-50, 0.25f);
-            Debug.Log("Off");
         }
     }
 }

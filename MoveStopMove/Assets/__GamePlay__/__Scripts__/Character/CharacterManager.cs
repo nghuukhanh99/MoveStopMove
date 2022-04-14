@@ -54,8 +54,10 @@ public class CharacterManager : MonoBehaviour, IHit
     public GameObject WeaponHand;
 
     [HideInInspector] public GameObject nearestCharacter;
-    #endregion
+    
+    public GameObject TargetFoot;
 
+    #endregion
     //Transform
     #region
     public Transform PointSpawnBullet;
@@ -74,6 +76,7 @@ public class CharacterManager : MonoBehaviour, IHit
     public GameObject bullet;
 
     public Animator MyAnimator { get; private set; }
+
     public virtual void Start()
     {
         MyAnimator = GetComponent<Animator>();
@@ -118,8 +121,8 @@ public class CharacterManager : MonoBehaviour, IHit
             }
         }
         nearestCharacter = target;
-
-        if (target != null && shortestDistance < range)
+        
+        if (target != null && shortestDistance < range * target.transform.localScale.z /* nhan voi scale cua nhan vat de thay foot target*/)
         {
             nearestCharacter = target;
         }
@@ -127,6 +130,7 @@ public class CharacterManager : MonoBehaviour, IHit
         {
             nearestCharacter = null;
         }
+
     }
 
     public void OnDead()
@@ -142,12 +146,6 @@ public class CharacterManager : MonoBehaviour, IHit
             MyAnimator.SetBool(AnimDeadTag, true);
 
             GameManager.Instance._listCharacter.Remove(this);
-
-            isDead = false;
-
-            GameManager.Instance.TotalEnemy -= 1;
-
-            GUIManager.Instance.EnemyCountNumber.text = GameManager.Instance.TotalEnemy.ToString();
         }
     }
 
@@ -237,7 +235,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
                 bulletWeaponScript.characterOwner.range += 0.025f;
 
-                if(bulletWeaponScript.characterOwner.range >= 0.4f)
+                if (bulletWeaponScript.characterOwner.range >= 0.4f)
                 {
                     bulletWeaponScript.characterOwner.range = 0.4f;
                 }
@@ -271,7 +269,6 @@ public class CharacterManager : MonoBehaviour, IHit
 
             isDead = true;
         }
-
         OnDead();
     }
 }

@@ -11,18 +11,14 @@ public class AttackSM : IEnemyState
     {
         this._Enemy = enemy;
 
-        if(enemy.nearestCharacter != null)
+        if(Vector3.Distance(enemy.transform.position, enemy.nearestCharacter.transform.position) < enemy.range && enemy.timeCountdownt <= 0 && enemy.checkFirstAttack && enemy.isMoving == false)
         {
-            if(Vector3.Distance(enemy.transform.position, enemy.nearestCharacter.transform.position) < enemy.range && enemy.timeCountdownt <= 0 && enemy.checkFirstAttack && enemy.isMoving == false)
-
             enemy.timeCountdownt = enemy.timeStart;
 
             enemy.checkFirstAttack = false;
-
-            Attack();
-
-            enemy.WeaponHand.SetActive(false);
         }
+
+        Attack();
     }
 
     public void Execute()
@@ -51,6 +47,8 @@ public class AttackSM : IEnemyState
         {
             _Enemy.transform.LookAt(_Enemy.nearestCharacter.transform);
         }
+
+     
 
         _Enemy.StartCoroutine(_Enemy.Attacked());
     }

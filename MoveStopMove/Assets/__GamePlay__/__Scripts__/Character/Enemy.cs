@@ -13,14 +13,14 @@ public class Enemy : CharacterManager
     private IEnemyState currentState;
 
     public List<Transform> wayPoints = new List<Transform>();
-    
-    NavMeshAgent agent;
 
-    Rigidbody rb;
+    internal NavMeshAgent agent;
 
-    Enemy scripts;
+    internal Rigidbody rb;
 
-    Collider _collider;
+    internal Enemy scripts;
+
+    internal Collider _collider;
 
     int currentWaypointIndex;
 
@@ -54,14 +54,6 @@ public class Enemy : CharacterManager
         if (GameManager.Instance.isGameActive == true)
         {
             currentState.Execute();
-
-            //if (nearestCharacter != null)
-            //{
-            //    if (Vector3.Distance(transform.position, nearestCharacter.transform.position) < range && timeCountdownt <= 0 && checkFirstAttack && isMoving == false)
-            //    {
-            //        timeCountdownt = timeStart;
-            //    }
-            //}
         }
 
         deadFunction();
@@ -77,7 +69,23 @@ public class Enemy : CharacterManager
             showWeapon();
         }
 
+        if(isDead == true)
+        {
+            GameManager.Instance.TotalAlive -= 1;
+
+            GUIManager.Instance.EnemyCountNumber.text = GameManager.Instance.TotalAlive.ToString();
+        }
+
+        if(nearestCharacter != null)
+        {
+            TargetFoot.SetActive(true);
+        }
+        else
+        {
+            TargetFoot.SetActive(false);
+        }
     }
+
     public void Fire()
     {
         if(nearestCharacter == null)
@@ -138,7 +146,6 @@ public class Enemy : CharacterManager
             agent.enabled = false;
 
             GameManager.Instance._listCharacter.Remove(this);
-
         }
     }
 
