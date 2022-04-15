@@ -79,6 +79,25 @@ public class GUIManager : MonoBehaviour
 
     public Button AddCoinsButton;
 
+    public float timerDelay;
+
+    public Button PantShopButton;
+
+    public Button HeadShopButton;
+
+    public Button ShieldShopButton;
+
+    public Button SkinSetShopButton;
+
+    public GameObject PantShowCase;
+
+    public GameObject HeadShowCase;
+
+    public GameObject ShieldShowCase;
+
+    public GameObject SkinSetShowCase;
+
+
     //public GameObject CanvasPlayButton;
     private void Awake()
     {
@@ -88,16 +107,25 @@ public class GUIManager : MonoBehaviour
     {
         if(GameManager.Instance.isWin == true)
         {
-            CanvasWinner.SetActive(true);
+            timerDelay += Time.deltaTime;
+            if(timerDelay >= 1.2f)
+            {
+                CanvasWinner.SetActive(true);
 
-            CanvasGameplay.SetActive(false);
+                CanvasGameplay.SetActive(false);
+            }
         }
 
         if(GameManager.Instance.isLose == true)
         {
-            CanvasLose.SetActive(true);
+            timerDelay += Time.deltaTime;
 
-            CanvasGameplay.SetActive(false);
+            if(timerDelay >= 1.2f)
+            {
+                CanvasLose.SetActive(true);
+
+                CanvasGameplay.SetActive(false);
+            }
         }
 
         EnemyCountNumber.text = GameManager.Instance.TotalAlive.ToString();
@@ -201,17 +229,6 @@ public class GUIManager : MonoBehaviour
 
         closeButton.gameObject.SetActive(false);
     }
-
-    public void openHeadTab()
-    {
-       
-    }
-
-    public void openPantTab()
-    {
-      
-    }
-
     public void HomeButtonClick()
     {
 
@@ -284,5 +301,49 @@ public class GUIManager : MonoBehaviour
         {
             BgchangeVibrate.rectTransform.DOAnchorPosX(-50, 0.25f);
         }
+    }
+
+    public void PantShowCaseButtonClick()
+    {
+        PantShowCase.SetActive(true);
+
+        HeadShowCase.SetActive(false);
+
+        ShieldShowCase.SetActive(false);
+
+        SkinSetShowCase.SetActive(false);
+    }
+
+    public void HeadShowCaseButtonClick()
+    {
+        PantShowCase.SetActive(false);
+
+        HeadShowCase.SetActive(true);
+
+        ShieldShowCase.SetActive(false);
+
+        SkinSetShowCase.SetActive(false);
+    }
+
+    public void ShieldShowCaseButtonClick()
+    {
+        PantShowCase.SetActive(false);
+
+        HeadShowCase.SetActive(false);
+
+        ShieldShowCase.SetActive(true);
+
+        SkinSetShowCase.SetActive(false);
+    }
+
+    public void SkinSetShowCaseButtonClick()
+    {
+        PantShowCase.SetActive(false);
+
+        HeadShowCase.SetActive(false);
+
+        ShieldShowCase.SetActive(false);
+
+        SkinSetShowCase.SetActive(true);
     }
 }

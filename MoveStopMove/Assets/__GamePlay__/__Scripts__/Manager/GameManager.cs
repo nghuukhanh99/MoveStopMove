@@ -51,13 +51,13 @@ public class GameManager : MonoBehaviour
 
         isGameActive = false;
 
-        Coins = PlayerPrefs.GetInt(prefsCoinsTag);
+        //Coins = PlayerPrefs.GetInt(prefsCoinsTag);
     }
     private void Update()
     {
         GUIManager.Instance.CoinsText.text = Coins.ToString();
 
-        SaveCoins();
+        //SaveCoins();
     }
 
     private void InitializeSingleton()
@@ -72,32 +72,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddCoins(int CoinsToAdd)
-    {
-        Coins += CoinsToAdd;
-    }
+    //public void AddCoins(int CoinsToAdd)
+    //{
+    //    Coins += CoinsToAdd;
+    //}
 
-    public void DeleteKey()
-    {
-        PlayerPrefs.DeleteKey(prefsCoinsTag);
+    //public void DeleteKey()
+    //{
+    //    PlayerPrefs.DeleteKey(prefsCoinsTag);
 
-        PlayerPrefs.DeleteKey("BuyValue");
+    //    PlayerPrefs.DeleteKey("BuyValue");
 
-        PlayerPrefs.DeleteKey("ItemsId");
+    //    PlayerPrefs.DeleteKey("ItemsId");
 
-        PlayerPrefs.DeleteKey("DisplayValue");
+    //    PlayerPrefs.DeleteKey("DisplayValue");
 
-        Coins = 0;
+    //    Coins = 0;
 
-        PlayerPrefs.SetInt(prefsCoinsTag, Coins);
+    //    PlayerPrefs.SetInt(prefsCoinsTag, Coins);
 
-        GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt(prefsCoinsTag).ToString();
-    }
+    //    GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt(prefsCoinsTag).ToString();
+    //}
 
-    public void SaveCoins()
-    {
-        PlayerPrefs.SetInt(prefsCoinsTag, Coins);
-    }
+    //public void SaveCoins()
+    //{
+    //    PlayerPrefs.SetInt(prefsCoinsTag, Coins);
+    //}
 
 
 }

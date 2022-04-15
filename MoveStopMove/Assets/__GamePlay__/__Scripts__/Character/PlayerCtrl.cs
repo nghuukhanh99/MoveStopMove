@@ -56,6 +56,10 @@ public class PlayerCtrl : CharacterManager
             moveSpeed = 0;
 
             _collider.enabled = false;
+
+            MyAnimator.SetBool(AnimIdleTag, true);
+
+            MyAnimator.SetBool(AnimDanceTag, true);
         }
 
         if(this.isDead == true)
