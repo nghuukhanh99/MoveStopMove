@@ -50,14 +50,19 @@ public class GameManager : MonoBehaviour
         InitializeSingleton();
 
         isGameActive = false;
-
-        //Coins = PlayerPrefs.GetInt(prefsCoinsTag);
     }
     private void Update()
     {
-        GUIManager.Instance.CoinsText.text = Coins.ToString();
+        Coins = PlayerPrefs.GetInt("Coins");
 
-        //SaveCoins();
+        GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt("Coins").ToString();
+
+        if(Coins <= 0)
+        {
+            Coins = 0;
+
+            GUIManager.Instance.CoinsText.text = Coins.ToString();
+        }
     }
 
     private void InitializeSingleton()
@@ -72,32 +77,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //public void AddCoins(int CoinsToAdd)
-    //{
-    //    Coins += CoinsToAdd;
-    //}
+    public void AddCoins(int CoinsToAdd)
+    {
+        Coins += CoinsToAdd;
 
-    //public void DeleteKey()
-    //{
-    //    PlayerPrefs.DeleteKey(prefsCoinsTag);
+        PlayerPrefs.SetInt("Coins", Coins);
 
-    //    PlayerPrefs.DeleteKey("BuyValue");
-
-    //    PlayerPrefs.DeleteKey("ItemsId");
-
-    //    PlayerPrefs.DeleteKey("DisplayValue");
-
-    //    Coins = 0;
-
-    //    PlayerPrefs.SetInt(prefsCoinsTag, Coins);
-
-    //    GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt(prefsCoinsTag).ToString();
-    //}
-
-    //public void SaveCoins()
-    //{
-    //    PlayerPrefs.SetInt(prefsCoinsTag, Coins);
-    //}
-
+        GUIManager.Instance.CoinsText.text = Coins.ToString();
+    }
 
 }

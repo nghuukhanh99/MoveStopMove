@@ -21,6 +21,7 @@ public class PlayerCtrl : CharacterManager
     public float timeStart = 1.5f;
 
     public float timeCountdownt = 0;
+
     public override void Start()
     {
         base.Start();
@@ -31,7 +32,7 @@ public class PlayerCtrl : CharacterManager
     public override void Update()
     {
         base.Update();
-
+        
         if (GameManager.Instance.isGameActive == true)
         {
             joystickObject.SetActive(true);

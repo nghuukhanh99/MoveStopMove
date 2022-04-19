@@ -30,6 +30,8 @@ public class CharacterManager : MonoBehaviour, IHit
     [HideInInspector] public const string CandyBulletName = "Candy Bullet";
 
     [HideInInspector] public const string KnifeBulletName = "Knife Bullet";
+
+    [HideInInspector] public const string PlayerTag = "Player";
     #endregion
 
     //bool
@@ -196,7 +198,6 @@ public class CharacterManager : MonoBehaviour, IHit
         poolingBullet.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
 
         poolingBullet.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
-
     }
 
     public IEnumerator Attacking()
@@ -234,6 +235,16 @@ public class CharacterManager : MonoBehaviour, IHit
                 bulletWeaponScript.characterOwner.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
 
                 bulletWeaponScript.characterOwner.range += 0.025f;
+
+                if(bulletWeaponScript.characterOwner.tag == PlayerTag)
+                {
+                    GameManager.Instance.cameraOnMenu.m_Lens.FieldOfView += 2;
+
+                    if(GameManager.Instance.cameraOnMenu.m_Lens.FieldOfView >= 70)
+                    {
+                        GameManager.Instance.cameraOnMenu.m_Lens.FieldOfView = 70;
+                    }
+                }
 
                 if (bulletWeaponScript.characterOwner.range >= 0.4f)
                 {

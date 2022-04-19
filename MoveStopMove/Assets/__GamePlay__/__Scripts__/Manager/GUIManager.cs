@@ -11,9 +11,9 @@ public class GUIManager : MonoBehaviour
 {
     public static GUIManager Instance;
 
-    private string AnimGUITagOpen = "IsOpen";
+    internal string AnimGUITagOpen = "IsOpen";
 
-    private string AnimGUITagClose = "IsClose";
+    internal string AnimGUITagClose = "IsClose";
 
     public List<Image> _imgList = new List<Image>();
 
@@ -96,7 +96,6 @@ public class GUIManager : MonoBehaviour
     public GameObject ShieldShowCase;
 
     public GameObject SkinSetShowCase;
-
 
     //public GameObject CanvasPlayButton;
     private void Awake()
@@ -207,28 +206,7 @@ public class GUIManager : MonoBehaviour
         Invoke("showSkinShopDelay", 1.3f);
     }
 
-    public void closeButtonClick()
-    {
-        PlayButton.animator.SetTrigger(AnimGUITagOpen);
-
-        ZombieMode.animator.SetTrigger(AnimGUITagOpen);
-
-        SoundButton.animator.SetTrigger(AnimGUITagOpen);
-
-        RemoveAdsButton.animator.SetTrigger(AnimGUITagOpen);
-
-        VibrateButton.animator.SetTrigger(AnimGUITagOpen);
-
-        ExpButton.animator.SetTrigger(AnimGUITagOpen);
-
-        SkinShopButton.animator.SetTrigger(AnimGUITagOpen);
-
-        WeaponShopButton.animator.SetTrigger(AnimGUITagOpen);
-
-        CanvasSkin.gameObject.SetActive(false);
-
-        closeButton.gameObject.SetActive(false);
-    }
+  
     public void HomeButtonClick()
     {
 
@@ -263,8 +241,11 @@ public class GUIManager : MonoBehaviour
 
     IEnumerator loadSceneDelay(int buildIndex)
     {
+        int SceneIndex = SceneManager.GetActiveScene().buildIndex;
+
         yield return new WaitForSeconds(1.2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + buildIndex);
+
+        SceneManager.LoadScene(SceneIndex + buildIndex);
     }
 
     public void ShowSettingDelay()
