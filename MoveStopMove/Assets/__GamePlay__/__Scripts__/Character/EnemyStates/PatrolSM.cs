@@ -14,10 +14,11 @@ public class PatrolSM : IEnemyState
 
     private Enemy enemy;
 
+    
+
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
-
     }
 
     public void Execute()

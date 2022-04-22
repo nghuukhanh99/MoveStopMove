@@ -6,6 +6,8 @@ using System;
 
 public class PlayerCtrl : CharacterManager
 {
+    public static PlayerCtrl Instance;
+
     [SerializeField] FloatingJoystick joystick;
 
     [SerializeField] GameObject joystickObject;
@@ -21,6 +23,11 @@ public class PlayerCtrl : CharacterManager
     public float timeStart = 1.5f;
 
     public float timeCountdownt = 0;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public override void Start()
     {

@@ -19,18 +19,20 @@ public class AttackSM : IEnemyState
         }
 
         Attack();
+
+        
     }
 
     public void Execute()
     {
         delayTime += Time.deltaTime;
 
-        if(delayTime >= Time.time)
+        if (delayTime >= 1.3f)
         {
-            _Enemy.ChangeState(new IdleSM());
+            _Enemy.ChangeState(new PatrolSM());
         }
-        
-        if(_Enemy.nearestCharacter == null)
+
+        if (_Enemy.nearestCharacter == null)
         {
             _Enemy.ChangeState(new IdleSM());
         }
@@ -38,7 +40,7 @@ public class AttackSM : IEnemyState
 
     public void Exit()
     {
-        //delayTime = 0;
+
     }
 
     private void Attack()
@@ -47,8 +49,6 @@ public class AttackSM : IEnemyState
         {
             _Enemy.transform.LookAt(_Enemy.nearestCharacter.transform);
         }
-
-     
 
         _Enemy.StartCoroutine(_Enemy.Attacked());
     }

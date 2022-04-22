@@ -97,6 +97,8 @@ public class GUIManager : MonoBehaviour
 
     public GameObject SkinSetShowCase;
 
+    public GameObject CanvasWeapon;
+
     //public GameObject CanvasPlayButton;
     private void Awake()
     {
@@ -182,7 +184,27 @@ public class GUIManager : MonoBehaviour
 
     public void WeaponShopButtonClick()
     {
-        
+        PlayButton.animator.SetTrigger(AnimGUITagClose);
+
+        ZombieMode.animator.SetTrigger(AnimGUITagClose);
+
+        SoundButton.animator.SetTrigger(AnimGUITagClose);
+
+        RemoveAdsButton.animator.SetTrigger(AnimGUITagClose);
+
+        VibrateButton.animator.SetTrigger(AnimGUITagClose);
+
+        ExpButton.animator.SetTrigger(AnimGUITagClose);
+
+        SkinShopButton.animator.SetTrigger(AnimGUITagClose);
+
+        WeaponShopButton.animator.SetTrigger(AnimGUITagClose);
+
+        SkinShopButton.interactable = false;
+
+        WeaponShopButton.interactable = false;
+
+        Invoke("showWeaponShopDelay", 1.3f);
     }
 
     public void SkinShopButtonClick()
@@ -202,6 +224,10 @@ public class GUIManager : MonoBehaviour
         SkinShopButton.animator.SetTrigger(AnimGUITagClose);
 
         WeaponShopButton.animator.SetTrigger(AnimGUITagClose);
+
+        SkinShopButton.interactable = false;
+
+        WeaponShopButton.interactable = false;
 
         Invoke("showSkinShopDelay", 1.3f);
     }
@@ -258,6 +284,13 @@ public class GUIManager : MonoBehaviour
         closeButton.gameObject.SetActive(true);
 
         CanvasSkin.SetActive(true);
+    }
+    
+    public void showWeaponShopDelay()
+    {
+        closeButton.gameObject.SetActive(true);
+
+        CanvasWeapon.SetActive(true);
     }
 
     public void SoundToggle()

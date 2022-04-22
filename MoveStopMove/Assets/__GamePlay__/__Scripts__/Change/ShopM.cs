@@ -10,11 +10,19 @@ public class ShopM : MonoBehaviour
 
     int IDShield;
 
+    int IDSetSkin;
+
     public SkinnedMeshRenderer DefaultPant;
+
+    public SkinnedMeshRenderer DefaultSkin;
 
     public GameObject posSpawnHead;
 
     public GameObject posSpawnShield;
+
+    public GameObject posSpawnTail;
+
+    public GameObject posSpawnWing;
 
     public List<Material> ListPantMaterial = new List<Material>();
 
@@ -22,6 +30,29 @@ public class ShopM : MonoBehaviour
 
     public List<GameObject> ListShield = new List<GameObject>();
 
+    public List<GameObject> Set1 = new List<GameObject>();
+
+    public List<GameObject> Set2 = new List<GameObject>();
+
+    public List<GameObject> Set3 = new List<GameObject>();
+
+    public List<Material> ListSkin = new List<Material>();
+
+    public List<GameObject> LockPant = new List<GameObject>();
+
+    public List<GameObject> EquippedPant = new List<GameObject>();
+
+    public List<GameObject> LockHead = new List<GameObject>();
+
+    public List<GameObject> EquippedHead = new List<GameObject>();
+
+    public List<GameObject> LockShield = new List<GameObject>();
+
+    public List<GameObject> EquippedShield = new List<GameObject>();
+
+    public List<GameObject> LockSetSkin = new List<GameObject>();
+
+    public List<GameObject> EquippedSetSkin = new List<GameObject>();
     #region//String Tag
     string CoinsPrefsTag = "Coins";
 
@@ -93,6 +124,17 @@ public class ShopM : MonoBehaviour
 
     string CaptainShield2BuyedPrefsTag = "CaptainShield2Buyed";
 
+    string SetSkin1PrefsTag = "SetSkin1";
+
+    string SetSkin1BuyedPrefsTag = "SetSkin1Buyed";
+
+    string SetSkin2PrefsTag = "SetSkin2";
+
+    string SetSkin2BuyedPrefsTag = "SetSkin2Buyed";
+
+    string SetSkin3PrefsTag = "SetSkin3";
+
+    string SetSkin3BuyedPrefsTag = "SetSkin3Buyed";
 
     #endregion
     private void Start()
@@ -101,42 +143,74 @@ public class ShopM : MonoBehaviour
         //Pant
         if (PlayerPrefs.GetInt(ChambiPrefsTag) == 2)
         {
-            DefaultPant.material = ListPantMaterial[0]; 
+            DefaultPant.material = ListPantMaterial[0];
+
+            EquippedPant[0].gameObject.SetActive(true);
+
+            LockPant[0].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(ComyPrefsTag) == 2)
         {
             DefaultPant.material = ListPantMaterial[1];
+
+            EquippedPant[1].gameObject.SetActive(true);
+
+            LockPant[1].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(DabaoPrefsTag) == 2)
         {
             DefaultPant.material = ListPantMaterial[2];
+
+            EquippedPant[2].gameObject.SetActive(true);
+
+            LockPant[2].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(BatmanPrefsTag) == 2)
         {
             DefaultPant.material = ListPantMaterial[3];
+
+            EquippedPant[3].gameObject.SetActive(true);
+
+            LockPant[3].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(PokemonPrefsTag) == 2)
         {
             DefaultPant.material = ListPantMaterial[4];
+
+            EquippedPant[4].gameObject.SetActive(true);
+
+            LockPant[4].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(OnionPrefsTag) == 2)
         {
             DefaultPant.material = ListPantMaterial[5];
+
+            EquippedPant[5].gameObject.SetActive(true);
+
+            LockPant[5].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(VantimPrefsTag) == 2)
         {
             DefaultPant.material = ListPantMaterial[6];
+
+            EquippedPant[6].gameObject.SetActive(true);
+
+            LockPant[6].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(RainbowPrefsTag) == 2)
         {
             DefaultPant.material = ListPantMaterial[7];
+
+            EquippedPant[7].gameObject.SetActive(true);
+
+            LockPant[7].gameObject.SetActive(false);
         }
         #endregion
 
@@ -154,6 +228,10 @@ public class ShopM : MonoBehaviour
             ArrowHead.transform.SetParent(posSpawnHead.transform);
 
             ArrowHead.transform.localScale = Vector3.one;
+
+            EquippedHead[0].gameObject.SetActive(true);
+
+            LockHead[0].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(CowboyHeadPrefsTag) == 2)
@@ -168,6 +246,10 @@ public class ShopM : MonoBehaviour
             Cowboy.transform.SetParent(posSpawnHead.transform);
 
             Cowboy.transform.localScale = Vector3.one;
+
+            EquippedHead[1].gameObject.SetActive(true);
+
+            LockHead[1].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(PoliceHeadPrefsTag) == 2)
@@ -182,6 +264,10 @@ public class ShopM : MonoBehaviour
             Police.transform.SetParent(posSpawnHead.transform);
 
             Police.transform.localScale = Vector3.one;
+
+            EquippedHead[2].gameObject.SetActive(true);
+
+            LockHead[2].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(SnapHeadPrefsTag) == 2)
@@ -196,6 +282,10 @@ public class ShopM : MonoBehaviour
             Snap.transform.SetParent(posSpawnHead.transform);
 
             Snap.transform.localScale = Vector3.one;
+
+            EquippedHead[3].gameObject.SetActive(true);
+
+            LockHead[3].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(TaiNgheHeadPrefsTag) == 2)
@@ -210,6 +300,10 @@ public class ShopM : MonoBehaviour
             TaiNghe.transform.SetParent(posSpawnHead.transform);
 
             TaiNghe.transform.localScale = Vector3.one;
+
+            EquippedHead[4].gameObject.SetActive(true);
+
+            LockHead[4].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(TaiThoHeadPrefsTag) == 2)
@@ -224,6 +318,10 @@ public class ShopM : MonoBehaviour
             TaiTho.transform.SetParent(posSpawnHead.transform);
 
             TaiTho.transform.localScale = Vector3.one;
+
+            EquippedHead[5].gameObject.SetActive(true);
+
+            LockHead[5].gameObject.SetActive(false);
         }
 
         if (PlayerPrefs.GetInt(MuRomHeadPrefsTag) == 2)
@@ -238,6 +336,10 @@ public class ShopM : MonoBehaviour
             MuRom.transform.SetParent(posSpawnHead.transform);
 
             MuRom.transform.localScale = Vector3.one;
+
+            EquippedHead[6].gameObject.SetActive(true);
+
+            LockHead[6].gameObject.SetActive(false);
         }
         #endregion
 
@@ -254,6 +356,10 @@ public class ShopM : MonoBehaviour
             CaptainShield1.transform.SetParent(posSpawnShield.transform);
 
             CaptainShield1.transform.localScale = Vector3.one;
+
+            EquippedShield[0].gameObject.SetActive(true);
+
+            LockShield[0].gameObject.SetActive(false);
         }
 
         if(PlayerPrefs.GetInt(CaptainShield2PrefsTag) == 2)
@@ -268,6 +374,155 @@ public class ShopM : MonoBehaviour
             CaptainShield2.transform.SetParent(posSpawnShield.transform);
 
             CaptainShield2.transform.localScale = Vector3.one;
+
+            EquippedShield[2].gameObject.SetActive(true);
+
+            LockShield[2].gameObject.SetActive(false);
+        }
+        #endregion
+
+        #region//Load Set Skin
+        if(PlayerPrefs.GetInt(SetSkin1PrefsTag) == 2)
+        {
+            foreach (Transform Child in posSpawnHead.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnTail.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnWing.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnShield.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            //Horn
+            GameObject Horn = Instantiate(Set1[0], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+            Horn.transform.SetParent(posSpawnHead.transform);
+
+            Horn.transform.localScale = Vector3.one;
+
+            //Tail
+            GameObject Tail = Instantiate(Set1[1], posSpawnTail.transform.position, posSpawnTail.transform.rotation);
+
+            Tail.transform.SetParent(posSpawnTail.transform);
+
+            Tail.transform.localScale = Vector3.one;
+
+            //Wing
+            GameObject Wing = Instantiate(Set1[2], posSpawnWing.transform.position, posSpawnWing.transform.rotation);
+
+            Wing.transform.SetParent(posSpawnWing.transform);
+
+            Wing.transform.localScale = Vector3.one;
+
+            DefaultSkin.material = ListSkin[0];
+
+            EquippedSetSkin[0].gameObject.SetActive(true);
+
+            LockSetSkin[0].gameObject.SetActive(false);
+        }
+
+        if(PlayerPrefs.GetInt(SetSkin2PrefsTag) == 2)
+        {
+            foreach (Transform Child in posSpawnHead.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnTail.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnWing.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnShield.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            //Hat
+            GameObject HeadAngel = Instantiate(Set2[0], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+            HeadAngel.transform.SetParent(posSpawnHead.transform);
+
+            HeadAngel.transform.localScale = Vector3.one;
+
+            //Wing Angel
+            GameObject WingAngel = Instantiate(Set2[1], posSpawnWing.transform.position, posSpawnWing.transform.rotation);
+
+            WingAngel.transform.SetParent(posSpawnWing.transform);
+
+            WingAngel.transform.localScale = Vector3.one;
+
+            //Bow
+            GameObject Bow = Instantiate(Set2[2], posSpawnShield.transform.position, posSpawnShield.transform.rotation);
+
+            Bow.transform.SetParent(posSpawnShield.transform);
+
+            Bow.transform.localScale = Vector3.one;
+
+            DefaultSkin.material = ListSkin[1];
+
+            EquippedSetSkin[1].gameObject.SetActive(true);
+
+            LockSetSkin[1].gameObject.SetActive(false);
+        }
+
+        if(PlayerPrefs.GetInt(SetSkin3PrefsTag) == 2)
+        {
+            foreach (Transform Child in posSpawnHead.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnTail.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnWing.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnShield.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            //Book
+            GameObject Book = Instantiate(Set3[0], posSpawnShield.transform.position, posSpawnShield.transform.rotation);
+
+            Book.transform.SetParent(posSpawnShield.transform);
+
+            Book.transform.localScale = Vector3.one;
+
+            //Hat
+            GameObject Hat = Instantiate(Set3[1], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+            Hat.transform.SetParent(posSpawnHead.transform);
+
+            Hat.transform.localScale = Vector3.one;
+
+            DefaultSkin.material = ListSkin[2];
+
+            EquippedSetSkin[2].gameObject.SetActive(true);
+
+            LockSetSkin[2].gameObject.SetActive(false);
         }
         #endregion
     }
@@ -346,8 +601,6 @@ public class ShopM : MonoBehaviour
         ArrowHead.transform.SetParent(posSpawnHead.transform);
 
         ArrowHead.transform.localScale = Vector3.one;
-
-
     }
 
     public void CowboyHeadButtonClick()
@@ -482,6 +735,145 @@ public class ShopM : MonoBehaviour
 
     #endregion
 
+    #region//SetSkinButtonClick
+    public void SkinSet1()
+    {
+        IDSetSkin = 1;
+
+        foreach (Transform Child in posSpawnHead.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach (Transform Child in posSpawnTail.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach (Transform Child in posSpawnWing.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach (Transform Child in posSpawnShield.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        //Horn
+        GameObject Horn = Instantiate(Set1[0], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+        Horn.transform.SetParent(posSpawnHead.transform);
+
+        Horn.transform.localScale = Vector3.one;
+
+        //Tail
+        GameObject Tail = Instantiate(Set1[1], posSpawnTail.transform.position, posSpawnTail.transform.rotation);
+
+        Tail.transform.SetParent(posSpawnTail.transform);
+
+        Tail.transform.localScale = Vector3.one;
+
+        //Wing
+        GameObject Wing = Instantiate(Set1[2], posSpawnWing.transform.position, posSpawnWing.transform.rotation);
+
+        Wing.transform.SetParent(posSpawnWing.transform);
+
+        Wing.transform.localScale = Vector3.one;
+
+        DefaultSkin.material = ListSkin[0];
+    }
+
+    public void SkinSet2()
+    {
+        IDSetSkin = 2;
+
+        foreach (Transform Child in posSpawnHead.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach (Transform Child in posSpawnTail.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach (Transform Child in posSpawnWing.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach (Transform Child in posSpawnShield.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        //Hat
+        GameObject HeadAngel = Instantiate(Set2[0], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+        HeadAngel.transform.SetParent(posSpawnHead.transform);
+
+        HeadAngel.transform.localScale = Vector3.one;
+
+        //Wing Angel
+        GameObject WingAngel = Instantiate(Set2[1], posSpawnWing.transform.position, posSpawnWing.transform.rotation);
+
+        WingAngel.transform.SetParent(posSpawnWing.transform);
+
+        WingAngel.transform.localScale = Vector3.one;
+
+        //Bow
+        GameObject Bow = Instantiate(Set2[2], posSpawnShield.transform.position, posSpawnShield.transform.rotation);
+
+        Bow.transform.SetParent(posSpawnShield.transform);
+
+        Bow.transform.localScale = Vector3.one;
+
+        DefaultSkin.material = ListSkin[1];
+    }
+
+    public void SkinSet3()
+    {
+        IDSetSkin = 3;
+
+        foreach (Transform Child in posSpawnHead.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach (Transform Child in posSpawnTail.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach (Transform Child in posSpawnWing.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        foreach(Transform Child in posSpawnShield.transform)
+        {
+            Destroy(Child.gameObject);
+        }
+
+        //Book
+        GameObject Book = Instantiate(Set3[0], posSpawnShield.transform.position, posSpawnShield.transform.rotation);
+
+        Book.transform.SetParent(posSpawnShield.transform);
+
+        Book.transform.localScale = Vector3.one;
+
+        //Hat
+        GameObject Hat = Instantiate(Set3[1], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+        Hat.transform.SetParent(posSpawnHead.transform);
+
+        Hat.transform.localScale = Vector3.one;
+
+        DefaultSkin.material = ListSkin[2];
+    }
+    #endregion
+
     public void DeleteKey()
     {
         PlayerPrefs.DeleteAll();
@@ -517,6 +909,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(ChambiPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(ChambiBuyedPrefsTag));
+
+                    LockPant[0].gameObject.SetActive(false);
+
+                    EquippedPant[0].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -542,6 +938,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(ComyPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(ComyBuyedPrefsTag));
+
+                    LockPant[1].gameObject.SetActive(false);
+
+                    EquippedPant[1].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -567,6 +967,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(DabaoPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(DabaoBuyedPrefsTag));
+
+                    LockPant[2].gameObject.SetActive(false);
+
+                    EquippedPant[2].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -592,6 +996,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(BatmanPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(BatmanBuyedPrefsTag));
+
+                    LockPant[3].gameObject.SetActive(false);
+
+                    EquippedPant[3].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -617,6 +1025,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(PokemonPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(PokemonBuyedPrefsTag));
+
+                    LockPant[4].gameObject.SetActive(false);
+
+                    EquippedPant[4].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -642,6 +1054,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(OnionPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(OnionBuyedPrefsTag));
+
+                    LockPant[5].gameObject.SetActive(false);
+
+                    EquippedPant[5].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -667,6 +1083,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(VantimPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(VantimBuyedPrefsTag));
+
+                    LockPant[6].gameObject.SetActive(false);
+
+                    EquippedPant[6].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -692,6 +1112,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(RainbowPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(RainbowBuyedPrefsTag));
+
+                    LockPant[7].gameObject.SetActive(false);
+
+                    EquippedPant[7].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -720,6 +1144,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(ArrowHeadPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(ArrowHeadBuyedPrefsTag));
+
+                    LockHead[0].gameObject.SetActive(false);
+
+                    EquippedHead[0].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -745,6 +1173,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(CowboyHeadPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(CowboyHeadBuyedPrefsTag));
+
+                    LockHead[1].gameObject.SetActive(false);
+
+                    EquippedHead[1].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -770,6 +1202,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(PoliceHeadPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(PoliceHeadBuyedPrefsTag));
+
+                    LockHead[2].gameObject.SetActive(false);
+
+                    EquippedHead[2].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -795,6 +1231,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(SnapHeadPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(SnapHeadBuyedPrefsTag));
+
+                    LockHead[3].gameObject.SetActive(false);
+
+                    EquippedHead[3].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -820,6 +1260,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(TaiNgheHeadPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(TaiNgheHeadBuyedPrefsTag));
+
+                    LockHead[4].gameObject.SetActive(false);
+
+                    EquippedHead[4].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -845,6 +1289,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(TaiThoHeadPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(TaiThoHeadBuyedPrefsTag));
+
+                    LockHead[5].gameObject.SetActive(false);
+
+                    EquippedHead[5].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -870,6 +1318,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(MuRomHeadPrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(MuRomHeadBuyedPrefsTag));
+
+                    LockHead[6].gameObject.SetActive(false);
+
+                    EquippedHead[6].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -898,6 +1350,10 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(CaptainShield1PrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(CaptainShield1BuyedPrefsTag));
+
+                    LockShield[0].gameObject.SetActive(false);
+
+                    EquippedShield[0].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -923,6 +1379,100 @@ public class ShopM : MonoBehaviour
                     Debug.Log(PlayerPrefs.GetInt(CaptainShield2PrefsTag));
 
                     Debug.Log(PlayerPrefs.GetInt(CaptainShield2BuyedPrefsTag));
+
+                    LockShield[1].gameObject.SetActive(false);
+
+                    EquippedShield[1].gameObject.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("You don't have enough money!");
+                }
+                break;
+        }
+
+        switch (IDSetSkin)
+        {
+            case 1:
+                if (GameManager.Instance.Coins >= 500)
+                {
+                    GameManager.Instance.Coins -= 500;
+
+                    PlayerPrefs.SetInt(CoinsPrefsTag, GameManager.Instance.Coins);
+
+                    GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt(CoinsPrefsTag).ToString();
+
+                    int buyedSetSkin1Status = 1;
+
+                    PlayerPrefs.SetInt(SetSkin1BuyedPrefsTag, buyedSetSkin1Status);
+
+                    PlayerPrefs.SetInt(SetSkin1PrefsTag, 2);
+
+                    Debug.Log(PlayerPrefs.GetInt(SetSkin1PrefsTag));
+
+                    Debug.Log(PlayerPrefs.GetInt(SetSkin1BuyedPrefsTag));
+
+                    LockSetSkin[0].gameObject.SetActive(false);
+
+                    EquippedSetSkin[0].gameObject.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("You don't have enough money!");
+                }
+                break;
+
+            case 2:
+                if (GameManager.Instance.Coins >= 500)
+                {
+                    GameManager.Instance.Coins -= 500;
+
+                    PlayerPrefs.SetInt(CoinsPrefsTag, GameManager.Instance.Coins);
+
+                    GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt(CoinsPrefsTag).ToString();
+
+                    int buyedSetSkin2Status = 2;
+
+                    PlayerPrefs.SetInt(SetSkin2BuyedPrefsTag, buyedSetSkin2Status);
+
+                    PlayerPrefs.SetInt(SetSkin2PrefsTag, 2);
+
+                    Debug.Log(PlayerPrefs.GetInt(SetSkin2PrefsTag));
+
+                    Debug.Log(PlayerPrefs.GetInt(SetSkin2BuyedPrefsTag));
+
+                    LockSetSkin[1].gameObject.SetActive(false);
+
+                    EquippedSetSkin[1].gameObject.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("You don't have enough money!");
+                }
+                break;
+
+            case 3:
+                if (GameManager.Instance.Coins >= 500)
+                {
+                    GameManager.Instance.Coins -= 500;
+
+                    PlayerPrefs.SetInt(CoinsPrefsTag, GameManager.Instance.Coins);
+
+                    GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt(CoinsPrefsTag).ToString();
+
+                    int buyedSetSkin3Status = 3;
+
+                    PlayerPrefs.SetInt(SetSkin3BuyedPrefsTag, buyedSetSkin3Status);
+
+                    PlayerPrefs.SetInt(SetSkin3PrefsTag, 2);
+
+                    Debug.Log(PlayerPrefs.GetInt(SetSkin3PrefsTag));
+
+                    Debug.Log(PlayerPrefs.GetInt(SetSkin3BuyedPrefsTag));
+
+                    LockSetSkin[2].gameObject.SetActive(false);
+
+                    EquippedSetSkin[2].gameObject.SetActive(true);
                 }
                 else
                 {
@@ -954,6 +1504,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(VantimPrefsTag, 1);
 
             PlayerPrefs.SetInt(RainbowPrefsTag, 1);
+
+            EquippedPant[0].gameObject.SetActive(true);
         }
 
         if (IDPant == 2 && PlayerPrefs.GetInt(ComyBuyedPrefsTag) == 2)
@@ -975,6 +1527,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(VantimPrefsTag, 1);
 
             PlayerPrefs.SetInt(RainbowPrefsTag, 1);
+
+            EquippedPant[1].gameObject.SetActive(true);
         }
 
         if (IDPant == 3 && PlayerPrefs.GetInt(DabaoBuyedPrefsTag) == 3)
@@ -996,6 +1550,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(VantimPrefsTag, 1);
 
             PlayerPrefs.SetInt(RainbowPrefsTag, 1);
+
+            EquippedPant[2].gameObject.SetActive(true);
         }
 
         if (IDPant == 4 && PlayerPrefs.GetInt(BatmanBuyedPrefsTag) == 4)
@@ -1017,6 +1573,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(VantimPrefsTag, 1);
 
             PlayerPrefs.SetInt(RainbowPrefsTag, 1);
+
+            EquippedPant[3].gameObject.SetActive(true);
         }
 
         if (IDPant == 5 && PlayerPrefs.GetInt(PokemonBuyedPrefsTag) == 5)
@@ -1038,6 +1596,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(VantimPrefsTag, 1);
 
             PlayerPrefs.SetInt(RainbowPrefsTag, 1);
+
+            EquippedPant[4].gameObject.SetActive(true);
         }
 
         if (IDPant == 6 && PlayerPrefs.GetInt(OnionBuyedPrefsTag) == 6)
@@ -1059,6 +1619,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(VantimPrefsTag, 1);
 
             PlayerPrefs.SetInt(RainbowPrefsTag, 1);
+
+            EquippedPant[5].gameObject.SetActive(true);
         }
 
         if (IDPant == 7 && PlayerPrefs.GetInt(VantimBuyedPrefsTag) == 7)
@@ -1080,6 +1642,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(VantimPrefsTag, 2);
 
             PlayerPrefs.SetInt(RainbowPrefsTag, 1);
+
+            EquippedPant[6].gameObject.SetActive(true);
         }
 
         if (IDPant == 8 && PlayerPrefs.GetInt(RainbowBuyedPrefsTag) == 8)
@@ -1101,6 +1665,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(VantimPrefsTag, 1);
 
             PlayerPrefs.SetInt(RainbowPrefsTag, 2);
+
+            EquippedPant[7].gameObject.SetActive(true);
         }
         #endregion
 
@@ -1131,6 +1697,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(TaiThoHeadPrefsTag, 1);
 
             PlayerPrefs.SetInt(MuRomHeadPrefsTag, 1);
+
+            EquippedHead[0].gameObject.SetActive(true);
         }
 
         if (IDHead == 2 && PlayerPrefs.GetInt(CowboyHeadBuyedPrefsTag) == 2)
@@ -1159,6 +1727,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(TaiThoHeadPrefsTag, 1);
 
             PlayerPrefs.SetInt(MuRomHeadPrefsTag, 1);
+
+            EquippedHead[1].gameObject.SetActive(true);
         }
 
         if (IDHead == 3 && PlayerPrefs.GetInt(PoliceHeadBuyedPrefsTag) == 3)
@@ -1187,6 +1757,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(TaiThoHeadPrefsTag, 1);
 
             PlayerPrefs.SetInt(MuRomHeadPrefsTag, 1);
+
+            EquippedHead[2].gameObject.SetActive(true);
         }
 
         if (IDHead == 4 && PlayerPrefs.GetInt(SnapHeadBuyedPrefsTag) == 4)
@@ -1215,6 +1787,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(TaiThoHeadPrefsTag, 1);
 
             PlayerPrefs.SetInt(MuRomHeadPrefsTag, 1);
+
+            EquippedHead[3].gameObject.SetActive(true);
         }
 
         if (IDHead == 5 && PlayerPrefs.GetInt(TaiNgheHeadBuyedPrefsTag) == 5)
@@ -1243,6 +1817,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(TaiThoHeadPrefsTag, 1);
 
             PlayerPrefs.SetInt(MuRomHeadPrefsTag, 1);
+
+            EquippedHead[4].gameObject.SetActive(true);
         }
 
         if (IDHead == 6 && PlayerPrefs.GetInt(TaiThoHeadBuyedPrefsTag) == 6)
@@ -1271,6 +1847,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(TaiThoHeadPrefsTag, 2);
 
             PlayerPrefs.SetInt(MuRomHeadPrefsTag, 1);
+
+            EquippedHead[5].gameObject.SetActive(true);
         }
 
         if (IDHead == 7 && PlayerPrefs.GetInt(MuRomHeadBuyedPrefsTag) == 7)
@@ -1299,6 +1877,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(TaiThoHeadPrefsTag, 1);
 
             PlayerPrefs.SetInt(MuRomHeadPrefsTag, 2);
+
+            EquippedHead[6].gameObject.SetActive(true);
         }
         #endregion
 
@@ -1319,6 +1899,8 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(CaptainShield1PrefsTag, 2);
 
             PlayerPrefs.SetInt(CaptainShield2PrefsTag, 1);
+
+            EquippedShield[0].gameObject.SetActive(true);
         }
 
         if (IDShield == 2 && PlayerPrefs.GetInt(CaptainShield2BuyedPrefsTag) == 2)
@@ -1337,8 +1919,274 @@ public class ShopM : MonoBehaviour
             PlayerPrefs.SetInt(CaptainShield1PrefsTag, 1);
 
             PlayerPrefs.SetInt(CaptainShield2PrefsTag, 2);
+
+            EquippedShield[1].gameObject.SetActive(true);
         }
         #endregion
+
+        #region//EquipSet
+        if (IDSetSkin == 1 && PlayerPrefs.GetInt(SetSkin1BuyedPrefsTag) == 1)
+        {
+            foreach (Transform Child in posSpawnHead.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnTail.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnWing.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnShield.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            //Horn
+            GameObject Horn = Instantiate(Set1[0], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+            Horn.transform.SetParent(posSpawnHead.transform);
+
+            Horn.transform.localScale = Vector3.one;
+
+            //Tail
+            GameObject Tail = Instantiate(Set1[1], posSpawnTail.transform.position, posSpawnTail.transform.rotation);
+
+            Tail.transform.SetParent(posSpawnTail.transform);
+
+            Tail.transform.localScale = Vector3.one;
+
+            //Wing
+            GameObject Wing = Instantiate(Set1[2], posSpawnWing.transform.position, posSpawnWing.transform.rotation);
+
+            Wing.transform.SetParent(posSpawnWing.transform);
+
+            Wing.transform.localScale = Vector3.one;
+
+            DefaultSkin.material = ListSkin[0];
+
+            PlayerPrefs.SetInt(SetSkin1PrefsTag, 2);
+
+            PlayerPrefs.SetInt(SetSkin2PrefsTag, 1);
+
+            PlayerPrefs.SetInt(SetSkin3PrefsTag, 1);
+
+            EquippedSetSkin[0].gameObject.SetActive(true);
+        }
+
+        if (IDSetSkin == 2 && PlayerPrefs.GetInt(SetSkin2BuyedPrefsTag) == 2)
+        {
+            foreach (Transform Child in posSpawnHead.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnTail.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnWing.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnShield.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            //Hat
+            GameObject HeadAngel = Instantiate(Set2[0], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+            HeadAngel.transform.SetParent(posSpawnHead.transform);
+
+            HeadAngel.transform.localScale = Vector3.one;
+
+            //Wing Angel
+            GameObject WingAngel = Instantiate(Set2[1], posSpawnWing.transform.position, posSpawnWing.transform.rotation);
+
+            WingAngel.transform.SetParent(posSpawnWing.transform);
+
+            WingAngel.transform.localScale = Vector3.one;
+
+            //Bow
+            GameObject Bow = Instantiate(Set2[2], posSpawnShield.transform.position, posSpawnShield.transform.rotation);
+
+            Bow.transform.SetParent(posSpawnShield.transform);
+
+            Bow.transform.localScale = Vector3.one;
+
+            DefaultSkin.material = ListSkin[1];
+
+            PlayerPrefs.SetInt(SetSkin1PrefsTag, 1);
+
+            PlayerPrefs.SetInt(SetSkin2PrefsTag, 2);
+
+            PlayerPrefs.SetInt(SetSkin3PrefsTag, 1);
+
+            EquippedSetSkin[1].gameObject.SetActive(true);
+        }
+
+        if (IDSetSkin == 3 && PlayerPrefs.GetInt(SetSkin3BuyedPrefsTag) == 3)
+        {
+            foreach (Transform Child in posSpawnHead.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnTail.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnWing.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            foreach (Transform Child in posSpawnShield.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            //Book
+            GameObject Book = Instantiate(Set3[0], posSpawnShield.transform.position, posSpawnShield.transform.rotation);
+
+            Book.transform.SetParent(posSpawnShield.transform);
+
+            Book.transform.localScale = Vector3.one;
+
+            //Hat
+            GameObject Hat = Instantiate(Set3[1], posSpawnHead.transform.position, posSpawnHead.transform.rotation);
+
+            Hat.transform.SetParent(posSpawnHead.transform);
+
+            Hat.transform.localScale = Vector3.one;
+
+            DefaultSkin.material = ListSkin[2];
+
+            PlayerPrefs.SetInt(SetSkin1PrefsTag, 1);
+
+            PlayerPrefs.SetInt(SetSkin2PrefsTag, 1);
+
+            PlayerPrefs.SetInt(SetSkin3PrefsTag, 2);
+
+            EquippedSetSkin[2].gameObject.SetActive(true);
+        }
+        #endregion
+    }
+
+    public void UnequipButtonClick()
+    {
+        //Unequip Pant
+        for (int i = 1; i <= 8/*Count of pant*/; i++)
+        {
+            if(IDPant == i)
+            {
+                DefaultPant.material = ListPantMaterial[8];
+
+                PlayerPrefs.SetInt(ChambiPrefsTag, 1);
+
+                PlayerPrefs.SetInt(ComyPrefsTag, 1);
+
+                PlayerPrefs.SetInt(DabaoPrefsTag, 1);
+
+                PlayerPrefs.SetInt(BatmanPrefsTag, 1);
+
+                PlayerPrefs.SetInt(PokemonPrefsTag, 1);
+
+                PlayerPrefs.SetInt(OnionPrefsTag, 1);
+
+                PlayerPrefs.SetInt(VantimPrefsTag, 1);
+
+                PlayerPrefs.SetInt(RainbowPrefsTag, 1);
+
+                //EquippedPant[i].gameObject.SetActive(false);
+            }
+        }
+
+        //Unequip Head
+
+        for (int i = 1; i <= 7/*Count of head*/; i++)
+        {
+            if(IDHead == i)
+            {
+                foreach (Transform Child in posSpawnHead.transform)
+                {
+                    Destroy(Child.gameObject);
+                }
+
+                PlayerPrefs.SetInt(ArrowHeadPrefsTag, 1);
+
+                PlayerPrefs.SetInt(CowboyHeadPrefsTag, 1);
+
+                PlayerPrefs.SetInt(PoliceHeadPrefsTag, 1);
+
+                PlayerPrefs.SetInt(SnapHeadPrefsTag, 1);
+
+                PlayerPrefs.SetInt(TaiNgheHeadPrefsTag, 1);
+
+                PlayerPrefs.SetInt(TaiThoHeadPrefsTag, 1);
+
+                PlayerPrefs.SetInt(MuRomHeadPrefsTag, 1);
+            }
+        }
+
+        //Unequip Shield
+        for (int i = 1; i <= 2/*Count of shield*/; i++)
+        {
+            foreach (Transform Child in posSpawnShield.transform)
+            {
+                Destroy(Child.gameObject);
+            }
+
+            PlayerPrefs.SetInt(CaptainShield1PrefsTag, 1);
+
+            PlayerPrefs.SetInt(CaptainShield2PrefsTag, 1);
+
+        }
+
+        //Unequip SetSkin
+
+        for (int i = 1; i <= 3; i++)
+        {
+            if(IDSetSkin == i)
+            {
+                foreach (Transform Child in posSpawnHead.transform)
+                {
+                    Destroy(Child.gameObject);
+                }
+
+                foreach (Transform Child in posSpawnTail.transform)
+                {
+                    Destroy(Child.gameObject);
+                }
+
+                foreach (Transform Child in posSpawnWing.transform)
+                {
+                    Destroy(Child.gameObject);
+                }
+
+                foreach (Transform Child in posSpawnShield.transform)
+                {
+                    Destroy(Child.gameObject);
+                }
+
+                DefaultSkin.material = ListSkin[3];
+
+                PlayerPrefs.SetInt(SetSkin1PrefsTag, 1);
+
+                PlayerPrefs.SetInt(SetSkin2PrefsTag, 1);
+
+                PlayerPrefs.SetInt(SetSkin3PrefsTag, 1);
+            }
+        }
     }
 
     public void closeButtonClick()
@@ -1362,5 +2210,11 @@ public class ShopM : MonoBehaviour
         GUIManager.Instance.CanvasSkin.gameObject.SetActive(false);
 
         GUIManager.Instance.closeButton.gameObject.SetActive(false);
+
+        GUIManager.Instance.CanvasWeapon.gameObject.SetActive(false);
+
+        GUIManager.Instance.SkinShopButton.interactable = true;
+
+        GUIManager.Instance.WeaponShopButton.interactable = true;
     }
 }

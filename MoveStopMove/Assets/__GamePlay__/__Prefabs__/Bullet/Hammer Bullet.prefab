@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 319419501937952604}
   - component: {fileID: 319419501939279740}
-  - component: {fileID: 319419501940377020}
   - component: {fileID: 7277542295661629490}
-  m_Layer: 0
+  - component: {fileID: 2090693573691601387}
+  m_Layer: 10
   m_Name: Hammer Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,8 +41,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319419501938449276}
   m_Mesh: {fileID: 4300000, guid: 90389cac50942cb4ca38583e6531094a, type: 3}
---- !u!23 &319419501940377020
-MeshRenderer:
+--- !u!95 &7277542295661629490
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319419501938449276}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da5aaf6558e56b347952d7d2e54d35b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!137 &2090693573691601387
+SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -55,7 +74,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,25 +100,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &7277542295661629490
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319419501938449276}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da5aaf6558e56b347952d7d2e54d35b6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 4300000, guid: 90389cac50942cb4ca38583e6531094a, type: 3}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0.000058174133, y: -0.0006495784, z: 0}
+    m_Extent: {x: 0.0063314247, y: 0.012564577, z: 0.0030051866}
+  m_DirtyAABB: 0
 --- !u!1 &1837506665760548694
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +123,7 @@ GameObject:
   - component: {fileID: 7156108833483256298}
   - component: {fileID: -2773101756672591736}
   - component: {fileID: 7014401628234882956}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hammer Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}

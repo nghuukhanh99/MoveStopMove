@@ -27,6 +27,12 @@ public class GameManager : MonoBehaviour
     public int EnemyCount;
 
     public int TotalAlive;
+
+    public GameObject PoolHammer;
+
+    public GameObject PoolCandy;
+
+    public GameObject PoolKnife;
     private void OnEnable()
     {
         CameraSwitcher.Register(cameraOnMenu);
@@ -62,6 +68,13 @@ public class GameManager : MonoBehaviour
             Coins = 0;
 
             GUIManager.Instance.CoinsText.text = Coins.ToString();
+        }
+
+        if(isGameActive == true)
+        {
+            PoolHammer.SetActive(true);
+            PoolCandy.SetActive(true);
+            PoolKnife.SetActive(true);
         }
     }
 

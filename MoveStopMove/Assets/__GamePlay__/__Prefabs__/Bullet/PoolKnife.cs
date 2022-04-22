@@ -20,16 +20,17 @@ public class PoolKnife : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < bulletAmount; i++)
-        {
-            GameObject bulletSpawn = Instantiate(bulletPrefab);
+        
+            for (int i = 0; i < bulletAmount; i++)
+            {
+                GameObject bulletSpawn = Instantiate(bulletPrefab);
 
-            bulletSpawn.transform.SetParent(transform);
+                bulletSpawn.transform.SetParent(transform);
 
-            bulletSpawn.SetActive(false);
+                bulletSpawn.SetActive(false);
 
-            bullets.Add(bulletSpawn);
-        }
+                bullets.Add(bulletSpawn);
+            }
     }
 
     public GameObject GetPooledBullet()

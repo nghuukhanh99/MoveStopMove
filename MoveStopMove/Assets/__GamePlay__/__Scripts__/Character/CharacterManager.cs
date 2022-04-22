@@ -158,7 +158,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public IEnumerator HideWeapon()
     {
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(0.42f);
 
         WeaponHand.SetActive(false);
     }
@@ -185,6 +185,12 @@ public class CharacterManager : MonoBehaviour, IHit
             poolingBullet = PoolKnife.Instance.GetPooledBullet();
         }
 
+        SkinnedMeshRenderer weaponInHand = WeaponHand.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+
+        BulletsWeapon InfoBulletAfterPool = poolingBullet.GetComponent<BulletsWeapon>();
+
+        CharacterManager typeOwnerChar = this.gameObject.GetComponent<CharacterManager>();
+
         poolingBullet.transform.localScale = this.transform.localScale;
 
         poolingBullet.transform.position = PointSpawnBullet.position;
@@ -193,11 +199,16 @@ public class CharacterManager : MonoBehaviour, IHit
 
         poolingBullet.SetActive(true);
 
-        poolingBullet.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
+        InfoBulletAfterPool.setTargetPosition(nearestCharacter.transform.position);
 
-        poolingBullet.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
+        InfoBulletAfterPool.setOwnerChar(typeOwnerChar);
 
-        poolingBullet.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
+        InfoBulletAfterPool.setOwnerPos(this.transform.position);
+
+        SkinnedMeshRenderer skinBulletAfterPool = poolingBullet.GetComponentInChildren<SkinnedMeshRenderer>();
+
+        //change color bullet follow weapon in hand
+        skinBulletAfterPool.materials = weaponInHand.materials;
     }
 
     public IEnumerator Attacking()
@@ -206,7 +217,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
         StartCoroutine(HideWeapon());
 
-        yield return new WaitForSeconds(0.46f);
+        yield return new WaitForSeconds(0.44f);
 
         FireBullet();
     }
@@ -281,6 +292,11 @@ public class CharacterManager : MonoBehaviour, IHit
             isDead = true;
         }
         OnDead();
+    }
+
+    public void GetWeaponHand(GameObject WeaponInHand)
+    {
+        WeaponHand = WeaponInHand;
     }
 }
 

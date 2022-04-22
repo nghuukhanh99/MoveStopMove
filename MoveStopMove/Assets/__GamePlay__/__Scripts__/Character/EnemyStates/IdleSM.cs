@@ -32,9 +32,10 @@ public class IdleSM : IEnemyState
 
             if(idleTimer >= idleToAttackDelay)
             {
+                enemy.checkFirstAttack = true;
+
                 enemy.ChangeState(new AttackSM());
             }
-            
         }
 
         idleTimer += Time.deltaTime;

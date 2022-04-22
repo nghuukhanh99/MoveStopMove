@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 319419501937952604}
   - component: {fileID: 319419501939279740}
-  - component: {fileID: 319419501940377020}
+  - component: {fileID: 5222330278190274596}
   m_Layer: 0
   m_Name: Candy Test Body
   m_TagString: Untagged
@@ -40,8 +40,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319419501938449276}
   m_Mesh: {fileID: 4300000, guid: 77de8014aff37804f92ab58c8817cced, type: 3}
---- !u!23 &319419501940377020
-MeshRenderer:
+--- !u!137 &5222330278190274596
+SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -54,7 +54,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +81,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 4300000, guid: 77de8014aff37804f92ab58c8817cced, type: 3}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: -0.0000000018626451, y: -0.0023885719, z: 4.656613e-10}
+    m_Extent: {x: 0.005807341, y: 0.013272367, z: 0.0058073383}
+  m_DirtyAABB: 0
 --- !u!1 &1837506665760548694
 GameObject:
   m_ObjectHideFlags: 0

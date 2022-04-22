@@ -20,6 +20,7 @@ public class PoolBullet : MonoBehaviour
 
     private void Start()
     {
+        
         for (int i = 0; i < bulletAmount; i++)
         {
             GameObject bulletSpawn = Instantiate(bulletPrefab);
@@ -30,6 +31,7 @@ public class PoolBullet : MonoBehaviour
 
             bullets.Add(bulletSpawn);
         }
+
     }
 
     public GameObject GetPooledBullet()
@@ -44,4 +46,6 @@ public class PoolBullet : MonoBehaviour
 
         return null;
     }
+
+    
 }

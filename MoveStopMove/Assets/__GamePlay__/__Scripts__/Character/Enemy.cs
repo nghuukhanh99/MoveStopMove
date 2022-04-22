@@ -30,6 +30,8 @@ public class Enemy : CharacterManager
 
     public bool needPatrolToAttack;
 
+    public bool attacked;
+
     public override void Start()
     {
         base.Start();
