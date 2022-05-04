@@ -36,7 +36,7 @@ public class WeaponShop : MonoBehaviour
 
         for(int i = 0; i < WeaponPrice.Length; i++)
         {
-            WeaponInfo.add
+
         }
     }
 }
