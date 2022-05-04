@@ -77,6 +77,11 @@ public class GUIManager : MonoBehaviour
 
     public GameObject ShowCase;
 
+    public Transform SpawnKillFeedPos;
+
+    public TextMeshProUGUI PlayerName;
+
+    public TextMeshProUGUI EnemyName;
     //public GameObject CanvasPlayButton;
     private void Awake()
     {

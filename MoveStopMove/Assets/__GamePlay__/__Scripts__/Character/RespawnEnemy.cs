@@ -10,10 +10,14 @@ public class RespawnEnemy : MonoBehaviour
 
     public List<GameObject> SpawnPos = new List<GameObject>();
 
+    public NameCharacter EnemyName;
+
+    public const string RespawnTag = "Respawn";
+
     // Update is called once per frame
     void Start()
     {
-        InvokeRepeating("Respawn", 0, 0.05f);
+        InvokeRepeating(RespawnTag, 0, 0.05f);
     }
 
     public void Respawn()
@@ -47,6 +51,8 @@ public class RespawnEnemy : MonoBehaviour
         _enemy.Score = 0;
 
         _enemy.ScoreText.text = _enemy.Score.ToString();
+
+        _enemy.Name.text = "" + (NameCharacter)Random.Range(0, 9);
 
         _enemy.agent.enabled = true;
 

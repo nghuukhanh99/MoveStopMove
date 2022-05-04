@@ -5,6 +5,7 @@ using System;
 using UnityEngine.UI;
 using TMPro;
 
+public enum NameCharacter { Johny, Kevil, Tonny, Depp, Bill, Crytal, David, Tucson, Niel, Tonado };
 public class CharacterManager : MonoBehaviour, IHit
 {
     //string
@@ -68,6 +69,8 @@ public class CharacterManager : MonoBehaviour, IHit
     public Transform PointSpawnBullet;
     #endregion
 
+    public TextMeshProUGUI Name;
+
     [SerializeField] int heal;
 
     public ParticleSystem effectOnDead;
@@ -83,10 +86,15 @@ public class CharacterManager : MonoBehaviour, IHit
     internal Transform CharacterTransform;
 
     public Animator MyAnimator { get; private set; }
-    
+
+    public int Damage;
+
+    [HideInInspector] public Animator AnimName;
     public virtual void Awake()
     {
         CharacterTransform = this.transform;
+
+        AnimName = Name.GetComponent<Animator>();
     }
     public virtual void Start()
     {
@@ -95,6 +103,8 @@ public class CharacterManager : MonoBehaviour, IHit
         GameManager.Instance.AddCharacter(this);
 
         nearestCharacter = null;
+
+        Damage = 10;
     }
 
     public virtual void Update()
@@ -145,8 +155,6 @@ public class CharacterManager : MonoBehaviour, IHit
 
             nearestCharacter = null;
         }
-
-        
     }
 
     public void OnDead()
@@ -248,11 +256,19 @@ public class CharacterManager : MonoBehaviour, IHit
         {
             if (this != bulletWeaponScript.characterOwner) // kiem tra neu thang nem vu khi khac chinh no thi thuc hien
             {
-                OnHit(10);
+                OnHit(Damage);
 
                 other.gameObject.SetActive(false);
 
                 isDead = true;
+
+                GUIManager.Instance.PlayerName.text = bulletWeaponScript.characterOwner.Name.text;
+
+                GUIManager.Instance.EnemyName.text = this.Name.text;
+
+
+
+                Name.text = "Killed By " + bulletWeaponScript.characterOwner.Name.text;
             }
 
             if(this.name != bulletWeaponScript.characterOwner.name)
@@ -262,6 +278,13 @@ public class CharacterManager : MonoBehaviour, IHit
                 bulletWeaponScript.characterOwner.ScoreText.text = bulletWeaponScript.characterOwner.Score.ToString();
 
                 bulletOfOwnerTransForm.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+
+                bulletWeaponScript.characterOwner.Damage += 1;
+
+                if(bulletWeaponScript.characterOwner.Damage >= 15)
+                {
+                    bulletWeaponScript.characterOwner.Damage = 15;
+                }
 
                 bulletWeaponScript.characterOwner.range += 0.025f;
 

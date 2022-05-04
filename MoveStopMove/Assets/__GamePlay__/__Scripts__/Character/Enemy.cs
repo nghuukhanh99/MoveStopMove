@@ -8,8 +8,6 @@ using System.Linq;
 
 public class Enemy : CharacterManager
 {
-    [SerializeField] private string enemyName;
-
     private IEnemyState currentState;
 
     public List<Transform> wayPoints = new List<Transform>();
@@ -28,9 +26,14 @@ public class Enemy : CharacterManager
 
     public float timeCountdownt = 0;
 
+    public NameCharacter EnemyName;
     public override void Awake()
     {
         base.Awake();
+
+        EnemyName = (NameCharacter)Random.Range(0, 9);
+
+        Name.text = "" + EnemyName;
     }
 
     public override void Start()
