@@ -15,6 +15,7 @@ TagManager:
   - Hammer Bullet
   - Knife Bullet
   - Bullet
+  - UnEquipButtonTag
   layers:
   - Default
   - TransparentFX

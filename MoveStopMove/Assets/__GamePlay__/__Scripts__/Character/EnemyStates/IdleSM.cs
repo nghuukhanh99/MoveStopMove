@@ -10,7 +10,7 @@ public class IdleSM : IEnemyState
 
     private float idleDuration = Random.Range(2f, 4f);
 
-    private float idleToAttackDelay = Random.Range(0.5f, 1f);
+    private float idleToAttackDelay = Random.Range(1.7f, 2.5f);
 
     private const string AnimIdleTag = "IsIdle";
     public void Enter(Enemy enemy)
@@ -26,24 +26,9 @@ public class IdleSM : IEnemyState
 
         Idle();
 
-        if (enemy.nearestCharacter != null)
-        {
-            idleTimer += Time.deltaTime;
+        IdleToAttack();
 
-            if(idleTimer >= idleToAttackDelay)
-            {
-                enemy.checkFirstAttack = true;
-
-                enemy.ChangeState(new AttackSM());
-            }
-        }
-
-        idleTimer += Time.deltaTime;
-
-        if (idleTimer >= idleDuration)
-        {
-            enemy.ChangeState(new PatrolSM());
-        }
+        IdleToPatrol();
     }
 
     public void Exit()
@@ -60,5 +45,30 @@ public class IdleSM : IEnemyState
             enemy.transform.LookAt(enemy.nearestCharacter.transform);
         }
 
+    }
+
+    public void IdleToAttack()
+    {
+        if (enemy.nearestCharacter != null)
+        {
+            idleTimer += Time.deltaTime;
+
+            if (idleTimer >= idleToAttackDelay)
+            {
+                enemy.checkFirstAttack = true;
+
+                enemy.ChangeState(new AttackSM());
+            }
+        }
+    }
+
+    public void IdleToPatrol()
+    {
+        idleTimer += Time.deltaTime;
+
+        if (idleTimer >= idleDuration)
+        {
+            enemy.ChangeState(new PatrolSM());
+        }
     }
 }

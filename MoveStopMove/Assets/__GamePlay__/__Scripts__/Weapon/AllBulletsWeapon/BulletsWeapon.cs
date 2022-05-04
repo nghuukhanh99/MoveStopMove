@@ -18,10 +18,12 @@ public class BulletsWeapon : MonoBehaviour
 
     public CharacterManager characterOwner;
 
+    public Vector3 posSpawnBullet;
+
     private void Update()
     {
 
-        updateState();
+        UpdateState();
 
         autoDespawnIfOutOfRange();
     }
@@ -31,7 +33,7 @@ public class BulletsWeapon : MonoBehaviour
         
     }
 
-    public virtual void updateState()
+    public virtual void UpdateState()
     {
         
     }

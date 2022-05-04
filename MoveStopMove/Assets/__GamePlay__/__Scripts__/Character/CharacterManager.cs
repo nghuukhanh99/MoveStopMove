@@ -32,6 +32,9 @@ public class CharacterManager : MonoBehaviour, IHit
     [HideInInspector] public const string KnifeBulletName = "Knife Bullet";
 
     [HideInInspector] public const string PlayerTag = "Player";
+
+    [HideInInspector] public const string EnemyTag = "Enemy";
+
     #endregion
 
     //bool
@@ -63,8 +66,6 @@ public class CharacterManager : MonoBehaviour, IHit
     //Transform
     #region
     public Transform PointSpawnBullet;
-
-    [HideInInspector] public Transform characterTransform;
     #endregion
 
     [SerializeField] int heal;
@@ -77,15 +78,21 @@ public class CharacterManager : MonoBehaviour, IHit
 
     public GameObject bullet;
 
-    public Animator MyAnimator { get; private set; }
+    public Vector3 bulletPos;
 
+    internal Transform CharacterTransform;
+
+    public Animator MyAnimator { get; private set; }
+    
+    public virtual void Awake()
+    {
+        CharacterTransform = this.transform;
+    }
     public virtual void Start()
     {
         MyAnimator = GetComponent<Animator>();
 
-        characterTransform = gameObject.GetComponent<Transform>();
-
-        GameManager.Instance._listCharacter.Add(gameObject.GetComponent<CharacterManager>());
+        GameManager.Instance.AddCharacter(this);
 
         nearestCharacter = null;
     }
@@ -127,12 +134,20 @@ public class CharacterManager : MonoBehaviour, IHit
         if (target != null && shortestDistance < range * target.transform.localScale.z /* nhan voi scale cua nhan vat de thay foot target*/)
         {
             nearestCharacter = target;
+
+            if (target.tag == PlayerTag && target.tag != EnemyTag)
+            {
+                TargetFoot.gameObject.SetActive(true);
+            }
         }
         else
         {
+            TargetFoot.gameObject.SetActive(false);
+
             nearestCharacter = null;
         }
 
+        
     }
 
     public void OnDead()
@@ -185,30 +200,32 @@ public class CharacterManager : MonoBehaviour, IHit
             poolingBullet = PoolKnife.Instance.GetPooledBullet();
         }
 
-        SkinnedMeshRenderer weaponInHand = WeaponHand.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        //SkinnedMeshRenderer weaponInHand = WeaponHand.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();//xoa
 
         BulletsWeapon InfoBulletAfterPool = poolingBullet.GetComponent<BulletsWeapon>();
 
-        CharacterManager typeOwnerChar = this.gameObject.GetComponent<CharacterManager>();
+        Transform bulletTransForm = InfoBulletAfterPool.transform;
 
-        poolingBullet.transform.localScale = this.transform.localScale;
+        Transform nearestTransform = nearestCharacter.transform;
 
-        poolingBullet.transform.position = PointSpawnBullet.position;
+        bulletTransForm.localScale = CharacterTransform.localScale;
 
-        poolingBullet.transform.rotation = poolingBullet.transform.rotation;
+        bulletTransForm.position = PointSpawnBullet.position;
+
+        bulletTransForm.rotation = bulletTransForm.rotation;
 
         poolingBullet.SetActive(true);
 
-        InfoBulletAfterPool.setTargetPosition(nearestCharacter.transform.position);
+        InfoBulletAfterPool.setTargetPosition(nearestTransform.position);
 
-        InfoBulletAfterPool.setOwnerChar(typeOwnerChar);
+        InfoBulletAfterPool.setOwnerChar(this);
 
-        InfoBulletAfterPool.setOwnerPos(this.transform.position);
+        InfoBulletAfterPool.setOwnerPos(CharacterTransform.position);
 
-        SkinnedMeshRenderer skinBulletAfterPool = poolingBullet.GetComponentInChildren<SkinnedMeshRenderer>();
+        //SkinnedMeshRenderer skinBulletAfterPool = poolingBullet.GetComponentInChildren<SkinnedMeshRenderer>();//xoa
 
         //change color bullet follow weapon in hand
-        skinBulletAfterPool.materials = weaponInHand.materials;
+        //skinBulletAfterPool.materials = weaponInHand.materials;
     }
 
     public IEnumerator Attacking()
@@ -225,6 +242,8 @@ public class CharacterManager : MonoBehaviour, IHit
     private void OnTriggerEnter(Collider other)
     {
         CandyBullet bulletWeaponScript = other.gameObject.GetComponent<CandyBullet>();
+
+        Transform bulletOfOwnerTransForm = bulletWeaponScript.characterOwner.transform;
 
         if (other.gameObject.CompareTag(bulletTag))
         {
@@ -243,7 +262,7 @@ public class CharacterManager : MonoBehaviour, IHit
 
                 bulletWeaponScript.characterOwner.ScoreText.text = bulletWeaponScript.characterOwner.Score.ToString();
 
-                bulletWeaponScript.characterOwner.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+                bulletOfOwnerTransForm.localScale += new Vector3(0.1f, 0.1f, 0.1f);
 
                 bulletWeaponScript.characterOwner.range += 0.025f;
 
@@ -262,9 +281,9 @@ public class CharacterManager : MonoBehaviour, IHit
                     bulletWeaponScript.characterOwner.range = 0.4f;
                 }
 
-                if(bulletWeaponScript.characterOwner.transform.localScale.x >= 1.5)
+                if(bulletOfOwnerTransForm.localScale.x >= 1.5)
                 {
-                    bulletWeaponScript.characterOwner.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                    bulletOfOwnerTransForm.localScale = new Vector3(1.5f, 1.5f, 1.5f);
                 }
             }
         }

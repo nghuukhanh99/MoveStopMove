@@ -56,11 +56,13 @@ public class GameManager : MonoBehaviour
         InitializeSingleton();
 
         isGameActive = false;
+
+        Coins = PlayerPrefs.GetInt("Coins");
+
+        GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt("Coins").ToString();
     }
     private void Update()
     {
-        Coins = PlayerPrefs.GetInt("Coins");
-
         GUIManager.Instance.CoinsText.text = PlayerPrefs.GetInt("Coins").ToString();
 
         if(Coins <= 0)
@@ -99,4 +101,8 @@ public class GameManager : MonoBehaviour
         GUIManager.Instance.CoinsText.text = Coins.ToString();
     }
 
+    public void AddCharacter(CharacterManager Character)
+    {
+        _listCharacter.Add(Character);
+    }
 }

@@ -14,8 +14,6 @@ public class PatrolSM : IEnemyState
 
     private Enemy enemy;
 
-    
-
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;
@@ -23,10 +21,29 @@ public class PatrolSM : IEnemyState
 
     public void Execute()
     {
-        Patrol();
-
         enemy.FindAround();
 
+        Patrol();
+
+        CheckingTarget();
+
+        PatrolToIdle();
+    }
+
+    public void Exit()
+    {
+
+    }
+
+    private void Patrol()
+    {
+        enemy.MyAnimator.SetBool(AnimIdleTag, false);
+
+        enemy.Move();
+    }
+
+    public void CheckingTarget()
+    {
         if (enemy.nearestCharacter != null)
         {
             patrolTimer += Time.deltaTime;
@@ -40,24 +57,15 @@ public class PatrolSM : IEnemyState
                 enemy.ChangeState(new IdleSM());
             }
         }
+    }
 
+    public void PatrolToIdle()
+    {
         patrolTimer += Time.deltaTime;
 
         if (patrolTimer >= patrolDuration)
         {
             enemy.ChangeState(new IdleSM());
         }
-    }
-
-    public void Exit()
-    {
-
-    }
-
-    private void Patrol()
-    {
-        enemy.MyAnimator.SetBool(AnimIdleTag, false);
-
-        enemy.Move();
     }
 }

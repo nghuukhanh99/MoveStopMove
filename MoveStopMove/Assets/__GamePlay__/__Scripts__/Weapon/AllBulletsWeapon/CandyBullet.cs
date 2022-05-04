@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class CandyBullet : BulletsWeapon
 {
-    public override void updateState()
+    Transform CandyBulletTransform;
+    private void Start()
     {
-        base.updateState();
+        CandyBulletTransform = this.transform;
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
 
         positionTarget.y = 0.92f;
 
         Quaternion lookTarget = Quaternion.LookRotation(fixedDirectToCharacter);
 
-        Vector3 rotation = Quaternion.Lerp(transform.rotation, lookTarget, Time.deltaTime * 30f).eulerAngles;
+        Vector3 rotation = Quaternion.Lerp(CandyBulletTransform.rotation, lookTarget, Time.deltaTime * 30f).eulerAngles;
 
-        transform.Translate(fixedDirectToCharacter * Time.deltaTime * speed, Space.World);
+        CandyBulletTransform.Translate(fixedDirectToCharacter * Time.deltaTime * speed, Space.World);
 
-        transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-        
-        
+        CandyBulletTransform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 }

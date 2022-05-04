@@ -28,12 +28,15 @@ public class Enemy : CharacterManager
 
     public float timeCountdownt = 0;
 
-    public bool needPatrolToAttack;
-
-    public bool attacked;
+    public override void Awake()
+    {
+        base.Awake();
+    }
 
     public override void Start()
     {
+        CharacterTransform = this.transform;
+
         base.Start();
 
         checkFirstAttack = true;
@@ -78,14 +81,14 @@ public class Enemy : CharacterManager
             GUIManager.Instance.EnemyCountNumber.text = GameManager.Instance.TotalAlive.ToString();
         }
 
-        if(nearestCharacter != null)
-        {
-            TargetFoot.SetActive(true);
-        }
-        else
-        {
-            TargetFoot.SetActive(false);
-        }
+        //if (nearestCharacter != null)
+        //{
+        //    TargetFoot.SetActive(true);
+        //}
+        //else
+        //{
+        //    TargetFoot.SetActive(false);
+        //}
     }
 
     public void Fire()
@@ -111,19 +114,26 @@ public class Enemy : CharacterManager
             poolingBullet = PoolKnife.Instance.GetPooledBullet();
         }
 
-        poolingBullet.transform.position = PointSpawnBullet.position;
+        BulletsWeapon InfoBulletAfterPool = poolingBullet.GetComponent<BulletsWeapon>();
 
-        poolingBullet.transform.rotation = poolingBullet.transform.rotation;
+        Transform bulletTransForm = poolingBullet.transform;
+
+        Transform nearestTransform = nearestCharacter.transform;
+
+        bulletTransForm.position = PointSpawnBullet.position;
+
+        bulletTransForm.rotation = bulletTransForm.rotation;
 
         poolingBullet.SetActive(true);
 
-        poolingBullet.GetComponent<BulletsWeapon>().setTargetPosition(nearestCharacter.transform.position);
+        InfoBulletAfterPool.setTargetPosition(nearestTransform.position);
 
-        poolingBullet.GetComponent<BulletsWeapon>().setOwnerChar(this.gameObject.GetComponent<CharacterManager>());
+        InfoBulletAfterPool.setOwnerChar(this);
 
-        poolingBullet.GetComponent<BulletsWeapon>().setOwnerPos(this.transform.position);
+        InfoBulletAfterPool.setOwnerPos(CharacterTransform.position);
 
     }
+
     public IEnumerator Attacked()
     {
         MyAnimator.SetTrigger(AnimAttackTag);
@@ -150,7 +160,6 @@ public class Enemy : CharacterManager
             GameManager.Instance._listCharacter.Remove(this);
         }
     }
-
     public void Move()
     {
         Transform wp = wayPoints[currentWaypointIndex];

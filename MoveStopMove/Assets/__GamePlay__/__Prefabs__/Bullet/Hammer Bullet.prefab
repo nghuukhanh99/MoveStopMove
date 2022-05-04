@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 319419501937952604}
   - component: {fileID: 319419501939279740}
   - component: {fileID: 7277542295661629490}
-  - component: {fileID: 2090693573691601387}
+  - component: {fileID: 6953292537100973166}
   m_Layer: 10
   m_Name: Hammer Body
   m_TagString: Untagged
@@ -60,8 +60,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!137 &2090693573691601387
-SkinnedMeshRenderer:
+--- !u!23 &6953292537100973166
+MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -74,7 +74,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -100,18 +100,6 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: 90389cac50942cb4ca38583e6531094a, type: 3}
-  m_Bones: []
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 0}
-  m_AABB:
-    m_Center: {x: 0.000058174133, y: -0.0006495784, z: 0}
-    m_Extent: {x: 0.0063314247, y: 0.012564577, z: 0.0030051866}
-  m_DirtyAABB: 0
 --- !u!1 &1837506665760548694
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +151,7 @@ MonoBehaviour:
   charOwnerPos: {x: 0, y: 0, z: 0}
   fixedDirectToCharacter: {x: 0, y: 0, z: 0}
   characterOwner: {fileID: 0}
+  posSpawnBullet: {x: 0, y: 0, z: 0}
 --- !u!136 &7014401628234882956
 CapsuleCollider:
   m_ObjectHideFlags: 0

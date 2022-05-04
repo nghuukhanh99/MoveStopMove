@@ -43,12 +43,6 @@ public class GUIManager : MonoBehaviour
 
     public Button ContinueButton;
 
-    public GameObject showCasePant;
-
-    public GameObject pantPanel;
-
-    public GameObject headPanel;
-
     public GameObject CanvasSkin;
 
     public GameObject CanvasGameplay;
@@ -77,27 +71,11 @@ public class GUIManager : MonoBehaviour
 
     public TextMeshProUGUI CoinsText;
 
-    public Button AddCoinsButton;
-
     public float timerDelay;
 
-    public Button PantShopButton;
-
-    public Button HeadShopButton;
-
-    public Button ShieldShopButton;
-
-    public Button SkinSetShopButton;
-
-    public GameObject PantShowCase;
-
-    public GameObject HeadShowCase;
-
-    public GameObject ShieldShowCase;
-
-    public GameObject SkinSetShowCase;
-
     public GameObject CanvasWeapon;
+
+    public GameObject ShowCase;
 
     //public GameObject CanvasPlayButton;
     private void Awake()
@@ -204,7 +182,7 @@ public class GUIManager : MonoBehaviour
 
         WeaponShopButton.interactable = false;
 
-        Invoke("showWeaponShopDelay", 1.3f);
+        Invoke("showWeaponShopDelay", 0.5f);
     }
 
     public void SkinShopButtonClick()
@@ -229,10 +207,38 @@ public class GUIManager : MonoBehaviour
 
         WeaponShopButton.interactable = false;
 
-        Invoke("showSkinShopDelay", 1.3f);
+        Invoke("showSkinShopDelay", 0.5f);
     }
 
-  
+    public void closeButtonClick()
+    {
+        PlayButton.animator.SetTrigger(AnimGUITagOpen);
+
+        ZombieMode.animator.SetTrigger(AnimGUITagOpen);
+
+        SoundButton.animator.SetTrigger(AnimGUITagOpen);
+
+        RemoveAdsButton.animator.SetTrigger(AnimGUITagOpen);
+
+        VibrateButton.animator.SetTrigger(AnimGUITagOpen);
+
+        ExpButton.animator.SetTrigger(AnimGUITagOpen);
+
+        SkinShopButton.animator.SetTrigger(AnimGUITagOpen);
+
+        WeaponShopButton.animator.SetTrigger(AnimGUITagOpen);
+
+        CanvasSkin.gameObject.SetActive(false);
+
+        closeButton.gameObject.SetActive(false);
+
+        SkinShopButton.interactable = true;
+
+        WeaponShopButton.interactable = true;
+
+        CanvasSkin.SetActive(false);
+    }
+
     public void HomeButtonClick()
     {
 
@@ -317,47 +323,8 @@ public class GUIManager : MonoBehaviour
         }
     }
 
-    public void PantShowCaseButtonClick()
+    public void DeleteKey()
     {
-        PantShowCase.SetActive(true);
-
-        HeadShowCase.SetActive(false);
-
-        ShieldShowCase.SetActive(false);
-
-        SkinSetShowCase.SetActive(false);
-    }
-
-    public void HeadShowCaseButtonClick()
-    {
-        PantShowCase.SetActive(false);
-
-        HeadShowCase.SetActive(true);
-
-        ShieldShowCase.SetActive(false);
-
-        SkinSetShowCase.SetActive(false);
-    }
-
-    public void ShieldShowCaseButtonClick()
-    {
-        PantShowCase.SetActive(false);
-
-        HeadShowCase.SetActive(false);
-
-        ShieldShowCase.SetActive(true);
-
-        SkinSetShowCase.SetActive(false);
-    }
-
-    public void SkinSetShowCaseButtonClick()
-    {
-        PantShowCase.SetActive(false);
-
-        HeadShowCase.SetActive(false);
-
-        ShieldShowCase.SetActive(false);
-
-        SkinSetShowCase.SetActive(true);
+        PlayerPrefs.DeleteAll();
     }
 }

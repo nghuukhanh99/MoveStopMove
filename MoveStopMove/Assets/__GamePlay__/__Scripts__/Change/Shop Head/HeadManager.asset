@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8a442673db50a479362764bd2b2bad, type: 3}
+  m_Name: HeadManager
+  m_EditorClassIdentifier: 
+  skinsHead:
+  - Cost: 500
+    HeadPrefab: {fileID: 4327051842446302850, guid: a8fa603d7a628e8449bf8a22ca264356,
+      type: 3}
+  - Cost: 500
+    HeadPrefab: {fileID: 1678144172913983571, guid: 509477fb2ed07044eb78a37d58bd89b7,
+      type: 3}
+  - Cost: 500
+    HeadPrefab: {fileID: 3270723796436366389, guid: f786d2896d02b484f955473e504381b5,
+      type: 3}
+  - Cost: 500
+    HeadPrefab: {fileID: 6961293876602357157, guid: f6af24d80c36bbc4eae141c52d4236c6,
+      type: 3}
+  - Cost: 500
+    HeadPrefab: {fileID: 871803533414391470, guid: 5685ffc2b01e989499f92f8a318d5fd3,
+      type: 3}
+  - Cost: 500
+    HeadPrefab: {fileID: 10044417455696680, guid: c750ae46949ecb54f8247939e3afe41a,
+      type: 3}
+  - Cost: 500
+    HeadPrefab: {fileID: 4896691754874073397, guid: 16ec7ea679891cf4a976118da534ee24,
+      type: 3}
+  - Cost: 0
+    HeadPrefab: {fileID: 6465811353090774960, guid: 943a438700d7fff4983be7e32add298c,
+      type: 3}
