@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
     public GameObject PoolCandy;
 
     public GameObject PoolKnife;
+
+    public int LevelID;
     private void OnEnable()
     {
         CameraSwitcher.Register(cameraOnMenu);
@@ -54,6 +57,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         InitializeSingleton();
+
+        LevelID = 1;
+
+        LevelID = PlayerPrefs.GetInt("LevelID");
 
         isGameActive = false;
 
@@ -104,5 +111,21 @@ public class GameManager : MonoBehaviour
     public void AddCharacter(CharacterManager Character)
     {
         _listCharacter.Add(Character);
+    }
+
+    public void LoadLevel()
+    {
+        LevelID++;
+
+        if(LevelID > 2)
+        {
+            LevelID = 1;
+        }
+
+        PlayerPrefs.SetInt("LevelID", LevelID);
+
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene("Level" + LevelID);
     }
 }

@@ -260,15 +260,17 @@ public class CharacterManager : MonoBehaviour, IHit
 
                 other.gameObject.SetActive(false);
 
-                isDead = true;
+                GameObject BGKillFeed = Instantiate(GUIManager.Instance.KillFeed, GUIManager.Instance.SpawnKillFeedPos);
 
-                GUIManager.Instance.PlayerName.text = bulletWeaponScript.characterOwner.Name.text;
+                TextMeshProUGUI EnemyTextOfKillfeed = BGKillFeed.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
-                GUIManager.Instance.EnemyName.text = this.Name.text;
+                TextMeshProUGUI PlayerTextOfKillfeed = BGKillFeed.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
+                PlayerTextOfKillfeed.text = bulletWeaponScript.characterOwner.Name.text;
 
+                EnemyTextOfKillfeed.text = this.Name.text;
 
-                Name.text = "Killed By " + bulletWeaponScript.characterOwner.Name.text;
+                Destroy(BGKillFeed, 2);
             }
 
             if(this.name != bulletWeaponScript.characterOwner.name)

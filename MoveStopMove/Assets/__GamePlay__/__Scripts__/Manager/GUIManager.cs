@@ -79,9 +79,11 @@ public class GUIManager : MonoBehaviour
 
     public Transform SpawnKillFeedPos;
 
-    public TextMeshProUGUI PlayerName;
+    //public TextMeshProUGUI PlayerName;
 
-    public TextMeshProUGUI EnemyName;
+    //public TextMeshProUGUI EnemyName;
+
+    public GameObject KillFeed;
     //public GameObject CanvasPlayButton;
     private void Awake()
     {
@@ -284,7 +286,7 @@ public class GUIManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.2f);
 
-        SceneManager.LoadScene(SceneIndex + buildIndex);
+        GameManager.Instance.LoadLevel();
     }
 
     public void ShowSettingDelay()
