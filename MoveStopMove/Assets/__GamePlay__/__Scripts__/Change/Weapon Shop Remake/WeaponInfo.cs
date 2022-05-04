@@ -6,5 +6,5 @@ public class WeaponInfo : ScriptableObject
     [Header("Weapon Type")]
     public GameObject[] WeaponType;
 
-
+    public GameObject[] BulletWeapon;
 }

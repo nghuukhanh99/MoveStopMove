@@ -237,6 +237,8 @@ public class GUIManager : MonoBehaviour
         WeaponShopButton.interactable = true;
 
         CanvasSkin.SetActive(false);
+
+        CanvasWeapon.SetActive(false);
     }
 
     public void HomeButtonClick()

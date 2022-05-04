@@ -7,6 +7,7 @@ using System;
 public class PlayerCtrl : CharacterManager
 {
     public static PlayerCtrl Instance;
+    [HideInInspector] public enum WeaponType {Hammer, Candy, Knife};
 
     [HideInInspector] public enum ItemsType
     {
@@ -59,7 +60,11 @@ public class PlayerCtrl : CharacterManager
 
     Transform playerTransform;
 
+    public GameObject[] weaponArray = new GameObject[3];
 
+    public GameObject[] BulletArray = new GameObject[3];
+
+    public WeaponInfo weaponInfo;
 
     public override void Awake()
     {
@@ -76,8 +81,6 @@ public class PlayerCtrl : CharacterManager
 
         _collider = GetComponent<Collider>();
 
-      
-
         UpdatePlayerItems();
     }
 
@@ -89,7 +92,7 @@ public class PlayerCtrl : CharacterManager
         {
             joystickObject.SetActive(true);
 
-            MyAnimator.SetBool(AnimDanceTag, false);    
+            MyAnimator.SetBool(AnimDanceTag, false);
         }
         else
         {
@@ -199,9 +202,36 @@ public class PlayerCtrl : CharacterManager
                 ChangeItems((ItemsType)i);
             }
         }
+
+        for(int i = 0; i < 2; i++)
+        {
+            if(PlayerPrefs.GetInt("WeaponShop" + (WeaponType)i) == 4)
+            {
+                WeaponSwitch((WeaponType)i);
+            }
+        }
     }
 
     // Change Skin
+
+    public void WeaponSwitch(WeaponType _weaponType)
+    {
+        for(int i = 0; i < weaponArray.Length; i++)
+        {
+            if(i == (int)_weaponType)
+            {
+                weaponArray[i].gameObject.SetActive(true);
+
+                WeaponHand = weaponArray[i].gameObject;
+
+                bullet = BulletArray[i].gameObject;
+            }
+            else
+            {
+                weaponArray[i].gameObject.SetActive(false);
+            }
+        }
+    }
 
     public void ChangeItems(ItemsType _ItemsType)
     {

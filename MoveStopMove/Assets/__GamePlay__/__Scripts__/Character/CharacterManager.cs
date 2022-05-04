@@ -101,14 +101,13 @@ public class CharacterManager : MonoBehaviour, IHit
     {
         FindAround();
 
-        if(this.gameObject.activeInHierarchy == false)
+        if (this.gameObject.activeInHierarchy == false)
         {
             isDead = true;
 
             GameManager.Instance._listCharacter.Remove(this);
         }
     }
-
     public void FindAround()
     {
         float shortestDistance = Mathf.Infinity;
