@@ -178,9 +178,9 @@ public class CharacterManager : MonoBehaviour, IHit
         WeaponHand.SetActive(true);
     }
 
-    public IEnumerator HideWeapon()
+    public void /*IEnumerator*/ HideWeapon()
     {
-        yield return new WaitForSeconds(0.42f);
+        //yield return new WaitForSeconds(0.42f);
 
         WeaponHand.SetActive(false);
     }
@@ -194,6 +194,8 @@ public class CharacterManager : MonoBehaviour, IHit
 
         GameObject poolingBullet = null;
 
+        HideWeapon();
+
         if (bullet.name == HammerBulletName)
         {
             poolingBullet = PoolBullet.Instance.GetPooledBullet();
@@ -206,8 +208,6 @@ public class CharacterManager : MonoBehaviour, IHit
         {
             poolingBullet = PoolKnife.Instance.GetPooledBullet();
         }
-
-        //SkinnedMeshRenderer weaponInHand = WeaponHand.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();//xoa
 
         BulletsWeapon InfoBulletAfterPool = poolingBullet.GetComponent<BulletsWeapon>();
 
@@ -228,18 +228,11 @@ public class CharacterManager : MonoBehaviour, IHit
         InfoBulletAfterPool.setOwnerChar(this);
 
         InfoBulletAfterPool.setOwnerPos(CharacterTransform.position);
-
-        //SkinnedMeshRenderer skinBulletAfterPool = poolingBullet.GetComponentInChildren<SkinnedMeshRenderer>();//xoa
-
-        //change color bullet follow weapon in hand
-        //skinBulletAfterPool.materials = weaponInHand.materials;
     }
 
     public IEnumerator Attacking()
     {
         MyAnimator.SetTrigger(AnimAttackTag);
-
-        StartCoroutine(HideWeapon());
 
         yield return new WaitForSeconds(0.44f);
 

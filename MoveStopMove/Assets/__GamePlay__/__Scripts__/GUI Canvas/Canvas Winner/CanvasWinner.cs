@@ -25,9 +25,6 @@ public class CanvasWinner : MonoBehaviour
     private WeaponType _WeaponPercent;
 
     private int PercentLoad;
-
-    Image[] _LockInWinner;
-
     public void Awake()
     {
         PercentLoad = 0;
@@ -39,8 +36,6 @@ public class CanvasWinner : MonoBehaviour
 
         _weaponType.Clear();
 
-       
-
         if(PlayerPrefs.GetInt("WeaponOrOutfit") == 1)
         {
             weaponOrOutfit = true;
@@ -50,7 +45,7 @@ public class CanvasWinner : MonoBehaviour
             weaponOrOutfit = false;
         }
 
-        for(int i = 0; i < 2; i++)
+        for(int i = 1; i < 2; i++)
         {
             if(PlayerPrefs.GetInt("WeaponShop" + (WeaponType)i, 99) != 99)
             {
@@ -92,7 +87,7 @@ public class CanvasWinner : MonoBehaviour
             _WeaponPercent = (WeaponType)PlayerPrefs.GetInt("WeaponPercent");
         }
 
-        PercentLoad += 25;
+        PercentLoad += 100;
 
         PlayerPrefs.SetInt("PercentLoad", PercentLoad);
 
@@ -102,7 +97,7 @@ public class CanvasWinner : MonoBehaviour
 
         ShowPercentImage();
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 1; i < 2; i++)
         {
             if (PlayerPrefs.GetInt("WeaponShop" + (PlayerCtrl.WeaponType)i) == 4)
             {
@@ -114,6 +109,8 @@ public class CanvasWinner : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("ItemsShop" + (PlayerCtrl.ItemsType)i) == 4)
             {
+                PlayerPrefs.SetInt("ItemsShop" + (PlayerCtrl.ItemsType)i, 3);
+
                 GameObject.FindObjectOfType<PlayerCtrl>().ChangeItems((PlayerCtrl.ItemsType)i);
             }
         }
@@ -166,7 +163,6 @@ public class CanvasWinner : MonoBehaviour
             PlayerPrefs.SetInt("WeaponShop" + (PlayerCtrl.WeaponType)_WeaponPercent, 4);
 
             PlayerPrefs.Save();
-
         }
 
         RandomPercent();
@@ -199,10 +195,11 @@ public class CanvasWinner : MonoBehaviour
             PlayerPrefs.SetInt("ItemsPercent", (int)_ItemsPercent);
 
             PlayerPrefs.Save();
+            
         }
         else
         {
-            _WeaponPercent = (WeaponType)(Random.Range(Random.Range(0, 2), _weaponType.Count));
+            _WeaponPercent = (WeaponType)(Random.Range(Random.Range(1, 2), _weaponType.Count));
 
             PlayerPrefs.SetInt("WeaponPercent", (int)_WeaponPercent);
 
@@ -226,7 +223,7 @@ public class CanvasWinner : MonoBehaviour
     {
         if (weaponOrOutfit)
         {
-            for(int i = 0; i < 2; i++)
+            for(int i = 1; i < 2; i++)
             {
                 if(i == (int)_WeaponPercent)
                 {
@@ -256,7 +253,7 @@ public class CanvasWinner : MonoBehaviour
                     percentItemImage[i].gameObject.SetActive(false);
                 }
             }
-            for(int i = 0; i < 2; i++)
+            for(int i = 1; i < 2; i++)
             {
                 percentWeaponImage[i].gameObject.SetActive(false);
             }

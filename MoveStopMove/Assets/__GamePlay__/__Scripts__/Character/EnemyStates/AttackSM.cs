@@ -60,13 +60,13 @@ public class AttackSM : IEnemyState
     }
 
     public void AttackToPatrol()
-    {
-        delayTime += Time.deltaTime;
+    {   delayTime += Time.deltaTime;
 
         if (delayTime >= Random.Range(1f, 1.5f))
         {
             _Enemy.ChangeState(new PatrolSM());
         }
+     
     }
 
     public void AttackToIdle()

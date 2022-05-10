@@ -27,6 +27,8 @@ public enum ItemsType
 }
 public class SkinShop : MonoBehaviour
 {
+    public static SkinShop Instance;
+
     public int[] ItemsPrice =
     {
         100, 120, 150, 160, 180, 200, 220, 250,
@@ -38,32 +40,34 @@ public class SkinShop : MonoBehaviour
         1500, 2000, 2500
     };
 
-    [SerializeField] private TextMeshProUGUI _CoinText;
+    public TextMeshProUGUI _CoinText;
 
-    [SerializeField] private TextMeshProUGUI _CantBuyPriceText;
+    public TextMeshProUGUI _CantBuyPriceText;
 
-    [SerializeField] private TextMeshProUGUI _CanBuyPriceText;
+    public TextMeshProUGUI _CanBuyPriceText;
 
-    [SerializeField] private Transform _ShopSkin;
+    public Transform _ShopSkin;
 
-    [SerializeField] private Transform[] _ShopBG;
+    public Transform[] _ShopBG;
 
-    [SerializeField] private Transform[] _ShopScrollView;
+    public Transform[] _ShopScrollView;
 
-    [SerializeField] private Image[] _Lock;
+    public Image[] _Lock;
 
-    [SerializeField] private Image[] _Equipped;
+    public Image[] _Equipped;
 
-    [SerializeField] private GameObject[] _StateButton;
+    public GameObject[] _StateButton;
 
-    Dictionary<ItemsType, ShopState> ItemsShopInfo = new Dictionary<ItemsType, ShopState>();
+    public Dictionary<ItemsType, ShopState> ItemsShopInfo = new Dictionary<ItemsType, ShopState>();
 
-    Dictionary<ItemsType, ShopStatus> ItemsStatusInfo = new Dictionary<ItemsType, ShopStatus>();
+    public Dictionary<ItemsType, ShopStatus> ItemsStatusInfo = new Dictionary<ItemsType, ShopStatus>();
 
     public int ItemsID;
 
     private void Awake()
     {
+        Instance = this;
+
         ItemsID = 0;
 
         for(int i = 0; i < ItemsPrice.Length; i++)
@@ -104,6 +108,7 @@ public class SkinShop : MonoBehaviour
                     _Lock[i].gameObject.SetActive(false);
                 }
             }
+
             if(PlayerPrefs.GetInt("ItemsShop" + (ItemsType)i) == 4)
             {
                 ItemsShopInfo.Remove((ItemsType)i);
@@ -114,10 +119,11 @@ public class SkinShop : MonoBehaviour
                 {
                     _Lock[i].gameObject.SetActive(false);
                 }
-
                 _Equipped[i].gameObject.SetActive(true);
             }
         }
+
+       
 
         UpdateUnLockStatus();
     }

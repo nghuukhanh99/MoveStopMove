@@ -15,6 +15,17 @@ public class GUIManager : MonoBehaviour
 
     internal string AnimGUITagClose = "IsClose";
 
+    internal const string showSettingDelayTag = "ShowSettingDelay";
+
+    internal const string showWeaponDelayTag = "showWeaponShopDelay";
+
+    internal const string showSkinDelayTag = "showSkinShopDelay";
+
+    internal const string isDanceTag = "IsDance";
+    
+    internal const string isIdleTag = "IsIdle";
+
+
     public List<Image> _imgList = new List<Image>();
 
     public Button SettingButton;
@@ -79,6 +90,8 @@ public class GUIManager : MonoBehaviour
 
     public Transform SpawnKillFeedPos;
 
+    public Animator AnimPlayer;
+
     //public TextMeshProUGUI PlayerName;
 
     //public TextMeshProUGUI EnemyName;
@@ -133,6 +146,10 @@ public class GUIManager : MonoBehaviour
     {
         GameManager.Instance.isGameActive = true;
 
+        AnimPlayer.SetBool(isDanceTag, false);
+
+        AnimPlayer.SetBool(isIdleTag, true);
+
         PlayButton.animator.SetTrigger(AnimGUITagClose);
 
         ZombieMode.animator.SetTrigger(AnimGUITagClose);
@@ -155,7 +172,7 @@ public class GUIManager : MonoBehaviour
 
         CanvasEnemyCount.gameObject.SetActive(true);
 
-        Invoke("ShowSettingDelay", 1.2f);
+        Invoke(showSettingDelayTag, 1.2f);
 
         if (CameraSwitcher.IsActiveCamera(GameManager.Instance.cameraOnMenu))
         {
@@ -189,7 +206,7 @@ public class GUIManager : MonoBehaviour
 
         WeaponShopButton.interactable = false;
 
-        Invoke("showWeaponShopDelay", 0.5f);
+        Invoke(showWeaponDelayTag, 0.5f);
     }
 
     public void SkinShopButtonClick()
@@ -214,7 +231,7 @@ public class GUIManager : MonoBehaviour
 
         WeaponShopButton.interactable = false;
 
-        Invoke("showSkinShopDelay", 0.5f);
+        Invoke(showSkinDelayTag, 0.5f);
     }
 
     public void closeButtonClick()

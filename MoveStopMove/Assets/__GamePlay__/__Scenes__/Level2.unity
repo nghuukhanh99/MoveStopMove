@@ -4536,6 +4536,7 @@ MonoBehaviour:
   CanvasWeapon: {fileID: 881968335}
   ShowCase: {fileID: 786740475}
   SpawnKillFeedPos: {fileID: 812332384}
+  AnimPlayer: {fileID: 502985506}
   KillFeed: {fileID: 673496999090667758, guid: 596638a6877355847ae86948d8481580, type: 3}
 --- !u!4 &379541484
 Transform:

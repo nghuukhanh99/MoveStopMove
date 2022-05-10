@@ -104,6 +104,8 @@ public class Enemy : CharacterManager
 
         GameObject poolingBullet = null;
 
+        HideWeapon();
+
         if (bullet.name == HammerBulletName)
         {
             poolingBullet = PoolBullet.Instance.GetPooledBullet();
@@ -140,8 +142,6 @@ public class Enemy : CharacterManager
     public IEnumerator Attacked()
     {
         MyAnimator.SetTrigger(AnimAttackTag);
-
-        StartCoroutine(HideWeapon());
 
         yield return new WaitForSeconds(0.4f);
 
